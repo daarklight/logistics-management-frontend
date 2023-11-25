@@ -1,0 +1,65 @@
+<div class="logopic">
+  <ng-template [ngIf]="isError" [ngIfElse]="details">
+    <div class="error">
+      <label><h3>Error occurred for while searching driver with id {{id}}:</h3></label>
+      <br>
+      <label><h3>{{errorMessage}}:</h3></label>
+    </div>
+  </ng-template>
+  <ng-template #details>
+
+    <div class="driver-details">
+      <br>
+      <div class="driver-details-header">
+        Driver {{driver.name}} {{driver.surname}} details
+      </div>
+      <div class="driver-details-info">
+        <div class="driver-details-cell">
+          <label><b>Personal Number : </b>{{driver.personalNumber}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Name : </b>{{driver.name}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Surname : </b>{{driver.surname}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Phone : </b>{{driver.phone}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Email : </b>{{driver.email}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>City: </b>{{driver.currentCity}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>State: </b>{{driver.currentState}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Is Busy: </b>{{driver.busy}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Current truck: </b>{{driver.currentTruckNumber}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Current order: </b>{{driver.currentOrderId}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Order Acceptance: </b>{{driver.orderAcceptance}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Status: </b>{{driver.status}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Hours spent in current month: </b>{{driver.workingHoursInCurrentMonth}}</label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b>Work Experience: </b>{{driver.workExperience}} years</label>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-template>
+</div>
+

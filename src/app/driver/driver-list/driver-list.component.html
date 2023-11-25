@@ -1,0 +1,68 @@
+<p></p>
+<div>
+  <mat-form-field class="mat-form-field ">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div>
+  <div class="table-container">
+    <mat-table [dataSource]="dataSource" matSort class="mat-table-style">
+
+      <!-- PersonalNumber Column -->
+      <ng-container matColumnDef="personalNumber" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Personal Number</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.personalNumber}} </mat-cell>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell"> Name</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.name}} </mat-cell>
+      </ng-container>
+      <!-- Surname Column -->
+      <ng-container matColumnDef="surname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell"> Surname</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.surname}} </mat-cell>
+      </ng-container>
+      <!-- Work Experience Column -->
+      <ng-container matColumnDef="workExperience">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell"> Work Experience</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.workExperience}} </mat-cell>
+      </ng-container>
+      <!-- Working Hours In Current Month Column -->
+      <ng-container matColumnDef="workingHoursInCurrentMonth">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell"> Spent hours
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.workingHoursInCurrentMonth}} </mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions" stickyEnd>
+        <mat-header-cell *matHeaderCellDef class="actions-header-cell" >Actions</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="buttons-container-cell" >
+        <span style="width: 50px">
+          <button (click)="showDriverDetails(row.personalNumber)" mat-button class="btn bnt-success">
+            <mat-icon>remove_red_eye</mat-icon></button>
+        </span>
+          <span style="width: 50px">
+          <button (click)="updateDriver(row.personalNumber)" mat-button class="btn bnt-success">
+            <mat-icon>edit</mat-icon></button>
+        </span>
+          <span style="width: 50px">
+          <button mat-button (click)="deleteDriver(row.personalNumber)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
+        </mat-cell>
+      </ng-container>
+      <div>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </div>
+    </mat-table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

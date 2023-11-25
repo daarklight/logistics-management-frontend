@@ -1,0 +1,43 @@
+<div class="form-create">
+  <h3 class="text-center">Create new driver</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Driver ID</label>
+      <input type="text" class="form-control" id="driverAuthenticationId" [(ngModel)]="driver.driverAuthenticationId" name="driverAuthenticationId">
+    </div>
+    <div class="form-group" [formGroup]="driverValidation">
+      <label>Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="driver.name" name="name" formControlName="drName">
+      <div
+        *ngIf="drName!.invalid && (drName!.dirty || drName!.touched)" class="validationAlert"
+      >
+            <div>
+              <div *ngIf="drName?.errors?.['required']"> &#10008; Name required</div>
+              <div *ngIf="drName?.errors?.['pattern']"> &#10008; Only Latin letters are allowed</div>
+              <div *ngIf="drName?.errors?.['minlength']"> &#10008; Name must be at least 4 characters long</div>
+            </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Surname</label>
+      <input type="text" class="form-control" id="surname" [(ngModel)]="driver.surname" name="surname">
+    </div>
+    <div class="form-group">
+      <label>Current City</label>
+      <input type="text" class="form-control" id="currentCity" [(ngModel)]="driver.currentCity" name="currentCity">
+    </div>
+    <div class="form-group">
+      <label>Current State</label>
+      <input type="text" class="form-control" id="currentState" [(ngModel)]="driver.currentState" name="currentState">
+    </div>
+    <div class="form-group">
+      <label>Work Experience (years)</label>
+      <input type="text" class="form-control" id="workExperience" [(ngModel)]="driver.workExperience" name="workExperience">
+    </div>
+    <div class="form-group">
+      <label>Working Hours In Current Month</label>
+      <input type="text" class="form-control" id="workingHoursInCurrentMonth" [(ngModel)]="driver.workingHoursInCurrentMonth" name="workingHoursInCurrentMonth">
+    </div>
+    <button class="button" [disabled]="!driverValidation.valid">CREATE</button>
+  </form>
+</div>
