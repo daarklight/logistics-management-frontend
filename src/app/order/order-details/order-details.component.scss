@@ -1,0 +1,49 @@
+.order-details {
+  height: 450px;
+  width: 500px;
+  background-color: #FFC72C;
+  border-radius: 1rem;
+  border-width: 1rem;
+  border-color: chocolate;
+  opacity: 1;
+}
+
+.order-details-header {
+  align-self: center;
+  margin-left: 20px;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-family: Arial, serif;
+  font-weight: bold;
+}
+
+.order-details-info {
+  margin-top: 2rem;
+  margin-left: 3rem;
+  font-size: 1.2rem;
+  font-family: Arial, serif;
+}
+.order-details-cell{
+  margin-top: 0.5rem;
+  font-family: Arial, serif;
+}
+
+.logopic{
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  height: 500px;
+  width: 800px;
+  margin-left: auto;
+  margin-right: 0;
+  background-image: url(../../../../resources/delivery.png);
+}
+
+.error{
+  position: relative;
+  color: darkred;
+  font-size: large;
+  font-weight: bold;
+  width: 500px;
+  height: 500px;
+}

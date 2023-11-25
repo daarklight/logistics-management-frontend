@@ -52,7 +52,7 @@ export class OrderListComponent implements OnInit{
   }
 
   deleteOrder(orderId: number) {
-    this.orderService.orderDelete(orderId).subscribe(driver => {
+    this.orderService.orderDelete(orderId).subscribe(cargo => {
       this.orderService.ordersFindAll().subscribe(allOrders => {
         this.orders = allOrders;
         this.dataSource = new MatTableDataSource(this.orders);

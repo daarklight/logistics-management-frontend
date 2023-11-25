@@ -1,1 +1,81 @@
-<p>cargo-details works!</p>
+<div class="logopic">
+  <ng-template [ngIf]="isError" [ngIfElse]="details">
+    <div class="error">
+      <label><h3>Error occurred for while searching cargo with id {{id}}:</h3></label>
+      <br>
+      <label><h3>{{errorMessage}}:</h3></label>
+    </div>
+  </ng-template>
+  <ng-template #details>
+
+    <div class="cargo-details">
+      <br>
+      <div class="cargo-details-header">
+        Order #{{cargo.cargoId}} details
+      </div>
+      <div class="cargo-details-info">
+
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.cargoId}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.orderForCargoId}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.cargoName}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.weight}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.startCity}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.startState}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.startAddress}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.loaded}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.finalCity}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.finalState}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.finalAddress}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.unloaded}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.waypointIndex}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.rideDistanceFromStartPoint}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.rideDurationFromStartPoint}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.rideDistanceFromPreviousPoint}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.rideDurationFromPreviousPoint}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.expectedCompletionDateTime}}</label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b>Order id : </b>{{cargo.realCompletionDateTime}}</label>
+        </div>
+
+      </div>
+    </div>
+
+  </ng-template>
+</div>
+

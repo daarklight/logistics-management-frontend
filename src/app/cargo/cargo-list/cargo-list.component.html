@@ -1,1 +1,139 @@
-<p>cargo-list works!</p>
+<p></p>
+<div>
+  <mat-form-field class="mat-form-field ">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div>
+  <div class="table-container">
+    <mat-table [dataSource]="dataSource" matSort class="mat-table-style">
+
+      <!-- Cargo Id Column -->
+      <ng-container matColumnDef="cargoId" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Cargo Id</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.cargoId}} </mat-cell>
+      </ng-container>
+      <!-- Order Id Column -->
+      <ng-container matColumnDef="orderForCargoId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Order Id</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.orderForCargoId}} </mat-cell>
+      </ng-container>
+      <!-- Cargo name Column -->
+      <ng-container matColumnDef="cargoName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Cargo name</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.cargoName}} </mat-cell>
+      </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Weight</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.weight}} </mat-cell>
+      </ng-container>
+      <!-- Start city Column -->
+      <ng-container matColumnDef="startCity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Start city</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.startCity}} </mat-cell>
+      </ng-container>
+      <!-- Start state Column -->
+      <ng-container matColumnDef="startState">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Start state</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.startState}} </mat-cell>
+      </ng-container>
+      <!-- Start address Column -->
+      <ng-container matColumnDef="startAddress">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Start address</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.startAddress}} </mat-cell>
+      </ng-container>
+      <!-- Loaded Column -->
+      <ng-container matColumnDef="loaded">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Loaded status</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.loaded}} </mat-cell>
+      </ng-container>
+      <!-- Final city Column -->
+      <ng-container matColumnDef="finalCity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Final city</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.finalCity}} </mat-cell>
+      </ng-container>
+      <!-- Final state Column -->
+      <ng-container matColumnDef="finalState">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Final state</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.finalState}} </mat-cell>
+      </ng-container>
+      <!-- Final address Column -->
+      <ng-container matColumnDef="finalAddress">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Final address</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.finalAddress}} </mat-cell>
+      </ng-container>
+      <!-- Unloaded Column -->
+      <ng-container matColumnDef="unloaded">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Unloaded status</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.unloaded}} </mat-cell>
+      </ng-container>
+      <!-- Waypoint index Column -->
+      <ng-container matColumnDef="waypointIndex">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Waypoint indexy</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.waypointIndex}} </mat-cell>
+      </ng-container>
+      <!-- Ride distance from start point Column -->
+      <ng-container matColumnDef="rideDistanceFromStartPoint">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Ride distance from start point, km</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDistanceFromStartPoint}} </mat-cell>
+      </ng-container>
+      <!-- Ride duration from start point Column -->
+      <ng-container matColumnDef="rideDurationFromStartPoint">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Ride duration from start point, minutes</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDurationFromStartPoint}} </mat-cell>
+      </ng-container>
+      <!-- Ride distance from previous point Column -->
+      <ng-container matColumnDef="rideDistanceFromPreviousPoint">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Ride distance from previous point, km</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDistanceFromPreviousPoint}} </mat-cell>
+      </ng-container>
+      <!-- Ride duration from previous point Column -->
+      <ng-container matColumnDef="rideDurationFromPreviousPoint">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Ride duration from previous point, minutes</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDurationFromPreviousPoint}} </mat-cell>
+      </ng-container>
+      <!-- Expected completion date and time Column -->
+      <ng-container matColumnDef="expectedCompletionDateTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Expected completion date and time</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.expectedCompletionDateTime}} </mat-cell>
+      </ng-container>
+      <!-- Real completion date and time Column -->
+      <ng-container matColumnDef="realCompletionDateTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Real completion date and time</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.realCompletionDateTime}} </mat-cell>
+      </ng-container>
+
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions" stickyEnd>
+        <mat-header-cell *matHeaderCellDef class="actions-header-cell">Actions</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="buttons-container-cell">
+        <span style="width: 50px">
+          <button (click)="showCargoDetails(row.cargoId)" mat-button class="btn bnt-success">
+            <mat-icon>remove_red_eye</mat-icon></button>
+        </span>
+          <span style="width: 50px">
+          <button (click)="updateCargo(row.cargoId)" mat-button class="btn bnt-success">
+            <mat-icon>edit</mat-icon></button>
+        </span>
+          <span style="width: 50px">
+          <button mat-button (click)="deleteCargo(row.cargoId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
+        </mat-cell>
+      </ng-container>
+      <div>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </div>
+    </mat-table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>
+

@@ -53,7 +53,7 @@ export class DriverListComponent implements OnInit {
 
   deleteDriver(personalNumber: number) {
     this.driverService.driverDelete(personalNumber).subscribe(driver => {
-      //обновить данные таблицы после удаления драйвера
+      //Renew table data after driver deletion
       this.driverService.driversFindAll().subscribe(allDrivers => {
         this.drivers = allDrivers;
         this.dataSource = new MatTableDataSource(this.drivers);
@@ -62,5 +62,4 @@ export class DriverListComponent implements OnInit {
       })
     })
   }
-
 }

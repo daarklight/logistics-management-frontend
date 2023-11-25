@@ -1,65 +1,85 @@
-<div class="logopic">
-  <ng-template [ngIf]="isError" [ngIfElse]="details">
-    <div class="error">
-      <label><h3>Error occurred for while searching driver with id {{id}}:</h3></label>
-      <br>
-      <label><h3>{{errorMessage}}:</h3></label>
-    </div>
-  </ng-template>
-  <ng-template #details>
-
-    <div class="driver-details">
-      <br>
-      <div class="driver-details-header">
-        Driver {{driver.name}} {{driver.surname}} details
+<div class="grid-container">
+  <div class="driver-details">
+    <ng-template [ngIf]="isError" [ngIfElse]="details">
+      <div class="error">
+        <label><h3>Error occurred for while searching driver with id {{id}}:</h3></label>
+        <br>
+        <label><h3>{{errorMessage}}:</h3></label>
       </div>
-      <div class="driver-details-info">
-        <div class="driver-details-cell">
-          <label><b>Personal Number : </b>{{driver.personalNumber}}</label>
+    </ng-template>
+    <ng-template #details>
+      <div>
+        <br>
+        <div class="driver-details-header">
+          Driver <span class="header-style">{{driver.name}} {{driver.surname}} </span>details
         </div>
-        <div class="driver-details-cell">
-          <label><b>Name : </b>{{driver.name}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>Surname : </b>{{driver.surname}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>Phone : </b>{{driver.phone}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>Email : </b>{{driver.email}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>City: </b>{{driver.currentCity}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>State: </b>{{driver.currentState}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>Is Busy: </b>{{driver.busy}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>Current truck: </b>{{driver.currentTruckNumber}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>Current order: </b>{{driver.currentOrderId}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>Order Acceptance: </b>{{driver.orderAcceptance}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>Status: </b>{{driver.status}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>Hours spent in current month: </b>{{driver.workingHoursInCurrentMonth}}</label>
-        </div>
-        <div class="driver-details-cell">
-          <label><b>Work Experience: </b>{{driver.workExperience}} years</label>
+        <div class="driver-details-info">
+          <div class="driver-details-cell">
+            <label><b class="header-style">Personal Number: </b><span
+              class="row-margin">{{driver.personalNumber}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Name: </b><span class="row-margin">{{driver.name}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Surname: </b><span class="row-margin">{{driver.surname}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Phone: </b><span
+              class="row-margin">{{driver.phone}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Email: </b><span
+              class="row-margin">{{driver.email}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">City: </b><span
+              class="row-margin">{{driver.currentCity}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">State: </b><span
+              class="row-margin">{{driver.currentState}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Is Busy: </b><span
+              class="row-margin">{{driver.busy}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Current truck: </b><span
+              class="row-margin">{{driver.currentTruckNumber ?? '  &mdash;'}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Current order: </b><span
+              class="row-margin">{{driver.currentOrderId ?? '  &mdash;'}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Order Acceptance: </b><span
+              class="row-margin">{{driver.orderAcceptance ?? '  &mdash;'}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Status: </b><span class="row-margin">{{driver.status}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Hours spent in current month: </b><span
+              class="row-margin">{{driver.workingHoursInCurrentMonth}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Work Experience: </b><span
+              class="row-margin">{{driver.workExperience}} years</span></label>
+          </div>
+          <div class="buttons-panel">
+            <span style="width: 50px">
+          <button mat-button (click)="updateDriver(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+            <mat-icon>edit</mat-icon> EDIT
+          </button></span>
+            <span style="width: 50px">
+          <button mat-button (click)="deleteDriver(driver.personalNumber!)" style="background-color: darkred; color: white">
+            <mat-icon>delete</mat-icon> DELETE
+          </button></span>
+          </div>
         </div>
       </div>
-
-    </div>
-
-  </ng-template>
+    </ng-template>
+  </div>
+  <div class="background-pic"></div>
 </div>
-

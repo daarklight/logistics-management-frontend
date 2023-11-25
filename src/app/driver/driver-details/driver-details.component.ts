@@ -29,7 +29,9 @@ export class DriverDetailsComponent implements OnInit {
       this.errorMessage = error.message;
       console.log(error)
 
-      // if(error instanceof HttpErrorResponse) { //TODO: вот так можно обрабатывать ошибки с кодами, выдавать свои сообщения понятные
+
+
+      // if(error instanceof HttpErrorResponse) { //TODO: IT IS ABLE TO WORK WITH ERRORS, TO PROVIDE OWN MESSAGES
       //   switch (error.status) {
       //     case 500:
       //       this.errorMessage = "500 error message";
@@ -38,7 +40,23 @@ export class DriverDetailsComponent implements OnInit {
       // }
     });
   }
+
+  updateDriver(personalNumber: number){
+    this.driverService.driverFindById(personalNumber).subscribe(driverDetails => {
+      this.router.navigate(['driver/update/', personalNumber]);
+    });
+  }
+
+  deleteDriver(personalNumber: number) {
+    this.driverService.driverDelete(personalNumber).subscribe(driver => {
+      //Renew table data after driver deletion
+      this.router.navigate(['drivers']);
+    })
+  }
 }
+
+
+
 
 export class HttpError{
   static BadRequest = 400;

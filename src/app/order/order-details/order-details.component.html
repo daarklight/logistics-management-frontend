@@ -1,1 +1,51 @@
-<p>order-details works!</p>
+<div class="logopic">
+  <ng-template [ngIf]="isError" [ngIfElse]="details">
+    <div class="error">
+      <label><h3>Error occurred for while searching order with id {{id}}:</h3></label>
+      <br>
+      <label><h3>{{errorMessage}}:</h3></label>
+    </div>
+  </ng-template>
+  <ng-template #details>
+
+    <div class="order-details">
+      <br>
+      <div class="order-details-header">
+        Order #{{order.orderId}} details
+      </div>
+      <div class="order-details-info">
+
+        <div class="order-details-cell">
+          <label><b>Order id : </b>{{order.orderId}}</label>
+        </div>
+        <div class="order-details-cell">
+          <label><b>Customer id for order : </b>{{order.orderCustomerId}}</label>
+        </div>
+        <div class="order-details-cell">
+          <label><b>Category : </b>{{order.category}}</label>
+        </div>
+        <div class="order-details-cell">
+          <label><b>Weight, tons : </b>{{order.weight}}</label>
+        </div>
+        <div class="order-details-cell">
+          <label><b>Status : </b>{{order.status}}</label>
+        </div>
+        <div class="order-details-cell">
+          <label><b>Start date and time : </b>{{order.startDateTime}}</label>
+        </div>
+        <div class="order-details-cell">
+          <label><b>Limit date and time : </b>{{order.limitDateTime}}</label>
+        </div>
+        <div class="order-details-cell">
+          <label><b>Assigned truck number : </b>{{order.assignedTruckNumber}}</label>
+        </div>
+        <div class="order-details-cell">
+          <label><b>Driver's comment : </b>{{order.driverComment}}</label>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-template>
+</div>
+

@@ -4,13 +4,15 @@
   border-collapse: collapse;
   width:85%;
   display: block;
+  word-wrap: break-word;
 }
 
 .mat-table-style {
   background-color: #b2d430;
-  white-space:nowrap;
   border-radius: 1rem;
   overflow-x: auto;
+  word-wrap: break-word;
+  word-break: normal;
 }
 
 .mat-header-cell {
