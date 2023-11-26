@@ -17,17 +17,27 @@
       </ng-container>
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell"> Name</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Name</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.name}} </mat-cell>
       </ng-container>
       <!-- Surname Column -->
       <ng-container matColumnDef="surname">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell"> Surname</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Surname</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.surname}} </mat-cell>
+      </ng-container>
+      <!-- Phone Column -->
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Phone</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.phone}} </mat-cell>
+      </ng-container>
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-long">Email</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-long"> {{row.email}} </mat-cell>
       </ng-container>
       <!-- Work Experience Column -->
       <ng-container matColumnDef="workExperience">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell"> Work Experience</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Work Experience</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.workExperience}} </mat-cell>
       </ng-container>
       <!-- Working Hours In Current Month Column -->
@@ -35,6 +45,36 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell"> Spent hours
         </mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.workingHoursInCurrentMonth}} </mat-cell>
+      </ng-container>
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Status</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.status}} </mat-cell>
+      </ng-container>
+      <!-- Busy status Column -->
+      <ng-container matColumnDef="busy">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Busy status</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.busy}} </mat-cell>
+      </ng-container>
+      <!-- Current city Column -->
+      <ng-container matColumnDef="currentCity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Current city</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.currentCity}} </mat-cell>
+      </ng-container>
+      <!-- Current state Column -->
+      <ng-container matColumnDef="currentState">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Current state</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.currentState}} </mat-cell>
+      </ng-container>
+      <!-- Current truck number Column -->
+      <ng-container matColumnDef="currentTruckNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Current truck number</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.currentTruckNumber}} </mat-cell>
+      </ng-container>
+      <!-- Id of current order Column -->
+      <ng-container matColumnDef="currentOrderId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Id of current order</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.currentOrderId}} </mat-cell>
       </ng-container>
 
       <!-- Actions Column -->
@@ -61,8 +101,8 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </div>
     </mat-table>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns">></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-paginator-style"></mat-paginator>
   </div>
 </div>

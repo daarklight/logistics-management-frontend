@@ -28,6 +28,19 @@ export class CargoDetailsComponent implements OnInit {
       console.log(error)
     });
   }
+
+  updateCargo(cargoId: number){
+    this.cargoService.cargoFindById(cargoId).subscribe(cargoDetails => {
+      this.router.navigate(['cargo/update/', cargoId]);
+    });
+  }
+
+  deleteCargo(cargoId: number) {
+    this.cargoService.cargoDelete(cargoId).subscribe(cargo => {
+      this.router.navigate(['cargos']);
+    })
+  }
+
 }
 
 export class HttpError{

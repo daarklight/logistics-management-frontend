@@ -17,7 +17,7 @@ export class CargoListComponent implements OnInit{
     ['cargoId', 'orderForCargoId', 'cargoName', 'weight', 'startCity', 'startState', 'startAddress',
       'loaded', 'finalCity', 'finalState', 'finalAddress', 'unloaded', 'waypointIndex', 'rideDistanceFromStartPoint',
       'rideDurationFromStartPoint', 'rideDistanceFromPreviousPoint', 'rideDurationFromPreviousPoint',
-      'expectedCompletionDateTime', 'realCompletionDateTime'];
+      'expectedCompletionDateTime', 'realCompletionDateTime', 'actions'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -35,8 +35,8 @@ export class CargoListComponent implements OnInit{
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 

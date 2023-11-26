@@ -52,7 +52,7 @@
       </ng-container>
       <!-- Driver comment Column -->
       <ng-container matColumnDef="driverComment">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Driver comment</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Driver's comment</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.driverComment}} </mat-cell>
       </ng-container>
 
@@ -83,7 +83,7 @@
     </mat-table>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-paginator-style"></mat-paginator>
   </div>
 </div>
 

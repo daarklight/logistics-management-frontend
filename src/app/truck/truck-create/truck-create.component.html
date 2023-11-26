@@ -1,1 +1,99 @@
-<p>truck-create works!</p>
+<div class="form-create">
+  <h3 class="text-center" style="font-size: 26px"><b>Register new truck</b></h3>
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-group" [formGroup]="truckValidation" style="margin-top: 15px">
+      <label><b>Number</b></label>
+      <input type="text" class="form-control" id="number" [(ngModel)]="truck.number" name="number" formControlName="numberCheck">
+      <div
+        *ngIf="numberCheck!.invalid && (numberCheck!.dirty || numberCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="numberCheck?.errors?.['required']"> &#10008; Number required
+          </div>
+          <div *ngIf="numberCheck?.errors?.['pattern']"> &#10008; Number should consist of 3 capital letters and 4 digits, like ABC1234
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="truckValidation" style="margin-top: 15px">
+      <label><b>Model</b></label>
+      <input type="text" class="form-control" id="surname" [(ngModel)]="truck.model" name="model"
+             formControlName="modelCheck">
+      <div
+        *ngIf="modelCheck!.invalid && (modelCheck!.dirty || modelCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="modelCheck?.errors?.['required']"> &#10008; Model should not be blank and should not exceed 30
+            symbols
+          </div>
+          <div *ngIf="modelCheck?.errors?.['pattern']"> &#10008; Model should consist of letters and can contain
+            backspaces and/or digits
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="truckValidation" style="margin-top: 15px">
+      <label><b>Max capacity, tons</b></label>
+      <input type="text" class="form-control" id="capacity" [(ngModel)]="truck.capacity" name="capacity"
+             formControlName="capacityCheck">
+      <div
+        *ngIf="capacityCheck!.invalid && (capacityCheck!.dirty || capacityCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="capacityCheck?.errors?.['required']"> &#10008; Capacity required</div>
+          <div *ngIf="capacityCheck?.errors?.['min']"> &#10008; Max capacity should be between 0.1 and 30.0 tons</div>
+          <div *ngIf="capacityCheck?.errors?.['max']"> &#10008; Max capacity should be between 0.1 and 30.0 tons</div>
+          <div *ngIf="capacityCheck?.errors?.['pattern']"> &#10008; Max capacity should be decimal number</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="truckValidation" style="margin-top: 15px">
+      <label><b>Total operating time, years</b></label>
+      <input type="text" class="form-control" id="work-experience" [(ngModel)]="truck.totalOperatingTime"
+             name="totalOperatingTime" formControlName="totalOperatingTimeCheck">
+      <div
+        *ngIf="totalOperatingTimeCheck!.invalid && (totalOperatingTimeCheck!.dirty || totalOperatingTimeCheck!.touched)"
+        class="validationAlert">
+        <div>
+          <div *ngIf="totalOperatingTimeCheck?.errors?.['required']"> &#10008; Total operating time experience required</div>
+          <div *ngIf="totalOperatingTimeCheck?.errors?.['min']"> &#10008; Total operating time should be between 1 and 30 years
+          </div>
+          <div *ngIf="totalOperatingTimeCheck?.errors?.['max']"> &#10008; Total operating time should be between 1 and 30 years
+          </div>
+          <div *ngIf="totalOperatingTimeCheck?.errors?.['pattern']"> &#10008; Total operating time should be integer number</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="truckValidation" style="margin-top: 15px">
+      <label><b>Current city</b></label>
+      <input type="text" class="form-control" id="current-сity" [(ngModel)]="truck.currentCity" name="currentCity"
+             formControlName="currentCityCheck">
+      <div
+        *ngIf="currentCityCheck!.invalid && (currentCityCheck!.dirty || currentCityCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="currentCityCheck?.errors?.['required']"> &#10008; Current city required</div>
+          <div *ngIf="currentCityCheck?.errors?.['maxlength']"> &#10008; Current city must be max 30 symbols long</div>
+          <div *ngIf="currentCityCheck?.errors?.['pattern']"> &#10008; Current city format is incorrect</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="truckValidation" style="margin-top: 15px">
+      <label><b>Current state</b></label>
+      <input type="text" class="form-control" id="current-state" [(ngModel)]="truck.currentState" name="currentState"
+             formControlName="currentStateCheck">
+      <div
+        *ngIf="currentStateCheck!.invalid && (currentStateCheck!.dirty || currentStateCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="currentStateCheck?.errors?.['required']"> &#10008; Current state required</div>
+          <div *ngIf="currentStateCheck?.errors?.['maxlength']"> &#10008; Current state must be max 30 symbols long</div>
+          <div *ngIf="currentStateCheck?.errors?.['pattern']"> &#10008; Current state format is incorrect</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="button" [disabled]="!truckValidation.valid">REGISTER</button>
+  </form>
+</div>

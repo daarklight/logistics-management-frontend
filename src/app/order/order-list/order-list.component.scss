@@ -2,17 +2,14 @@
   border: 2px solid #008080;
   border-radius: 1rem;
   border-collapse: collapse;
-  width:85%;
-  display: block;
-  word-wrap: break-word;
+  width:95%;
 }
 
 .mat-table-style {
   background-color: #b2d430;
   border-radius: 1rem;
   overflow-x: auto;
-  word-wrap: break-word;
-  word-break: normal;
+  display: grid;
 }
 
 .mat-header-cell {
@@ -51,6 +48,7 @@
   border-left: solid 1px  #008080;
 }
 
-
-
-
+.mat-paginator-style {
+  border-bottom-left-radius: 1.2rem;
+  border-bottom-right-radius: 1.2rem;;
+}

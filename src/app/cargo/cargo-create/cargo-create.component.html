@@ -1,1 +1,139 @@
-<p>cargo-create works!</p>
+<div class="form-create">
+  <h3 class="text-center" style="font-size: 26px"><b>Register new cargo</b></h3>
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
+      <label><b>Id of order for this cargo</b></label>
+      <input type="text" class="form-control" id="order-for-cargo-id" [(ngModel)]="cargo.orderForCargoId"
+             name="orderForCargoId" formControlName="orderForCargoIdCheck" maxlength="6">
+      <div
+        *ngIf="orderForCargoIdCheck!.invalid && (orderForCargoIdCheck!.dirty || orderForCargoIdCheck!.touched)"
+        class="validationAlert">
+        <div>
+          <div *ngIf="orderForCargoIdCheck?.errors?.['required']"> &#10008; Order Id required</div>
+          <div *ngIf="orderForCargoIdCheck?.errors?.['min']"> &#10008; Order Id should be not less than 1</div>
+          <div *ngIf="orderForCargoIdCheck?.errors?.['pattern']"> &#10008; Order Id should be integer number</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
+      <label><b>Cargo name</b></label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="cargo.cargoName" name="cargoName"
+             formControlName="cargoNameCheck">
+      <div
+        *ngIf="cargoNameCheck!.invalid && (cargoNameCheck!.dirty || cargoNameCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="cargoNameCheck?.errors?.['required']"> &#10008; Cargo name required
+          </div>
+          <div *ngIf="cargoNameCheck?.errors?.['maxlength']"> &#10008; Cargo name should not exceed 40 symbols
+          </div>
+          <div *ngIf="cargoNameCheck?.errors?.['pattern']"> &#10008; Cargo name should consist of letters and can contain
+            backspaces and/or digits
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
+      <label><b>Weight, tons</b></label>
+      <input type="text" class="form-control" id="surname" [(ngModel)]="cargo.weight" name="weight"
+             formControlName="weightCheck">
+      <div
+        *ngIf="weightCheck!.invalid && (weightCheck!.dirty || weightCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="weightCheck?.errors?.['required']"> &#10008; Weight required</div>
+          <div *ngIf="weightCheck?.errors?.['min']"> &#10008; Weight should be between 0.01 and 30.0 tons</div>
+          <div *ngIf="weightCheck?.errors?.['max']"> &#10008; Weight should be between 0.01 and 30.0 tons</div>
+          <div *ngIf="weightCheck?.errors?.['pattern']"> &#10008; Weight should be decimal number</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
+      <label><b>Start city</b></label>
+      <input type="text" class="form-control" id="start-сity" [(ngModel)]="cargo.startCity" name="startCity"
+             formControlName="startCityCheck">
+      <div
+        *ngIf="startCityCheck!.invalid && (startCityCheck!.dirty || startCityCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="startCityCheck?.errors?.['required']"> &#10008; Start city required</div>
+          <div *ngIf="startCityCheck?.errors?.['maxlength']"> &#10008; Start city must be max 30 symbols long</div>
+          <div *ngIf="startCityCheck?.errors?.['pattern']"> &#10008; Start city format is incorrect</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
+      <label><b>Start state</b></label>
+      <input type="text" class="form-control" id="start-state" [(ngModel)]="cargo.startState" name="startState"
+             formControlName="startStateCheck">
+      <div
+        *ngIf="startStateCheck!.invalid && (startStateCheck!.dirty || startStateCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="startStateCheck?.errors?.['required']"> &#10008; Start state required</div>
+          <div *ngIf="startStateCheck?.errors?.['maxlength']"> &#10008; Start state must be max 30 symbols long</div>
+          <div *ngIf="startStateCheck?.errors?.['pattern']"> &#10008; Start state format is incorrect</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
+      <label><b>Start address</b></label>
+      <input type="text" class="form-control" id="start-address" [(ngModel)]="cargo.startAddress" name="startAddress"
+             formControlName="startAddressCheck">
+      <div
+        *ngIf="startAddressCheck!.invalid && (startStateCheck!.dirty || startAddressCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="startAddressCheck?.errors?.['required']"> &#10008; Start address required</div>
+          <div *ngIf="startAddressCheck?.errors?.['maxlength']"> &#10008; Start address must be max 50 symbols long</div>
+          <div *ngIf="startAddressCheck?.errors?.['pattern']"> &#10008; Start address format is incorrect</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
+      <label><b>Final city</b></label>
+      <input type="text" class="form-control" id="final-сity" [(ngModel)]="cargo.finalCity" name="finalCity"
+             formControlName="finalCityCheck">
+      <div
+        *ngIf="finalCityCheck!.invalid && (finalCityCheck!.dirty || finalCityCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="finalCityCheck?.errors?.['required']"> &#10008; Final city required</div>
+          <div *ngIf="finalCityCheck?.errors?.['maxlength']"> &#10008; Final city must be max 30 symbols long</div>
+          <div *ngIf="finalCityCheck?.errors?.['pattern']"> &#10008; Final city format is incorrect</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
+      <label><b>Final state</b></label>
+      <input type="text" class="form-control" id="final-state" [(ngModel)]="cargo.finalState" name="finalState"
+             formControlName="finalStateCheck">
+      <div
+        *ngIf="finalStateCheck!.invalid && (finalStateCheck!.dirty || finalStateCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="finalStateCheck?.errors?.['required']"> &#10008; Final state required</div>
+          <div *ngIf="finalStateCheck?.errors?.['maxlength']"> &#10008; Final state must be max 30 symbols long</div>
+          <div *ngIf="finalStateCheck?.errors?.['pattern']"> &#10008; Final state format is incorrect</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
+      <label><b>Final address</b></label>
+      <input type="text" class="form-control" id="final-address" [(ngModel)]="cargo.finalAddress" name="finalAddress"
+             formControlName="finalAddressCheck">
+      <div
+        *ngIf="finalAddressCheck!.invalid && (finalStateCheck!.dirty || finalAddressCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="finalAddressCheck?.errors?.['required']"> &#10008; Final address required</div>
+          <div *ngIf="finalAddressCheck?.errors?.['maxlength']"> &#10008; Final address must be max 50 symbols long</div>
+          <div *ngIf="finalAddressCheck?.errors?.['pattern']"> &#10008; Final address format is incorrect</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="button" [disabled]="!cargoValidation.valid">REGISTER</button>
+  </form>
+</div>

@@ -19,7 +19,7 @@
 
   <div class="form-group" [formGroup]="orderValidation" style="margin-top: 15px">
     <label><b>Category</b></label>
-    <input type="text" class="form-control" id="name" [(ngModel)]="order.category" name="category"
+    <input type="text" class="form-control" id="category" [(ngModel)]="order.category" name="category"
            formControlName="orderCategory">
     <div
       *ngIf="orderCategory!.invalid && (orderCategory!.dirty || orderCategory!.touched)" class="validationAlert">
@@ -37,7 +37,7 @@
 
   <div class="form-group" [formGroup]="orderValidation" style="margin-top: 15px">
     <label><b>Weight, tons</b></label>
-    <input type="text" class="form-control" id="surname" [(ngModel)]="order.weight" name="weight"
+    <input type="text" class="form-control" id="weight" [(ngModel)]="order.weight" name="weight"
            formControlName="orderWeight">
     <div
       *ngIf="orderWeight!.invalid && (orderWeight!.dirty || orderWeight!.touched)" class="validationAlert">
@@ -66,6 +66,7 @@
       </div>
     </div>
   </div>
+
 <button class="button" [disabled]="!orderValidation.valid">REGISTER</button>
 </form>
 </div>

@@ -1,51 +1,68 @@
-<div class="logopic">
-  <ng-template [ngIf]="isError" [ngIfElse]="details">
-    <div class="error">
-      <label><h3>Error occurred for while searching order with id {{id}}:</h3></label>
-      <br>
-      <label><h3>{{errorMessage}}:</h3></label>
-    </div>
-  </ng-template>
-  <ng-template #details>
-
-    <div class="order-details">
-      <br>
-      <div class="order-details-header">
-        Order #{{order.orderId}} details
+<div class="grid-container">
+  <div class="order-details">
+    <ng-template [ngIf]="isError" [ngIfElse]="details">
+      <div class="error">
+        <label><h3>Error occurred for while searching order with id {{id}}:</h3></label>
+        <br>
+        <label><h3>{{errorMessage}}:</h3></label>
       </div>
-      <div class="order-details-info">
+    </ng-template>
+    <ng-template #details>
+      <div>
+        <br>
+        <div class="order-details-header">
+          Order# <span class="header-style">{{order.orderId}} </span>details
+        </div>
+        <div class="order-details-info">
 
-        <div class="order-details-cell">
-          <label><b>Order id : </b>{{order.orderId}}</label>
-        </div>
-        <div class="order-details-cell">
-          <label><b>Customer id for order : </b>{{order.orderCustomerId}}</label>
-        </div>
-        <div class="order-details-cell">
-          <label><b>Category : </b>{{order.category}}</label>
-        </div>
-        <div class="order-details-cell">
-          <label><b>Weight, tons : </b>{{order.weight}}</label>
-        </div>
-        <div class="order-details-cell">
-          <label><b>Status : </b>{{order.status}}</label>
-        </div>
-        <div class="order-details-cell">
-          <label><b>Start date and time : </b>{{order.startDateTime}}</label>
-        </div>
-        <div class="order-details-cell">
-          <label><b>Limit date and time : </b>{{order.limitDateTime}}</label>
-        </div>
-        <div class="order-details-cell">
-          <label><b>Assigned truck number : </b>{{order.assignedTruckNumber}}</label>
-        </div>
-        <div class="order-details-cell">
-          <label><b>Driver's comment : </b>{{order.driverComment}}</label>
+          <div class="order-details-cell">
+            <label><b class="header-style">Order id: </b><span
+              class="row-margin">{{order.orderId}}</span></label>
+          </div>
+          <div class="order-details-cell">
+            <label><b class="header-style">Customer id for order: </b><span class="row-margin">{{order.orderCustomerId}}</span></label>
+          </div>
+          <div class="order-details-cell">
+            <label><b class="header-style">Category: </b><span class="row-margin">{{order.category}}</span></label>
+          </div>
+          <div class="order-details-cell">
+            <label><b class="header-style">Weight, tons: </b><span
+              class="row-margin">{{order.weight}}</span></label>
+          </div>
+          <div class="order-details-cell">
+            <label><b class="header-style">Status: </b><span
+              class="row-margin">{{order.status}}</span></label>
+          </div>
+          <div class="order-details-cell">
+            <label><b class="header-style">Start date and time: </b><span
+              class="row-margin">{{order.startDateTime ?? '  &mdash;'}}</span></label>
+          </div>
+          <div class="order-details-cell">
+            <label><b class="header-style">Limit date and time: </b><span
+              class="row-margin">{{order.limitDateTime}}</span></label>
+          </div>
+          <div class="order-details-cell">
+            <label><b class="header-style">Assigned truck number: </b><span
+              class="row-margin">{{order.assignedTruckNumber ?? '  &mdash;'}}</span></label>
+          </div>
+          <div class="order-details-cell">
+            <label><b class="header-style">Driver's comment: </b><span
+              class="row-margin">{{order.driverComment ?? '  &mdash;'}}</span></label>
+          </div>
+
+          <div class="buttons-panel">
+            <span style="width: 50px">
+          <button mat-button (click)="updateOrder(order.orderId!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+            <mat-icon>edit</mat-icon> EDIT
+          </button></span>
+            <span style="width: 50px">
+          <button mat-button (click)="deleteOrder(order.orderId!)" style="background-color: darkred; color: white">
+            <mat-icon>delete</mat-icon> DELETE
+          </button></span>
+          </div>
         </div>
       </div>
-
-    </div>
-
-  </ng-template>
+    </ng-template>
+  </div>
+  <div class="background-pic"></div>
 </div>
-

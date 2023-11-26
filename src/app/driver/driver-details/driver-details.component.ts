@@ -53,6 +53,7 @@ export class DriverDetailsComponent implements OnInit {
       this.router.navigate(['drivers']);
     })
   }
+
 }
 
 

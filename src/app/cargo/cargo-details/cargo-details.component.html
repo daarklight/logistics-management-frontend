@@ -1,81 +1,107 @@
-<div class="logopic">
-  <ng-template [ngIf]="isError" [ngIfElse]="details">
-    <div class="error">
-      <label><h3>Error occurred for while searching cargo with id {{id}}:</h3></label>
-      <br>
-      <label><h3>{{errorMessage}}:</h3></label>
-    </div>
-  </ng-template>
-  <ng-template #details>
-
-    <div class="cargo-details">
-      <br>
-      <div class="cargo-details-header">
-        Order #{{cargo.cargoId}} details
+<div class="grid-container">
+  <div class="cargo-details">
+    <ng-template [ngIf]="isError" [ngIfElse]="details">
+      <div class="error">
+        <label><h3>Error occurred for while searching cargo with id {{id}}:</h3></label>
+        <br>
+        <label><h3>{{errorMessage}}:</h3></label>
       </div>
-      <div class="cargo-details-info">
+    </ng-template>
+    <ng-template #details>
+      <div>
+        <br>
+        <div class="cargo-details-header">
+          Cargo# <span class="header-style">{{cargo.cargoId}} </span>details
+        </div>
+        <div class="cargo-details-info">
 
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.cargoId}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.orderForCargoId}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.cargoName}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.weight}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.startCity}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.startState}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.startAddress}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.loaded}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.finalCity}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.finalState}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.finalAddress}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.unloaded}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.waypointIndex}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.rideDistanceFromStartPoint}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.rideDurationFromStartPoint}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.rideDistanceFromPreviousPoint}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.rideDurationFromPreviousPoint}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.expectedCompletionDateTime}}</label>
-        </div>
-        <div class="cargo-details-cell">
-          <label><b>Order id : </b>{{cargo.realCompletionDateTime}}</label>
-        </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Cargo Id: </b><span
+              class="row-margin">{{cargo.cargoId}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Order Id: </b><span class="row-margin">{{cargo.orderForCargoId}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Cargo name: </b><span class="row-margin">{{cargo.cargoName}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Weigh, tons: </b><span
+              class="row-margin">{{cargo.weight}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Start city: </b><span
+              class="row-margin">{{cargo.startCity}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Start state: </b><span
+              class="row-margin">{{cargo.startState}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Start address: </b><span
+              class="row-margin">{{cargo.startAddress}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Loaded status: </b><span
+              class="row-margin">{{cargo.loaded}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Final city: </b><span
+              class="row-margin">{{cargo.finalCity ?? '  &mdash;'}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Final state: </b><span
+              class="row-margin">{{cargo.finalState ?? '  &mdash;'}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Final address: </b><span
+              class="row-margin">{{cargo.finalAddress ?? '  &mdash;'}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Unloaded status: </b><span class="row-margin">{{cargo.unloaded}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Waypoint index: </b><span
+              class="row-margin">{{cargo.waypointIndex}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Ride distance from start point, km: </b><span
+              class="row-margin">{{cargo.rideDistanceFromStartPoint}} years</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Ride duration from start point, minutes: </b><span
+              class="row-margin">{{cargo.rideDurationFromStartPoint}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Ride distance from previous point, km: </b><span
+              class="row-margin">{{cargo.rideDistanceFromPreviousPoint}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Ride duration from previous point, minutes: </b><span
+              class="row-margin">{{cargo.rideDurationFromPreviousPoint}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Expected completion date and time: </b><span
+              class="row-margin">{{cargo.expectedCompletionDateTime ?? '  &mdash;'}}</span></label>
+          </div>
+          <div class="cargo-details-cell">
+            <label><b class="header-style">Real completion date and time: </b><span
+              class="row-margin">{{cargo.realCompletionDateTime ?? '  &mdash;'}}</span></label>
+          </div>
 
+          <div class="buttons-panel">
+            <span style="width: 50px">
+          <button mat-button (click)="updateCargo(cargo.cargoId!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+            <mat-icon>edit</mat-icon> EDIT
+          </button></span>
+            <span style="width: 50px">
+          <button mat-button (click)="deleteCargo(cargo.cargoId!)" style="background-color: darkred; color: white">
+            <mat-icon>delete</mat-icon> DELETE
+          </button></span>
+          </div>
+        </div>
       </div>
-    </div>
-
-  </ng-template>
+    </ng-template>
+  </div>
+  <div class="background-pic"></div>
 </div>
-

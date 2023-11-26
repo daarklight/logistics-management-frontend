@@ -14,8 +14,25 @@ export class DriverListComponent implements OnInit {
   drivers: Driver[]
   dataSource: MatTableDataSource<Driver>
   displayedColumns =
-    ['personalNumber', 'name', 'surname', 'workExperience', 'workingHoursInCurrentMonth',
-      'actions'];
+
+    //    "personalNumber": 153001,
+    //     "name": "John",
+    //     "surname": "Smith",
+    //     "phone": "+1 638 478 3001",
+    //     "email": "charley_adams@gmail.com",
+    //     "workExperience": 5,
+    //     "workingHoursInCurrentMonth": 10,
+    //     "status": "REST",
+    //     "busy": "NO",
+    //     "currentCity": "Chicago",
+    //     "currentState": "Illinois",
+    //     "currentTruckNumber": "ABC1234",
+    //     "currentOrderId": 12001,
+    //     "orderAcceptance": "YES"
+
+
+    ['personalNumber', 'name', 'surname', 'phone', 'email', 'workExperience', 'workingHoursInCurrentMonth',
+      'status', 'busy', 'currentCity', 'currentState', 'currentTruckNumber', 'currentOrderId', 'actions'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -62,4 +79,5 @@ export class DriverListComponent implements OnInit {
       })
     })
   }
+
 }

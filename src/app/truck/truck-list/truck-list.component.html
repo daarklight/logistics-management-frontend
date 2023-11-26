@@ -1,1 +1,83 @@
-<p>truck-list works!</p>
+<p></p>
+<div>
+  <mat-form-field class="mat-form-field ">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div>
+  <div class="table-container">
+    <mat-table [dataSource]="dataSource" matSort class="mat-table-style">
+
+      <!-- Number Column -->
+      <ng-container matColumnDef="number" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Number</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.number}} </mat-cell>
+      </ng-container>
+      <!-- Model Column -->
+      <ng-container matColumnDef="model">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Model</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.model}} </mat-cell>
+      </ng-container>
+      <!-- Capacity Column -->
+      <ng-container matColumnDef="capacity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Capacity, tons</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.capacity}} </mat-cell>
+      </ng-container>
+      <!-- Total operating time Column -->
+      <ng-container matColumnDef="totalOperatingTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Total operating time, years</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.totalOperatingTime}} </mat-cell>
+      </ng-container>
+      <!-- Technical condition Column -->
+      <ng-container matColumnDef="technicalCondition">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Technical condition</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.technicalCondition}} </mat-cell>
+      </ng-container>
+      <!-- Busy Column -->
+      <ng-container matColumnDef="busy">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Busy status</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.busy}} </mat-cell>
+      </ng-container>
+      <!-- Current city Column -->
+      <ng-container matColumnDef="currentCity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Current city</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.currentCity}} </mat-cell>
+      </ng-container>
+      <!-- Current state Column -->
+      <ng-container matColumnDef="currentState">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Current state</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.currentState}} </mat-cell>
+      </ng-container>
+
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions" stickyEnd>
+        <mat-header-cell *matHeaderCellDef class="actions-header-cell">Actions</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="buttons-container-cell">
+        <span style="width: 50px">
+          <button (click)="showTruckDetails(row.number)" mat-button class="btn bnt-success">
+            <mat-icon>remove_red_eye</mat-icon></button>
+        </span>
+          <span style="width: 50px">
+          <button (click)="updateTruck(row.number)" mat-button class="btn bnt-success">
+            <mat-icon>edit</mat-icon></button>
+        </span>
+          <span style="width: 50px">
+          <button mat-button (click)="deleteTruck(row.number)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
+        </mat-cell>
+      </ng-container>
+      <div>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </div>
+    </mat-table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-paginator-style"></mat-paginator>
+  </div>
+</div>

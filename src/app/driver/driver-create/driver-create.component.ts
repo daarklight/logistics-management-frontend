@@ -32,13 +32,14 @@ export class DriverCreateComponent implements OnInit {
     this.driverService.driverCreate(this.driver).subscribe(createdDriver => {
         this.isError = false;
         console.log(createdDriver)
-        //TODO: редиректнуть на страницу с деталями водителя
+        this.router.navigate(['driver/details/', createdDriver.personalNumber]);
+        //TODO: redirect to the page with driver details
       },
       error => { //если ошибка
         this.isError = true;
         this.errorMessage = error.error.message;
-        //TODO: редиректнуть на страницу с ошибкой (сделать компонент для вывода ошибки)
-        //редирект посмотреть на странице вывода всех драйверов (кнопка показать детали)
+        //TODO: redirect to the page with error (make component to show error)
+        //redirect to view all drivers (button Show Details)
       })
   }
 
@@ -68,7 +69,7 @@ export class DriverCreateComponent implements OnInit {
         + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$")]),
     drEmail: new FormControl(this.driver.email, [
       Validators.required,
-      Validators.pattern("^[A-Za-z0-9+_.-]+@(.+)$")]),
+      Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]),
     drWorkExperience: new FormControl(this.driver.workExperience, [
       Validators.required,
       Validators.min(1),
@@ -124,11 +125,4 @@ export class DriverCreateComponent implements OnInit {
   get drCurrentState() {
     return this.driverValidation.get('drCurrentState')
   }
-
-  // createDriver(personalNumber: number){
-  //   this.driverService.driverCreate().subscribe(driver => {
-  //     this.router.navigate(['driver/details/', personalNumber]);
-  //   });
-  // }
-
 }

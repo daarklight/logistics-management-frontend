@@ -1,0 +1,54 @@
+.table-container{
+  border: 2px solid #008080;
+  border-radius: 1rem;
+  border-collapse: collapse;
+  width:95%;
+}
+
+.mat-table-style {
+  background-color: #b2d430;
+  border-radius: 1rem;
+  overflow-x: auto;
+  display: grid;
+}
+
+.mat-header-cell {
+  font-size: 14px;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  min-width: 170px;
+  border-right: solid 0.5px  #008080;
+  border-left: solid 0.5px  #008080;
+}
+
+.mat-cell {
+  min-width: 170px;
+  background-color: #fff5f5;
+  justify-content: center;
+  border-right: solid 0.5px  #008080;
+  border-left: solid 0.5px  #008080;
+}
+
+.actions-header-cell {
+  font-size: 14px;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  min-width: 185px;
+  border-left: solid 1px  #008080;
+}
+.buttons-container-cell {
+  min-width: 185px;
+  background-color: #ffd944;
+  justify-content: center;
+  border-right: solid 1px  #008080;
+  border-left: solid 1px  #008080;
+}
+
+.mat-paginator-style {
+  border-bottom-left-radius: 1.2rem;
+  border-bottom-right-radius: 1.2rem;;
+}

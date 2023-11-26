@@ -28,6 +28,19 @@ export class OrderDetailsComponent implements OnInit {
       console.log(error)
     });
   }
+
+  updateOrder(orderId: number){
+    this.orderService.orderFindById(orderId).subscribe(orderDetails => {
+      this.router.navigate(['order/update/', orderId]);
+    });
+  }
+
+  deleteOrder(orderId: number) {
+    this.orderService.orderDelete(orderId).subscribe(order => {
+      this.router.navigate(['orders']);
+    })
+  }
+
 }
 
 export class HttpError{

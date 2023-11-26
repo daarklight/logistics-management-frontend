@@ -1,1 +1,65 @@
-<p>truck-details works!</p>
+<div class="grid-container">
+  <div class="truck-details">
+    <ng-template [ngIf]="isError" [ngIfElse]="details">
+      <div class="error">
+        <label><h3>Error occurred for while searching truck with id {{id}}:</h3></label>
+        <br>
+        <label><h3>{{errorMessage}}:</h3></label>
+      </div>
+    </ng-template>
+    <ng-template #details>
+      <div>
+        <br>
+        <div class="truck-details-header">
+          Truck# <span class="header-style">{{truck.number}} </span>details
+        </div>
+        <div class="truck-details-info">
+
+          <div class="truck-details-cell">
+            <label><b class="header-style">Number: </b><span
+              class="row-margin">{{truck.number}}</span></label>
+          </div>
+          <div class="truck-details-cell">
+            <label><b class="header-style">Model: </b><span class="row-margin">{{truck.model}}</span></label>
+          </div>
+          <div class="truck-details-cell">
+            <label><b class="header-style">Capacity, tons: </b><span
+              class="row-margin">{{truck.capacity}}</span></label>
+          </div>
+          <div class="truck-details-cell">
+            <label><b class="header-style">Total operating time, years: </b><span
+              class="row-margin">{{truck.totalOperatingTime}}</span></label>
+          </div>
+          <div class="truck-details-cell">
+            <label><b class="header-style">Technical condition: </b><span
+              class="row-margin">{{truck.technicalCondition}}</span></label>
+          </div>
+          <div class="truck-details-cell">
+            <label><b class="header-style">Busy status: </b><span
+              class="row-margin">{{truck.busy}}</span></label>
+          </div>
+          <div class="truck-details-cell">
+            <label><b class="header-style">Current city: </b><span
+              class="row-margin">{{truck.currentCity}}</span></label>
+          </div>
+          <div class="truck-details-cell">
+            <label><b class="header-style">Current state: </b><span
+              class="row-margin">{{truck.currentState}}</span></label>
+          </div>
+
+          <div class="buttons-panel">
+            <span style="width: 50px">
+          <button mat-button (click)="updateTruck(truck.number!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+            <mat-icon>edit</mat-icon> EDIT
+          </button></span>
+            <span style="width: 50px">
+          <button mat-button (click)="deleteTruck(truck.number!)" style="background-color: darkred; color: white">
+            <mat-icon>delete</mat-icon> DELETE
+          </button></span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <div class="background-pic"></div>
+</div>

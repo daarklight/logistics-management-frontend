@@ -27,7 +27,7 @@
       </ng-container>
       <!-- Weight Column -->
       <ng-container matColumnDef="weight">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Weight</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Weigh, tons</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.weight}} </mat-cell>
       </ng-container>
       <!-- Start city Column -->
@@ -72,7 +72,7 @@
       </ng-container>
       <!-- Waypoint index Column -->
       <ng-container matColumnDef="waypointIndex">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Waypoint indexy</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Waypoint index</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.waypointIndex}} </mat-cell>
       </ng-container>
       <!-- Ride distance from start point Column -->
@@ -133,7 +133,7 @@
     </mat-table>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-paginator-style"></mat-paginator>
   </div>
 </div>
 
