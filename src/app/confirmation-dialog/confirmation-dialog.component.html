@@ -1,0 +1,14 @@
+<div class="modal-header border-0">
+  <h1 class="modal-title">PLEASE CONFIRM:</h1>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()" style="visibility: hidden">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body border-0">
+  {{ message }}
+</div>
+<div class="modal-footer border-0">
+  <button type="button" class="btn btn-danger btn-lg" (click)="decline()">{{ btnCancelText }}</button>
+  <button type="button" class="btn btn-primary btn-lg" (click)="accept()">{{ btnOkText }}</button>
+</div>
+

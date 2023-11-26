@@ -1,1 +1,80 @@
-<p>order-edit works!</p>
+<ng-template [ngIf]="isError" [ngIfElse]="details">
+  <div>
+    <label><h3>Error occurred for while updating order with id {{id}}:</h3></label>
+    <label><h3>{{errorMessage}}:</h3></label>
+  </div>
+</ng-template>
+<ng-template #details>
+  <div class="form-create">
+    <h3 class="text-center" style="font-size: 26px"><b>Update order info</b></h3>
+    <form (ngSubmit)="onSubmit()">
+
+      <div class="form-group" [formGroup]="orderValidation" style="margin-top: 15px">
+        <label><b>Customer Id for order</b></label>
+        <input type="text" class="form-control" id="order-customer-id" [(ngModel)]="orderUpdate.orderCustomerId"
+               name="orderCustomerId" formControlName="orderOrderCustomerId" maxlength="7">
+        <div
+          *ngIf="orderOrderCustomerId!.invalid && (orderOrderCustomerId!.dirty || orderOrderCustomerId!.touched)"
+          class="validationAlert">
+          <div>
+            <div *ngIf="orderOrderCustomerId?.errors?.['required']"> &#10008; Customer Id required</div>
+            <div *ngIf="orderOrderCustomerId?.errors?.['min']"> &#10008; Customer Id should be not less than 1</div>
+            <div *ngIf="orderOrderCustomerId?.errors?.['pattern']"> &#10008; Customer Id should be integer number</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [formGroup]="orderValidation" style="margin-top: 15px">
+        <label><b>Category</b></label>
+        <input type="text" class="form-control" id="category" [(ngModel)]="orderUpdate.category" name="category"
+               formControlName="orderCategory">
+        <div
+          *ngIf="orderCategory!.invalid && (orderCategory!.dirty || orderCategory!.touched)" class="validationAlert">
+          <div>
+            <div *ngIf="orderCategory?.errors?.['required']"> &#10008; Category required
+            </div>
+            <div *ngIf="orderCategory?.errors?.['maxlength']"> &#10008; Category should not exceed 40 symbols
+            </div>
+            <div *ngIf="orderCategory?.errors?.['pattern']"> &#10008; Category should consist of letters and can contain
+              backspaces and/or digits
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [formGroup]="orderValidation" style="margin-top: 15px">
+        <label><b>Weight, tons</b></label>
+        <input type="text" class="form-control" id="weight" [(ngModel)]="orderUpdate.weight" name="weight"
+               formControlName="orderWeight">
+        <div
+          *ngIf="orderWeight!.invalid && (orderWeight!.dirty || orderWeight!.touched)" class="validationAlert">
+          <div>
+            <div *ngIf="orderWeight?.errors?.['required']"> &#10008; Weight required</div>
+            <div *ngIf="orderWeight?.errors?.['min']"> &#10008; Weight should be between 0.01 and 30.0 tons</div>
+            <div *ngIf="orderWeight?.errors?.['max']"> &#10008; Weight should be between 0.01 and 30.0 tons</div>
+            <div *ngIf="orderWeight?.errors?.['pattern']"> &#10008; Weight should be decimal number</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [formGroup]="orderValidation" style="margin-top: 15px">
+        <label><b>Limit date and time</b></label>
+        <input type="text" class="form-control" id="limitDateTime" [(ngModel)]="orderUpdate.limitDateTime"
+               name="limitDateTime"
+               formControlName="orderLimitDateTime">
+        <div
+          *ngIf="orderLimitDateTime!.invalid && (orderLimitDateTime!.dirty || orderLimitDateTime!.touched)"
+          class="validationAlert">
+          <div>
+            <div *ngIf="orderLimitDateTime?.errors?.['required']"> &#10008; Limit date and time required</div>
+            <div *ngIf="orderLimitDateTime?.errors?.['pattern']"> &#10008; Limit date and time should have proper
+              format
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="button">UPDATE</button>
+    </form>
+  </div>
+</ng-template>

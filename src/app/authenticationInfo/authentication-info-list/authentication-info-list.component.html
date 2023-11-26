@@ -1,1 +1,52 @@
-<p>authentication-info-list works!</p>
+<p></p>
+<div>
+  <mat-form-field appearance="outline">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div>
+  <div class="table-container">
+    <mat-table [dataSource]="dataSource" matSort class="mat-table-style">
+
+      <!-- Id Column -->
+      <ng-container matColumnDef="id" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Id</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.id}} </mat-cell>
+      </ng-container>
+      <!-- Login Column -->
+      <ng-container matColumnDef="login">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Login</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.login}} </mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions" stickyEnd>
+        <mat-header-cell *matHeaderCellDef class="actions-header-cell" >Actions</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="buttons-container-cell" >
+        <span style="width: 50px">
+          <button (click)="showAuthenticationInfoDetails(row.id)" mat-button class="btn bnt-success">
+            <mat-icon>remove_red_eye</mat-icon></button>
+        </span>
+          <span style="width: 50px">
+          <button (click)="updateAuthenticationInfo(row.id)" mat-button class="btn bnt-success">
+            <mat-icon>edit</mat-icon></button>
+        </span>
+          <span style="width: 50px">
+          <button mat-button (click)="deleteAuthenticationInfo(row.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
+        </mat-cell>
+      </ng-container>
+      <div>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </div>
+    </mat-table>
+    <mat-header-row *matHeaderRowDef="displayedColumns">></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-paginator-style"></mat-paginator>
+  </div>
+</div>

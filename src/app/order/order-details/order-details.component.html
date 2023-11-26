@@ -31,7 +31,7 @@
           </div>
           <div class="order-details-cell">
             <label><b class="header-style">Status: </b><span
-              class="row-margin">{{order.status}}</span></label>
+              class="row-margin">{{order.status!.replaceAll("_", " ").toLowerCase()}}</span></label>
           </div>
           <div class="order-details-cell">
             <label><b class="header-style">Start date and time: </b><span
@@ -64,5 +64,5 @@
       </div>
     </ng-template>
   </div>
-  <div class="background-pic"></div>
+<!--  <div class="background-pic"></div>  -->
 </div>

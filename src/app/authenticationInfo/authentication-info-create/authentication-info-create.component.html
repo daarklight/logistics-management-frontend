@@ -1,1 +1,55 @@
-<p>authentication-info-create works!</p>
+<div class="form-create">
+  <h3 class="text-center" style="font-size: 26px"><b>Register new authentication info</b></h3>
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-group" [formGroup]="authenticationInfoValidation" style="margin-top: 15px">
+      <label><b>Authentication Id</b></label>
+      <input type="text" class="form-control" id="id" [(ngModel)]="authenticationInfo.id"
+             name="id" formControlName="idCheck" maxlength="6">
+      <div
+        *ngIf="idCheck!.invalid && (idCheck!.dirty || idCheck!.touched)"
+        class="validationAlert">
+        <div>
+          <div *ngIf="idCheck?.errors?.['required']"> &#10008; Authentication Id required</div>
+          <div *ngIf="idCheck?.errors?.['min']"> &#10008; Authentication Id should be not less than 1</div>
+          <div *ngIf="idCheck?.errors?.['pattern']"> &#10008; Authentication Id should be positive integer
+            number
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="authenticationInfoValidation" style="margin-top: 15px">
+      <label><b>Login</b></label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="authenticationInfo.login" name="name" formControlName="loginCheck">
+      <div
+        *ngIf="loginCheck!.invalid && (loginCheck!.dirty || loginCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="loginCheck?.errors?.['required']"> &#10008; Login should not be blank and should not exceed 40
+            symbols
+          </div>
+          <div *ngIf="loginCheck?.errors?.['maxlength']"> &#10008; Login should not be blank and should not exceed 40
+            symbols
+          </div>
+          <div *ngIf="loginCheck?.errors?.['pattern']"> &#10008; Login can contain only letters, digits and underscores
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="authenticationInfoValidation" style="margin-top: 15px">
+      <label><b>Password</b></label>
+      <input type="text" class="form-control" id="password" [(ngModel)]="authenticationInfo.password" name="surname"
+             formControlName="passwordCheck">
+      <div
+        *ngIf="passwordCheck!.invalid && (passwordCheck!.dirty || passwordCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="passwordCheck?.errors?.['required']"> &#10008; Password required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="button" [disabled]="!authenticationInfoValidation.valid">REGISTER</button>
+  </form>
+</div>

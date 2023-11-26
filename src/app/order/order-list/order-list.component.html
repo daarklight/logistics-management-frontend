@@ -1,6 +1,6 @@
 <p></p>
 <div>
-  <mat-form-field class="mat-form-field ">
+  <mat-form-field appearance="outline">
     <mat-icon matPrefix>search</mat-icon>
     <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
   </mat-form-field>
@@ -33,7 +33,7 @@
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Status</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.status}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.status.replaceAll("_", " ").toLowerCase()}} </mat-cell>
       </ng-container>
       <!-- Start date and time Column -->
       <ng-container matColumnDef="startDateTime">

@@ -6,7 +6,7 @@
   opacity: 1;
   margin-right: auto;
   margin-left: -300px;
-  position: relative;
+  position: absolute;
 }
 
 .order-details-header {
@@ -69,13 +69,13 @@
 .grid-container{
   display: inline-grid;
   margin-left: 300px;
-  height: auto;
-  width: auto;
+  height: 80%;
+  width: 70%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: right;
   position: relative;
   margin-right: 0;
   margin-top: auto;
-  background-image: url(../../../../resources/delivery.png);
+ background-image: url(../../../../resources/delivery.png);
 }

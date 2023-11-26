@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Cargo, CargoService} from "../../../logistics-api";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-cargo-details',
@@ -11,10 +13,11 @@ export class CargoDetailsComponent implements OnInit {
 
   id: number;
   cargo: Cargo;
-  errorMessage:String
-  isError:boolean
+  errorMessage: string;
+  isError: boolean;
 
-  constructor(private route: ActivatedRoute, private cargoService: CargoService, private router: Router) {
+  constructor(private route: ActivatedRoute, private cargoService: CargoService, private router: Router,
+              private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
@@ -36,9 +39,18 @@ export class CargoDetailsComponent implements OnInit {
   }
 
   deleteCargo(cargoId: number) {
-    this.cargoService.cargoDelete(cargoId).subscribe(cargo => {
-      this.router.navigate(['cargos']);
-    })
+    this.confirmationDialogService.confirm('Do you really want to delete this cargo?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.cargoService.cargoDelete(cargoId).subscribe(cargo => {
+            //Renew table data after cargo deletion
+            this.router.navigate(['cargos']);
+          })
+        }
+        else {
+          this.router.navigate(['cargo/details/', cargoId]);
+        }
+      })
   }
 
 }

@@ -4,6 +4,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {Router} from "@angular/router";
+import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
 @Component({
   selector: 'app-customer-list',
@@ -19,7 +20,8 @@ export class CustomerListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private customerService: CustomerService, private router: Router) {
+  constructor(private customerService: CustomerService, private router: Router,
+              private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
@@ -51,15 +53,28 @@ export class CustomerListComponent implements OnInit {
   }
 
   deleteCustomer(customerId: number) {
-    this.customerService.customerDelete(customerId).subscribe(customer => {
-      //Renew table data after customer deletion
-      this.customerService.customersFindAll().subscribe(allCustomers => {
-        this.customers = allCustomers;
-        this.dataSource = new MatTableDataSource(this.customers);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+    this.confirmationDialogService.confirm('Do you really want to delete this customer?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.customerService.customerDelete(customerId).subscribe(customer => {
+            //Renew table data after customer deletion
+            this.customerService.customersFindAll().subscribe(allCustomers => {
+              this.customers = allCustomers;
+              this.dataSource = new MatTableDataSource(this.customers);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+            })
+          })
+        }
+        else {
+          this.customerService.customersFindAll().subscribe(allCustomers => {
+            this.customers = allCustomers;
+            this.dataSource = new MatTableDataSource(this.customers);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          })
+        }
       })
-    })
   }
 
 }

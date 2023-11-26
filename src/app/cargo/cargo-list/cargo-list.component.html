@@ -1,6 +1,6 @@
 <p></p>
 <div>
-  <mat-form-field class="mat-form-field ">
+  <mat-form-field appearance="outline">
     <mat-icon matPrefix>search</mat-icon>
     <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
   </mat-form-field>
@@ -48,7 +48,7 @@
       <!-- Loaded Column -->
       <ng-container matColumnDef="loaded">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Loaded status</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.loaded}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.loaded.toLowerCase()}} </mat-cell>
       </ng-container>
       <!-- Final city Column -->
       <ng-container matColumnDef="finalCity">
@@ -68,31 +68,31 @@
       <!-- Unloaded Column -->
       <ng-container matColumnDef="unloaded">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Unloaded status</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.unloaded}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.unloaded.toLowerCase()}} </mat-cell>
       </ng-container>
       <!-- Waypoint index Column -->
       <ng-container matColumnDef="waypointIndex">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Waypoint index</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.waypointIndex}} </mat-cell>
       </ng-container>
-      <!-- Ride distance from start point Column -->
+      <!-- Distance from start point Column -->
       <ng-container matColumnDef="rideDistanceFromStartPoint">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Ride distance from start point, km</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Distance from start point, km</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDistanceFromStartPoint}} </mat-cell>
       </ng-container>
-      <!-- Ride duration from start point Column -->
+      <!-- Duration from start point Column -->
       <ng-container matColumnDef="rideDurationFromStartPoint">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Ride duration from start point, minutes</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Duration from start point, minutes</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDurationFromStartPoint}} </mat-cell>
       </ng-container>
-      <!-- Ride distance from previous point Column -->
+      <!-- Distance from previous point Column -->
       <ng-container matColumnDef="rideDistanceFromPreviousPoint">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Ride distance from previous point, km</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Distance from previous point, km</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDistanceFromPreviousPoint}} </mat-cell>
       </ng-container>
-      <!-- Ride duration from previous point Column -->
+      <!-- Duration from previous point Column -->
       <ng-container matColumnDef="rideDurationFromPreviousPoint">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Ride duration from previous point, minutes</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Duration from previous point, minutes</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDurationFromPreviousPoint}} </mat-cell>
       </ng-container>
       <!-- Expected completion date and time Column -->

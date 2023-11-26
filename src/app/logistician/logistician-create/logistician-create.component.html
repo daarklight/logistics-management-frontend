@@ -1,1 +1,63 @@
-<p>logistician-create works!</p>
+<div class="form-create">
+  <h3 class="text-center" style="font-size: 26px"><b>Register new logistician</b></h3>
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-group" [formGroup]="logisticianValidation" style="margin-top: 15px">
+      <label><b>Authentication ID</b></label>
+      <input type="text" class="form-control" id="logistician-authentication-id" [(ngModel)]="logistician.logisticianAuthenticationId"
+             name="logisticianAuthenticationId" formControlName="authenticationIdCheck" maxlength="6">
+      <div
+        *ngIf="authenticationIdCheck!.invalid && (authenticationIdCheck!.dirty || authenticationIdCheck!.touched)"
+        class="validationAlert">
+        <div>
+          <div *ngIf="authenticationIdCheck?.errors?.['required']"> &#10008; Authentication Id required</div>
+          <div *ngIf="authenticationIdCheck?.errors?.['min']"> &#10008; Authentication Id should be not less than 1</div>
+          <div *ngIf="authenticationIdCheck?.errors?.['pattern']"> &#10008; Authentication Id should be positive integer
+            number
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="logisticianValidation" style="margin-top: 15px">
+      <label><b>Name</b></label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="logistician.name" name="name" formControlName="nameCheck">
+      <div
+        *ngIf="nameCheck!.invalid && (nameCheck!.dirty || nameCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="nameCheck?.errors?.['required']"> &#10008; Name should not be blank and should not exceed 35
+            symbols
+          </div>
+          <div *ngIf="nameCheck?.errors?.['maxlength']"> &#10008; Name should not be blank and should not exceed 35
+            symbols
+          </div>
+          <div *ngIf="nameCheck?.errors?.['pattern']"> &#10008; Name should consist of letters and can contain backspaces
+            and/or digits
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="logisticianValidation" style="margin-top: 15px">
+      <label><b>Surname</b></label>
+      <input type="text" class="form-control" id="surname" [(ngModel)]="logistician.surname" name="surname"
+             formControlName="surnameCheck">
+      <div
+        *ngIf="surnameCheck!.invalid && (surnameCheck!.dirty || surnameCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="surnameCheck?.errors?.['required']"> &#10008; Surname should not be blank and should not exceed 35
+            symbols
+          </div>
+          <div *ngIf="surnameCheck?.errors?.['maxlength']"> &#10008; Surname should not be blank and should not exceed 35
+            symbols
+          </div>
+          <div *ngIf="surnameCheck?.errors?.['pattern']"> &#10008; Surname should consist of letters and can contain
+            backspaces and/or digits
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="button" [disabled]="!logisticianValidation.valid">REGISTER</button>
+  </form>
+</div>

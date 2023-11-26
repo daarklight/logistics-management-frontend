@@ -9,16 +9,18 @@ import {Router} from "@angular/router";
   styleUrls: ['./driver-create.component.scss']
 })
 export class DriverCreateComponent implements OnInit {
-  errorMessage: String
-  isError: boolean
+  errorMessage: string;
+  isError: boolean;
   driver: CreateDriver = new class implements CreateDriver {
-    currentCity: string;
-    currentState: string;
     driverAuthenticationId: number;
     name: string;
     surname: string;
+    phone: string;
+    email: string;
     workExperience: number;
     workingHoursInCurrentMonth: number;
+    currentCity: string;
+    currentState: string;
   }
 
   constructor(private driverService: DriverService, private router: Router) {
@@ -35,7 +37,7 @@ export class DriverCreateComponent implements OnInit {
         this.router.navigate(['driver/details/', createdDriver.personalNumber]);
         //TODO: redirect to the page with driver details
       },
-      error => { //если ошибка
+      error => {
         this.isError = true;
         this.errorMessage = error.error.message;
         //TODO: redirect to the page with error (make component to show error)

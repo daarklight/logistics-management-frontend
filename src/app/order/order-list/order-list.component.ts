@@ -4,6 +4,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {Router} from "@angular/router";
+import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
 @Component({
   selector: 'app-order-list',
@@ -20,7 +21,8 @@ export class OrderListComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private orderService: OrderService, private router: Router) {
+  constructor(private orderService: OrderService, private router: Router,
+              private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
@@ -52,13 +54,28 @@ export class OrderListComponent implements OnInit{
   }
 
   deleteOrder(orderId: number) {
-    this.orderService.orderDelete(orderId).subscribe(cargo => {
-      this.orderService.ordersFindAll().subscribe(allOrders => {
-        this.orders = allOrders;
-        this.dataSource = new MatTableDataSource(this.orders);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+    this.confirmationDialogService.confirm('Do you really want to delete this order?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.orderService.orderDelete(orderId).subscribe(order => {
+            //Renew table data after order deletion
+            this.orderService.ordersFindAll().subscribe(allOrders => {
+              this.orders = allOrders;
+              this.dataSource = new MatTableDataSource(this.orders);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+            })
+          })
+        }
+        else {
+          this.orderService.ordersFindAll().subscribe(allOrders => {
+            this.orders = allOrders;
+            this.dataSource = new MatTableDataSource(this.orders);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          })
+        }
       })
-    })
   }
+
 }

@@ -1,6 +1,6 @@
 <p></p>
 <div>
-  <mat-form-field class="mat-form-field ">
+  <mat-form-field appearance="outline">
     <mat-icon matPrefix>search</mat-icon>
     <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
   </mat-form-field>
@@ -33,12 +33,12 @@
       <!-- Technical condition Column -->
       <ng-container matColumnDef="technicalCondition">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Technical condition</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.technicalCondition}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.technicalCondition.toLowerCase()}} </mat-cell>
       </ng-container>
       <!-- Busy Column -->
       <ng-container matColumnDef="busy">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Busy status</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.busy}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.busy.toLowerCase()}} </mat-cell>
       </ng-container>
       <!-- Current city Column -->
       <ng-container matColumnDef="currentCity">

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Truck, TruckService} from "../../../logistics-api";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
 @Component({
   selector: 'app-truck-details',
@@ -11,10 +12,11 @@ export class TruckDetailsComponent implements OnInit {
 
   id: string;
   truck: Truck;
-  errorMessage:String
-  isError:boolean
+  errorMessage: string;
+  isError: boolean;
 
-  constructor(private route: ActivatedRoute, private truckService: TruckService, private router: Router) {
+  constructor(private route: ActivatedRoute, private truckService: TruckService, private router: Router,
+              private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
@@ -36,9 +38,18 @@ export class TruckDetailsComponent implements OnInit {
   }
 
   deleteTruck(number: string) {
-    this.truckService.truckDelete(number).subscribe(truck => {
-      this.router.navigate(['trucks']);
-    })
+    this.confirmationDialogService.confirm('Do you really want to delete this truck?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.truckService.truckDelete(number).subscribe(truck => {
+            //Renew table data after truck deletion
+            this.router.navigate(['trucks']);
+          })
+        }
+        else {
+          this.router.navigate(['truck/details/', number]);
+        }
+      })
   }
 
 }

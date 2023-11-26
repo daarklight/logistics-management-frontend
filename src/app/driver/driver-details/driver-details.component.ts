@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Driver, DriverService} from "../../../logistics-api";
 import {HttpErrorResponse} from "@angular/common/http";
+import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
 
 @Component({
@@ -13,10 +14,11 @@ export class DriverDetailsComponent implements OnInit {
 
   id: number;
   driver: Driver;
-  errorMessage:String
-  isError:boolean
+  errorMessage: string;
+  isError: boolean;
 
-  constructor(private route: ActivatedRoute, private driverService: DriverService, private router: Router) {
+  constructor(private route: ActivatedRoute, private driverService: DriverService, private router: Router,
+              private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
@@ -48,10 +50,18 @@ export class DriverDetailsComponent implements OnInit {
   }
 
   deleteDriver(personalNumber: number) {
-    this.driverService.driverDelete(personalNumber).subscribe(driver => {
-      //Renew table data after driver deletion
-      this.router.navigate(['drivers']);
-    })
+    this.confirmationDialogService.confirm('Do you really want to delete this driver?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.driverService.driverDelete(personalNumber).subscribe(driver => {
+            //Renew table data after driver deletion
+            this.router.navigate(['drivers']);
+          })
+        }
+        else {
+          this.router.navigate(['driver/details/', personalNumber]);
+        }
+      })
   }
 
 }

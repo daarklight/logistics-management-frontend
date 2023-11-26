@@ -1,1 +1,41 @@
-<p>authentication-info-details works!</p>
+<div class="grid-container">
+  <div class="authentication-info-details">
+    <ng-template [ngIf]="isError" [ngIfElse]="details">
+      <div class="error">
+        <label><h3>Error occurred for while searching authentication info with id {{id}}:</h3></label>
+        <br>
+        <label><h3>{{errorMessage}}:</h3></label>
+      </div>
+    </ng-template>
+    <ng-template #details>
+      <div>
+        <br>
+        <div class="authentication-details-header">
+          Authentication Info# <span class="header-style">{{authenticationInfo.id}} </span>details
+        </div>
+        <div class="authentication-details-info">
+
+          <div class="authentication-details-cell">
+            <label><b class="header-style">Authentication id: </b><span
+              class="row-margin">{{authenticationInfo.id}}</span></label>
+          </div>
+          <div class="authentication-details-cell">
+            <label><b class="header-style">Login: </b><span class="row-margin">{{authenticationInfo.login}}</span></label>
+          </div>
+
+          <div class="buttons-panel">
+            <span style="width: 50px">
+          <button mat-button (click)="updateAuthenticationInfo(authenticationInfo.id!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+            <mat-icon>edit</mat-icon> EDIT
+          </button></span>
+            <span style="width: 50px">
+          <button mat-button (click)="deleteAuthenticationInfo(authenticationInfo.id!)" style="background-color: darkred; color: white">
+            <mat-icon>delete</mat-icon> DELETE
+          </button></span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <div class="background-pic"></div>
+</div>

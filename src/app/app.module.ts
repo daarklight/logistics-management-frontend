@@ -48,6 +48,9 @@ import { AuthenticationInfoDetailsComponent } from './authenticationInfo/authent
 import { AuthenticationInfoEditComponent } from './authenticationInfo/authentication-info-edit/authentication-info-edit.component';
 import { AuthenticationInfoListComponent } from './authenticationInfo/authentication-info-list/authentication-info-list.component';
 import { LogisticianListComponent } from './logistician/logistician-list/logistician-list.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ConfirmationDialogService} from "./confirmation-dialog/confirmation-dialog.service";
 
 @NgModule({
   declarations: [
@@ -81,7 +84,8 @@ import { LogisticianListComponent } from './logistician/logistician-list/logisti
     AuthenticationInfoCreateComponent,
     AuthenticationInfoDetailsComponent,
     AuthenticationInfoEditComponent,
-    AuthenticationInfoListComponent
+    AuthenticationInfoListComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -100,11 +104,12 @@ import { LogisticianListComponent } from './logistician/logistician-list/logisti
     MatInputModule,
     MatPaginatorModule,
     MatSortModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [{
     provide: BASE_PATH, useValue: environment.basePath
-  }],
+  }, ConfirmationDialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Order, OrderService} from "../../../logistics-api";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
 @Component({
   selector: 'app-order-details',
@@ -11,10 +12,11 @@ export class OrderDetailsComponent implements OnInit {
 
   id: number;
   order: Order;
-  errorMessage:String
-  isError:boolean
+  errorMessage: string;
+  isError: boolean;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService, private router: Router) {
+  constructor(private route: ActivatedRoute, private orderService: OrderService, private router: Router,
+              private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
@@ -36,9 +38,18 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   deleteOrder(orderId: number) {
-    this.orderService.orderDelete(orderId).subscribe(order => {
-      this.router.navigate(['orders']);
-    })
+    this.confirmationDialogService.confirm('Do you really want to delete this order?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.orderService.orderDelete(orderId).subscribe(order => {
+            //Renew table data after order deletion
+            this.router.navigate(['orders']);
+          })
+        }
+        else {
+          this.router.navigate(['order/details/', orderId]);
+        }
+      })
   }
 
 }

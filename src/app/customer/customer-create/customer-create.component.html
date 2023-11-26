@@ -1,1 +1,72 @@
-<p>customer-create works!</p>
+<div class="form-create">
+  <h3 class="text-center" style="font-size: 26px"><b>Register new customer</b></h3>
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-group" [formGroup]="customerValidation" style="margin-top: 15px">
+      <label><b>Authentication ID</b> (ask admin to provide)</label>
+      <input type="text" class="form-control" id="customer-authentication-id" [(ngModel)]="customer.customerAuthenticationId"
+             name="customerAuthenticationId" formControlName="authenticationIdCheck" maxlength="6">
+      <div
+        *ngIf="authenticationIdCheck!.invalid && (authenticationIdCheck!.dirty || authenticationIdCheck!.touched)"
+        class="validationAlert">
+        <div>
+          <div *ngIf="authenticationIdCheck?.errors?.['required']"> &#10008; Authentication Id required</div>
+          <div *ngIf="authenticationIdCheck?.errors?.['min']"> &#10008; Authentication Id should be not less than 1</div>
+          <div *ngIf="authenticationIdCheck?.errors?.['pattern']"> &#10008; Authentication Id should be positive integer
+            number
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="customerValidation" style="margin-top: 15px">
+      <label><b>Customer name</b></label>
+      <input type="text" class="form-control" id="customer-name" [(ngModel)]="customer.customerName" name="customerName" formControlName="customerNameCheck">
+      <div
+        *ngIf="customerNameCheck!.invalid && (customerNameCheck!.dirty || customerNameCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="customerNameCheck?.errors?.['required']"> &#10008; Customer name should not be blank and should not exceed 50
+            symbols
+          </div>
+          <div *ngIf="customerNameCheck?.errors?.['maxlength']"> &#10008; Customer name should not be blank and should not exceed 50
+            symbols
+          </div>
+          <div *ngIf="customerNameCheck?.errors?.['pattern']"> &#10008; Customer name should consist of letters and can contain backspaces
+            and/or digits
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="customerValidation" style="margin-top: 15px">
+      <label><b>Phone</b></label>
+      <input type="text" class="form-control" id="phone" [(ngModel)]="customer.phone" name="phone"
+             formControlName="phoneCheck">
+      <div
+        *ngIf="phoneCheck!.invalid && (phoneCheck!.dirty || phoneCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="phoneCheck?.errors?.['required']"> &#10008; Phone required</div>
+          <div *ngIf="phoneCheck?.errors?.['maxlength']"> &#10008; Phone must be max 19 symbols long</div>
+          <div *ngIf="phoneCheck?.errors?.['pattern']"> &#10008; Phone number format is incorrect</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [formGroup]="customerValidation" style="margin-top: 15px">
+      <label><b>Email</b></label>
+      <input type="text" class="form-control" id="email" [(ngModel)]="customer.email" name="email"
+             formControlName="emailCheck">
+      <div
+        *ngIf="emailCheck!.invalid && (emailCheck!.dirty || emailCheck!.touched)" class="validationAlert">
+        <div>
+          <div *ngIf="emailCheck?.errors?.['required']"> &#10008; Email required</div>
+          <div *ngIf="emailCheck?.errors?.['pattern']"> &#10008; Email format is incorrect, email can contain only letters,
+            digits, underscores, dashes, dots, @
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="button" [disabled]="!customerValidation.valid">REGISTER</button>
+  </form>
+</div>

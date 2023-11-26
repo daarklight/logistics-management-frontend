@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Customer, CustomerService} from "../../../logistics-api";
+import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
 
 @Component({
@@ -12,10 +13,11 @@ export class CustomerDetailsComponent implements OnInit {
 
   id: number;
   customer: Customer;
-  errorMessage:String
-  isError:boolean
+  errorMessage: string;
+  isError: boolean;
 
-  constructor(private route: ActivatedRoute, private customerService: CustomerService, private router: Router) {
+  constructor(private route: ActivatedRoute, private customerService: CustomerService, private router: Router,
+              private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
@@ -37,10 +39,18 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   deleteCustomer(customerId: number) {
-    this.customerService.customerDelete(customerId).subscribe(customer => {
-      //Renew table data after customer deletion
-      this.router.navigate(['customers']);
-    })
+    this.confirmationDialogService.confirm('Do you really want to delete this customer?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.customerService.customerDelete(customerId).subscribe(customer => {
+            //Renew table data after customer deletion
+            this.router.navigate(['customers']);
+          })
+        }
+        else {
+          this.router.navigate(['customer/details/', customerId]);
+        }
+      })
   }
 
 }
