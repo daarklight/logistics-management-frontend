@@ -14,7 +14,7 @@ export class AuthenticationInfoEditComponent {
   isError: boolean;
 
   authenticationInfoUpdate: AuthenticationInfo = new class implements AuthenticationInfo{
-    login: string;
+    username: string;
     password: string;
   }
 
@@ -41,7 +41,7 @@ export class AuthenticationInfoEditComponent {
 
   //----------------- VALIDATION----------------------------
   authenticationInfoValidation = new FormGroup({
-    loginCheck: new FormControl(this.authenticationInfoUpdate.login, [
+    loginCheck: new FormControl(this.authenticationInfoUpdate.username, [
       Validators.required,
       Validators.maxLength(40),
       Validators.pattern("[A-Za-z1-9_]+")]),

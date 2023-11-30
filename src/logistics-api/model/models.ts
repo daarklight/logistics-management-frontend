@@ -1,4 +1,5 @@
 export * from './authenticationInfo';
+export * from './authenticationInfoToSend';
 export * from './cargo';
 export * from './createCargo';
 export * from './createCustomer';

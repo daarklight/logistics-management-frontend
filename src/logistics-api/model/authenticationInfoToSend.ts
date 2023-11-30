@@ -11,10 +11,9 @@
  */
 
 /**
- * Object representing AuthenticationInfo
+ * Object representing AuthenticationInfo to send
  */
-export interface AuthenticationInfo { 
-    id?: number;
+export interface AuthenticationInfoToSend { 
     username?: string;
     password?: string;
 }

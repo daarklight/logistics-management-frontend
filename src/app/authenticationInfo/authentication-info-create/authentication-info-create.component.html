@@ -21,7 +21,7 @@
 
     <div class="form-group" [formGroup]="authenticationInfoValidation" style="margin-top: 15px">
       <label><b>Login</b></label>
-      <input type="text" class="form-control" id="name" [(ngModel)]="authenticationInfo.login" name="name" formControlName="loginCheck">
+      <input type="text" class="form-control" id="name" [(ngModel)]="authenticationInfo.username" name="name" formControlName="loginCheck">
       <div
         *ngIf="loginCheck!.invalid && (loginCheck!.dirty || loginCheck!.touched)" class="validationAlert">
         <div>

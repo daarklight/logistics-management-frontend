@@ -36,8 +36,12 @@ import {TruckEditComponent} from "./truck/truck-edit/truck-edit.component";
 import {TruckDetailsComponent} from "./truck/truck-details/truck-details.component";
 import {TruckCreateComponent} from "./truck/truck-create/truck-create.component";
 import {TruckListComponent} from "./truck/truck-list/truck-list.component";
+import {LoginPageComponent} from "./login-page/login-page.component";
 
 const routes: Routes = [
+  {path: 'login', component: LoginPageComponent},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+
   {path: 'authenticationInfo', component: AuthenticationInfoListComponent},
   {path: '', redirectTo: 'authenticationInfo', pathMatch: 'full'},
   {path: 'authenticationInfo/create', component: AuthenticationInfoCreateComponent},
@@ -108,9 +112,9 @@ const routes: Routes = [
 })
 export class AppRoutingModule implements OnInit{
 
-  //TODO:здесь будет логика по выводу страницы авторизации
-  // и роутинга на страницу админа, логиста или драйвера в зависимости от роли
-  // или вывод ошибки о провальной авторизации
+  //TODO: there will be logic for authorization page
+  // and routing to pages of admin, logistician and driver depending on the role
+  // and error output if authorization fails
   ngOnInit(): void {
   }
 

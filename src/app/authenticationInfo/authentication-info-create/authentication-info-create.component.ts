@@ -48,7 +48,7 @@ export class AuthenticationInfoCreateComponent implements OnInit {
       Validators.required,
       Validators.min(1),
       Validators.pattern("\\d+")]),
-    loginCheck: new FormControl(this.authenticationInfo.login, [
+    usernameCheck: new FormControl(this.authenticationInfo.username, [
       Validators.required,
       Validators.maxLength(40),
       Validators.pattern("[A-Za-z1-9_]+")]),
@@ -60,7 +60,7 @@ export class AuthenticationInfoCreateComponent implements OnInit {
     return this.authenticationInfoValidation.get('idCheck')
   }
   get loginCheck() {
-    return this.authenticationInfoValidation.get('loginCheck')
+    return this.authenticationInfoValidation.get('usernameCheck')
   }
   get passwordCheck() {
     return this.authenticationInfoValidation.get('passwordCheck')
