@@ -10,12 +10,5 @@
  * Do not edit the class manually.
  */
 
-/**
- * Object representing updating assigned truck number for Order
- */
-export interface UpdateOrderAssignedTruckNumber { 
-    /**
-     * Assigned truck number
-     */
-    assignedTruckNumber?: string;
+export interface EmptyBody {
 }

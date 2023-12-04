@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Driver, DriverService} from "../../../logistics-api";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
@@ -7,11 +7,11 @@ import {Router} from "@angular/router";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
 @Component({
-  selector: 'app-driver-list',
-  templateUrl: './driver-list.component.html',
-  styleUrls: ['./driver-list.component.scss']
+  selector: 'app-driver-proper',
+  templateUrl: './driver-proper.component.html',
+  styleUrls: ['./driver-proper.component.scss']
 })
-export class DriverListComponent implements OnInit {
+export class DriverProperComponent {
   drivers: Driver[]
   dataSource: MatTableDataSource<Driver>
   displayedColumns =

@@ -17,4 +17,14 @@ export interface AuthenticationInfo {
     id?: number;
     username?: string;
     password?: string;
+    role?: AuthenticationInfo.RoleEnum;
+}
+export namespace AuthenticationInfo {
+    export type RoleEnum = 'ROLE_ADMIN' | 'ROLE_LOGISTICIAN' | 'ROLE_DRIVER' | 'ROLE_CUSTOMER';
+    export const RoleEnum = {
+        ADMIN: 'ROLE_ADMIN' as RoleEnum,
+        LOGISTICIAN: 'ROLE_LOGISTICIAN' as RoleEnum,
+        DRIVER: 'ROLE_DRIVER' as RoleEnum,
+        CUSTOMER: 'ROLE_CUSTOMER' as RoleEnum
+    };
 }

@@ -107,7 +107,7 @@ export class LogisticianService {
     /**
      * Delete Logistician
      * 
-     * @param personalNumber 
+     * @param personalNumber Logistician&#x27;s personal number
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -147,7 +147,7 @@ export class LogisticianService {
     /**
      * Find Logistician by id
      * 
-     * @param personalNumber 
+     * @param personalNumber Logistician&#x27;s personal number
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -241,10 +241,51 @@ export class LogisticianService {
     }
 
     /**
+     * Find Logistician by username
+     * 
+     * @param username Logistician&#x27;s username
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public logisticianFindByUsername(username: string, observe?: 'body', reportProgress?: boolean): Observable<Logistician>;
+    public logisticianFindByUsername(username: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Logistician>>;
+    public logisticianFindByUsername(username: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Logistician>>;
+    public logisticianFindByUsername(username: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (username === null || username === undefined) {
+            throw new Error('Required parameter username was null or undefined when calling logisticianFindByUsername.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Logistician>('get',`${this.basePath}/logisticians/byUsername/${encodeURIComponent(String(username))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Update Logistician
      * 
      * @param body Logistician object that needs to be updated
-     * @param personalNumber Logistician personal number
+     * @param personalNumber Logistician&#x27;s personal number
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

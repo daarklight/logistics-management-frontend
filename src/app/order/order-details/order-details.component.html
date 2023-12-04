@@ -20,7 +20,8 @@
               class="row-margin">{{order.orderId}}</span></label>
           </div>
           <div class="order-details-cell">
-            <label><b class="header-style">Customer id for order: </b><span class="row-margin">{{order.orderCustomerId}}</span></label>
+            <label><b class="header-style">Customer id for order: </b><span
+              class="row-margin">{{order.orderCustomerId}}</span></label>
           </div>
           <div class="order-details-cell">
             <label><b class="header-style">Category: </b><span class="row-margin">{{order.category}}</span></label>
@@ -52,17 +53,45 @@
 
           <div class="buttons-panel">
             <span style="width: 50px">
-          <button mat-button (click)="updateOrder(order.orderId!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+          <button mat-button (click)="updateOrder(order.orderId!)"
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
             <mat-icon>edit</mat-icon> EDIT
           </button></span>
             <span style="width: 50px">
-          <button mat-button (click)="deleteOrder(order.orderId!)" style="background-color: darkred; color: white">
+          <button mat-button (click)="deleteOrder(order.orderId!)" style="background-color: darkred; color: white"
+                  title="Delete order">
             <mat-icon>delete</mat-icon> DELETE
           </button></span>
+            <span style="width: 50px">
+          <button mat-button (click)="updateOrder(order.orderId!)"
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 130px">
+            <mat-icon>edit</mat-icon> ALL CARGOS IN ORDER
+          </button></span>
+            <br>
+            <br>
+
+            <span style="width: 50px">
+          <button mat-button (click)="updateOrder(order.orderId!)"
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+            <mat-icon>edit</mat-icon> ASSIGN TRUCK
+          </button></span>
+
+<!--            <span style="width: 50px">-->
+<!--          <button mat-button (click)="findProperDrivers(order.orderId, order.)"-->
+<!--                  style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">-->
+<!--            <mat-icon>edit</mat-icon> ASSIGN DRIVER-->
+<!--          </button></span>-->
+
+            <span style="width: 50px">
+          <button mat-button (click)="updateOrder(order.orderId!)"
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 180px">
+            <mat-icon>edit</mat-icon> SENT TO DRIVER FOR APPROVE
+          </button></span>
+
           </div>
         </div>
       </div>
     </ng-template>
   </div>
-<!--  <div class="background-pic"></div>  -->
+  <!--  <div class="background-pic"></div>  -->
 </div>

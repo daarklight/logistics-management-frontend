@@ -13,7 +13,7 @@
 /**
  * Object representing AuthenticationInfo to send
  */
-export interface AuthenticationInfoToSend { 
-    username?: string;
-    password?: string;
+export interface AuthenticationInfoToSend {
+  username?: string;
+  password?: string;
 }

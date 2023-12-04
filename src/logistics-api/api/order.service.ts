@@ -20,9 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { CreateOrder } from '../model/createOrder';
 import { Order } from '../model/order';
 import { UpdateOrder } from '../model/updateOrder';
-import { UpdateOrderAssignedTruckNumber } from '../model/updateOrderAssignedTruckNumber';
 import { UpdateOrderDriverComment } from '../model/updateOrderDriverComment';
-import { UpdateOrderStatus } from '../model/updateOrderStatus';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -110,7 +108,7 @@ export class OrderService {
     /**
      * Delete Order
      * 
-     * @param orderId 
+     * @param orderId Order id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -230,6 +228,47 @@ export class OrderService {
     }
 
     /**
+     * Find Order by Driver
+     * 
+     * @param personalNumber Driver&#x27;s personal number
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public orderFindByDriver(personalNumber: number, observe?: 'body', reportProgress?: boolean): Observable<Order>;
+    public orderFindByDriver(personalNumber: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
+    public orderFindByDriver(personalNumber: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
+    public orderFindByDriver(personalNumber: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (personalNumber === null || personalNumber === undefined) {
+            throw new Error('Required parameter personalNumber was null or undefined when calling orderFindByDriver.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Order>('get',`${this.basePath}/orders/byDriver/${encodeURIComponent(String(personalNumber))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Find Orders with limitDateTime earlier or equal to defined
      * 
      * @param limitDateTime Limit date time
@@ -314,7 +353,7 @@ export class OrderService {
     /**
      * Find Order by id
      * 
-     * @param orderId 
+     * @param orderId Order id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -571,22 +610,22 @@ export class OrderService {
     /**
      * Update assigned truck number for Order
      * 
-     * @param body Order object that needs to be updated
      * @param orderId Order id
+     * @param number Truck number in proper format
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public orderUpdateAssignedTruckNumber(body: UpdateOrderAssignedTruckNumber, orderId: number, observe?: 'body', reportProgress?: boolean): Observable<Order>;
-    public orderUpdateAssignedTruckNumber(body: UpdateOrderAssignedTruckNumber, orderId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
-    public orderUpdateAssignedTruckNumber(body: UpdateOrderAssignedTruckNumber, orderId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
-    public orderUpdateAssignedTruckNumber(body: UpdateOrderAssignedTruckNumber, orderId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling orderUpdateAssignedTruckNumber.');
-        }
+    public orderUpdateAssignedTruckNumber(orderId: number, number: string, observe?: 'body', reportProgress?: boolean): Observable<Order>;
+    public orderUpdateAssignedTruckNumber(orderId: number, number: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
+    public orderUpdateAssignedTruckNumber(orderId: number, number: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
+    public orderUpdateAssignedTruckNumber(orderId: number, number: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (orderId === null || orderId === undefined) {
             throw new Error('Required parameter orderId was null or undefined when calling orderUpdateAssignedTruckNumber.');
+        }
+
+        if (number === null || number === undefined) {
+            throw new Error('Required parameter number was null or undefined when calling orderUpdateAssignedTruckNumber.');
         }
 
         let headers = this.defaultHeaders;
@@ -602,16 +641,10 @@ export class OrderService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json'
         ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
 
-        return this.httpClient.request<Order>('patch',`${this.basePath}/orders/assignedTruckNumber/${encodeURIComponent(String(orderId))}`,
+        return this.httpClient.request<Order>('patch',`${this.basePath}/orders/assignedTruckNumber/${encodeURIComponent(String(orderId))}/${encodeURIComponent(String(number))}`,
             {
-                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -716,22 +749,22 @@ export class OrderService {
     /**
      * Update Order status
      * 
-     * @param body Order object that needs to be updated
      * @param orderId Order id
+     * @param status Order status
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public orderUpdateStatus(body: UpdateOrderStatus, orderId: number, observe?: 'body', reportProgress?: boolean): Observable<Order>;
-    public orderUpdateStatus(body: UpdateOrderStatus, orderId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
-    public orderUpdateStatus(body: UpdateOrderStatus, orderId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
-    public orderUpdateStatus(body: UpdateOrderStatus, orderId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling orderUpdateStatus.');
-        }
+    public orderUpdateStatus(orderId: number, status: string, observe?: 'body', reportProgress?: boolean): Observable<Order>;
+    public orderUpdateStatus(orderId: number, status: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
+    public orderUpdateStatus(orderId: number, status: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
+    public orderUpdateStatus(orderId: number, status: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (orderId === null || orderId === undefined) {
             throw new Error('Required parameter orderId was null or undefined when calling orderUpdateStatus.');
+        }
+
+        if (status === null || status === undefined) {
+            throw new Error('Required parameter status was null or undefined when calling orderUpdateStatus.');
         }
 
         let headers = this.defaultHeaders;
@@ -747,16 +780,10 @@ export class OrderService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json'
         ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
 
-        return this.httpClient.request<Order>('patch',`${this.basePath}/orders/status/${encodeURIComponent(String(orderId))}`,
+        return this.httpClient.request<Order>('patch',`${this.basePath}/orders/status/${encodeURIComponent(String(orderId))}/${encodeURIComponent(String(status))}`,
             {
-                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

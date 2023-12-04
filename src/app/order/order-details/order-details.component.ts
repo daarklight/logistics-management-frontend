@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Order, OrderService} from "../../../logistics-api";
+import {Cargo, CargoService, DriverService, Order, OrderService} from "../../../logistics-api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
@@ -12,11 +12,12 @@ export class OrderDetailsComponent implements OnInit {
 
   id: number;
   order: Order;
+  cargos: Cargo[]
   errorMessage: string;
   isError: boolean;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService, private router: Router,
-              private confirmationDialogService: ConfirmationDialogService) {
+  constructor(private route: ActivatedRoute, private orderService: OrderService, private driverService: DriverService,
+              private router: Router, private confirmationDialogService: ConfirmationDialogService, private cargoService: CargoService) {
   }
 
   ngOnInit(): void {
@@ -24,6 +25,10 @@ export class OrderDetailsComponent implements OnInit {
     this.orderService.orderFindById(this.id).subscribe(orderDetails => {
       this.isError = false;
       this.order = orderDetails;
+      this.cargoService.cargoFindByOrderId(this.order.orderId!).subscribe(cargoList => {
+
+      })
+
     }, error => {
       this.isError = true;
       this.errorMessage = error.message;
@@ -33,6 +38,12 @@ export class OrderDetailsComponent implements OnInit {
 
   updateOrder(orderId: number){
     this.orderService.orderFindById(orderId).subscribe(orderDetails => {
+      this.router.navigate(['order/update/', orderId]);
+    });
+  }
+
+  findProperDrivers(orderId: number, city: string, state: string, hours: number){
+    this.driverService.driversFindForOrder(orderId, city, state, hours).subscribe(orderDetails => {
       this.router.navigate(['order/update/', orderId]);
     });
   }

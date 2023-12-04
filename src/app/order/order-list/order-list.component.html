@@ -62,15 +62,15 @@
         <mat-header-cell *matHeaderCellDef class="actions-header-cell">Actions</mat-header-cell>
         <mat-cell *matCellDef="let row" class="buttons-container-cell">
         <span style="width: 50px">
-          <button (click)="showOrderDetails(row.orderId)" mat-button class="btn bnt-success">
+          <button (click)="showOrderDetails(row.orderId)" mat-button class="btn bnt-success" title="Order details">
             <mat-icon>remove_red_eye</mat-icon></button>
         </span>
           <span style="width: 50px">
-          <button (click)="updateOrder(row.orderId)" mat-button class="btn bnt-success">
+          <button (click)="updateOrder(row.orderId)" mat-button class="btn bnt-success" title="Edit order">
             <mat-icon>edit</mat-icon></button>
         </span>
           <span style="width: 50px">
-          <button mat-button (click)="deleteOrder(row.orderId)">
+          <button mat-button (click)="deleteOrder(row.orderId)" title="Delete order">
             <mat-icon>delete</mat-icon>
           </button>
         </span>

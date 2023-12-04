@@ -917,6 +917,88 @@ export class CargoService {
     }
 
     /**
+     * Update loaded status to YES
+     * 
+     * @param cargoId Cargo id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public cargoUpdateLoading(cargoId: number, observe?: 'body', reportProgress?: boolean): Observable<Cargo>;
+    public cargoUpdateLoading(cargoId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Cargo>>;
+    public cargoUpdateLoading(cargoId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Cargo>>;
+    public cargoUpdateLoading(cargoId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (cargoId === null || cargoId === undefined) {
+            throw new Error('Required parameter cargoId was null or undefined when calling cargoUpdateLoading.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Cargo>('get',`${this.basePath}/cargos/loadingDone/${encodeURIComponent(String(cargoId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update unloaded status to YES
+     * 
+     * @param cargoId Cargo id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public cargoUpdateUnloading(cargoId: number, observe?: 'body', reportProgress?: boolean): Observable<Cargo>;
+    public cargoUpdateUnloading(cargoId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Cargo>>;
+    public cargoUpdateUnloading(cargoId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Cargo>>;
+    public cargoUpdateUnloading(cargoId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (cargoId === null || cargoId === undefined) {
+            throw new Error('Required parameter cargoId was null or undefined when calling cargoUpdateUnloading.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Cargo>('get',`${this.basePath}/cargos/unloadingDone/${encodeURIComponent(String(cargoId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Find all Cargos
      * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

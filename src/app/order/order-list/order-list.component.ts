@@ -26,6 +26,10 @@ export class OrderListComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem('need-to-reload-page') === String(true)) {
+      localStorage.setItem('need-to-reload-page', String(false));
+      location.reload();
+    }
     this.orderService.ordersFindAll().subscribe(allOrders => {
       this.orders = allOrders;
       this.dataSource = new MatTableDataSource(this.orders);

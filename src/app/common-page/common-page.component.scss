@@ -100,5 +100,51 @@ mat-sidenav-content {
   height: 55px;
   width: 100px;
   margin: 1.5rem 1rem 1.5rem auto;
-  background-image: url(../../../../resources/logopic.png);
+  background-image: url(../../../resources/logopic.png);
 }
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+
+.avatar-main{
+  align: center;
+  margin-left: 50px;
+}
+.avatar {
+  margin-top: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.name {
+  margin-top: 8px;
+  font-weight: normal;
+  font-family: Lato, serif;
+}
+
+.designation {
+  margin-top: 2px;
+  font-size: 1rem;
+  font-family: Lato, serif;
+  font-weight: bold;
+  color: #2E5090;
+}
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: 0;
+  width: 400px;
+  height: 1px;
+  background-color: lightgray;
+}
+

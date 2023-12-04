@@ -146,6 +146,47 @@ export class TruckService {
     }
 
     /**
+     * Find current Truck for driver
+     * 
+     * @param personalNumber Driver&#x27;s personal number
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public truckFindByDriver(personalNumber: number, observe?: 'body', reportProgress?: boolean): Observable<Truck>;
+    public truckFindByDriver(personalNumber: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Truck>>;
+    public truckFindByDriver(personalNumber: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Truck>>;
+    public truckFindByDriver(personalNumber: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (personalNumber === null || personalNumber === undefined) {
+            throw new Error('Required parameter personalNumber was null or undefined when calling truckFindByDriver.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Truck>('get',`${this.basePath}/trucks/byDriver/${encodeURIComponent(String(personalNumber))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Find Truck by number
      * 
      * @param number Truck number in proper format

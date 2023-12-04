@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, OnInit} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -7,7 +7,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ApiModule, BASE_PATH} from "../logistics-api";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {environment} from "../environments/environment";
-import {LogisticianMainComponent} from './logistician/logistician-main/logistician-main.component';
 import {DriverListComponent} from './driver/driver-list/driver-list.component';
 import {DriverCreateComponent} from './driver/driver-create/driver-create.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -16,9 +15,6 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
-import {
-  SidebarMenuLogisticianComponent
-} from './logistician/sidebar-menu-logistician/sidebar-menu-logistician.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatTableModule} from "@angular/material/table";
 import {MatInputModule} from "@angular/material/input";
@@ -61,19 +57,23 @@ import {LogisticianListComponent} from './logistician/logistician-list/logistici
 import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ConfirmationDialogService} from "./confirmation-dialog/confirmation-dialog.service";
-import {DriverMainComponent} from './driver/driver-main/driver-main.component';
-import {SidebarMenuDriverComponent} from './driver/sidebar-menu-driver/sidebar-menu-driver.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {MatCardModule} from "@angular/material/card";
 import {AuthInterceptor} from "./login-page/auth.interceptor";
+import {CommonPageComponent} from './common-page/common-page.component';
+import {Error403Component} from "./errors/error-403/error-403.component";
+import {Error404Component} from './errors/error-404/error-404.component';
+import {ErrorCommonComponent} from './errors/error-common/error-common.component';
+import {ErrorInterceptor} from "./errors/error.interceptor";
+import {ToastrModule} from "ngx-toastr";
+import { DriverProperComponent } from './driver/driver-proper/driver-proper.component';
+import { TruckProperComponent } from './truck/truck-proper/truck-proper.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogisticianMainComponent,
     DriverListComponent,
     DriverCreateComponent,
-    SidebarMenuLogisticianComponent,
     DriverEditComponent,
     DriverDetailsComponent,
     OrderListComponent,
@@ -101,9 +101,13 @@ import {AuthInterceptor} from "./login-page/auth.interceptor";
     AuthenticationInfoEditComponent,
     AuthenticationInfoListComponent,
     ConfirmationDialogComponent,
-    DriverMainComponent,
-    SidebarMenuDriverComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    CommonPageComponent,
+    Error403Component,
+    Error404Component,
+    ErrorCommonComponent,
+    DriverProperComponent,
+    TruckProperComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,11 +128,12 @@ import {AuthInterceptor} from "./login-page/auth.interceptor";
     MatSortModule,
     ReactiveFormsModule,
     NgbModule,
-    MatCardModule
+    MatCardModule,
   ],
   providers: [
     {provide: BASE_PATH, useValue: environment.basePath},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     ConfirmationDialogService],
   bootstrap: [AppComponent]
 })

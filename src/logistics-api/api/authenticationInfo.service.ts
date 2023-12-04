@@ -18,10 +18,11 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { AuthenticationInfo } from '../model/authenticationInfo';
-import { AuthenticationInfoToSend } from '../model/authenticationInfoToSend';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import {AuthenticationInfoToSend} from "../model/authenticationInfoToSend";
+import {EmptyBody} from "../model/emptyBody";
 
 
 @Injectable()
@@ -58,7 +59,7 @@ export class AuthenticationInfoService {
 
     /**
      * Create a new AuthenticationInfo
-     * 
+     *
      * @param body AuthenticationInfo object that needs to be added to AuthenticationInfo list
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -105,8 +106,8 @@ export class AuthenticationInfoService {
 
     /**
      * Delete AuthenticationInfo
-     * 
-     * @param id 
+     *
+     * @param id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -145,7 +146,7 @@ export class AuthenticationInfoService {
 
     /**
      * Find all AuthenticationInfos
-     * 
+     *
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -181,8 +182,8 @@ export class AuthenticationInfoService {
 
     /**
      * Find AuthenticationInfo by id
-     * 
-     * @param id 
+     *
+     * @param id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -222,7 +223,7 @@ export class AuthenticationInfoService {
 
     /**
      * Find AuthenticationInfo by username
-     * 
+     *
      * @param username AuthenticationInfo username
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -262,57 +263,10 @@ export class AuthenticationInfoService {
     }
 
     /**
-     * Send data for authorization
-     * 
-     * @param body AuthenticationInfo sending for authorization
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public authenticationInfoSend(body: AuthenticationInfoToSend, observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public authenticationInfoSend(body: AuthenticationInfoToSend, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public authenticationInfoSend(body: AuthenticationInfoToSend, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
-    public authenticationInfoSend(body: AuthenticationInfoToSend, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling authenticationInfoSend.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'text/plain'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<string>('post',`${this.basePath}/authenticationInfo/login`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Update AuthenticationInfo
-     * 
+     *
      * @param body AuthenticationInfo object that needs to be updated
-     * @param id 
+     * @param id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -359,5 +313,57 @@ export class AuthenticationInfoService {
             }
         );
     }
+
+  /**
+   * Send data for authorization
+   *
+   * @param body AuthenticationInfo sending for authorization
+   * @param authToken
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public authenticationInfoSend(body: AuthenticationInfoToSend, authToken?: string, observe?: 'body', reportProgress?: boolean): Observable<HttpResponse<void>>;
+  public authenticationInfoSend(body: AuthenticationInfoToSend, authToken?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<void>>;
+  public authenticationInfoSend(body: AuthenticationInfoToSend, authToken?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<EmptyBody>>;
+  public authenticationInfoSend(body: AuthenticationInfoToSend, authToken?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+    if (body === null || body === undefined) {
+      throw new Error('Required parameter body was null or undefined when calling authenticationInfoSend.');
+    }
+
+
+    let headers = this.defaultHeaders;
+    if (authToken !== undefined && authToken !== null) {
+      headers = headers.set('auth-token', String(authToken));
+    }
+
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = [
+      'application/json'
+    ];
+    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    }
+
+    // to determine the Content-Type header
+    const consumes: string[] = [
+      'application/json'
+    ];
+    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+    if (httpContentTypeSelected != undefined) {
+      headers = headers.set('Content-Type', httpContentTypeSelected);
+    }
+
+    return this.httpClient.request<EmptyBody>('post',`${this.basePath}/authenticationInfo/login`,
+      {
+        body: body,
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: 'response',
+        reportProgress: reportProgress,
+      }
+    );
+  }
 
 }
