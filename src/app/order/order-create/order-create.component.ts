@@ -30,6 +30,7 @@ export class OrderCreateComponent implements OnInit{
     this.orderService.orderCreate(this.order).subscribe(createdOrder => {
         this.isError = false;
         console.log(createdOrder)
+        this.router.navigate(['order/details/', createdOrder.orderId]);
       },
       error => {
         this.isError = true;
@@ -47,11 +48,6 @@ export class OrderCreateComponent implements OnInit{
       Validators.required,
       Validators.maxLength(40),
       Validators.pattern("[A-Za-z\\d\\s]+")]),
-    orderWeight: new FormControl(this.order.weight, [
-      Validators.required,
-      Validators.min(0.01),
-      Validators.max(30.0),
-      Validators.pattern("[+]?[0-9]*\\.?[0-9]+")]),
     orderLimitDateTime: new FormControl(this.order.limitDateTime, [
       Validators.required,
       Validators.pattern("^\\d{4}-(?:0[0-9]{1}|1[0-2]{1})-(0?[1-9]|[12][0-9]|3[01])[tT ]\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?([zZ]|[+-]\\d{2}:\\d{2})")]),
@@ -63,10 +59,6 @@ export class OrderCreateComponent implements OnInit{
 
   get orderCategory() {
     return this.orderValidation.get('orderCategory')
-  }
-
-  get orderWeight() {
-    return this.orderValidation.get('orderWeight')
   }
 
   get orderLimitDateTime() {

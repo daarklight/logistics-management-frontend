@@ -11,6 +11,7 @@ import {CargoListComponent} from "./cargo/cargo-list/cargo-list.component";
 import {CargoCreateComponent} from "./cargo/cargo-create/cargo-create.component";
 import {CargoDetailsComponent} from "./cargo/cargo-details/cargo-details.component";
 import {CargoEditComponent} from "./cargo/cargo-edit/cargo-edit.component";
+import {CargoInOrderListComponent} from "./cargo/cargo-in-order-list/cargo-in-order-list.component";
 import {
   AuthenticationInfoListComponent
 } from "./authenticationInfo/authentication-info-list/authentication-info-list.component";
@@ -37,6 +38,7 @@ import {TruckEditComponent} from "./truck/truck-edit/truck-edit.component";
 import {TruckDetailsComponent} from "./truck/truck-details/truck-details.component";
 import {TruckCreateComponent} from "./truck/truck-create/truck-create.component";
 import {TruckListComponent} from "./truck/truck-list/truck-list.component";
+import {TruckProperComponent} from "./truck/truck-proper/truck-proper.component";
 import {LoginPageComponent} from "./login-page/login-page.component";
 import {AuthorityGuard} from "./authority-guard";
 import {Error403Component} from "./errors/error-403/error-403.component";
@@ -64,6 +66,8 @@ const routes: Routes = [
   {path: 'cargo/details/:id', redirectTo: 'cargo/details/:id', pathMatch: 'full'},
   {path: 'cargo/update/:id', component: CargoEditComponent},
   {path: 'cargo/update/:id', redirectTo: 'cargo/update/:id', pathMatch: 'full'},
+  {path: 'cargos/cargosInOrder', component: CargoInOrderListComponent},
+  {path: 'cargos/cargosInOrder', redirectTo: 'cargos/cargosInOrder', pathMatch: 'full'},
 
   {path: 'customers', component: CustomerListComponent},
   {path: 'customers', redirectTo: 'customers', pathMatch: 'full'},
@@ -111,6 +115,8 @@ const routes: Routes = [
   {path: 'truck/details/:id', redirectTo: 'truck/details/:id', pathMatch: 'full'},
   {path: 'truck/update/:id', component: TruckEditComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_LOGISTICIAN'] }},
   {path: 'truck/update/:id', redirectTo: 'truck/update/:id', pathMatch: 'full'},
+  {path: 'trucks/proper', component: TruckProperComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_LOGISTICIAN'] }},
+  {path: 'trucks/proper', redirectTo: 'trucks/proper', pathMatch: 'full'},
 
   {path: 'error/403', component: Error403Component},
   {path: 'error/403', redirectTo: 'error/404', pathMatch: 'full'},

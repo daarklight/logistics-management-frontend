@@ -20,6 +20,10 @@
               class="row-margin">{{order.orderId}}</span></label>
           </div>
           <div class="order-details-cell">
+            <label><b class="header-style">Total number of cargos: </b><span
+              class="row-margin">{{calculateNumberOfCargos()}}</span></label>
+          </div>
+          <div class="order-details-cell">
             <label><b class="header-style">Customer id for order: </b><span
               class="row-margin">{{order.orderCustomerId}}</span></label>
           </div>
@@ -62,30 +66,48 @@
                   title="Delete order">
             <mat-icon>delete</mat-icon> DELETE
           </button></span>
+            <br>
+            <br>
+
+
             <span style="width: 50px">
-          <button mat-button (click)="updateOrder(order.orderId!)"
+          <button mat-button (click)="findAllCargos(order.orderId!)"
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 140px">
+            <mat-icon>list</mat-icon> ALL CARGOS IN ORDER
+          </button></span>
+            <br>
+            <br>
+
+<!--            CONSIDER THE POSSIBILITY TO CREATE SEPARATE PAGE TO CREATE CARGO WHERE ORDER ID = ID FOR CURRENTLY CONSIDERED ORDER !!!-->
+            <a mat-list-item routerLink="../../../cargo/create">
+            <span style="width: 50px" *ngIf="calculateNumberOfCargos() <2">
+          <button mat-button
                   style="; margin-right: 10px; color: white; background-color: #009511; width: 130px">
-            <mat-icon>edit</mat-icon> ALL CARGOS IN ORDER
+            <mat-icon>edit</mat-icon> ADD CARGO
           </button></span>
+            </a>
             <br>
             <br>
 
-            <span style="width: 50px">
-          <button mat-button (click)="updateOrder(order.orderId!)"
-                  style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
-            <mat-icon>edit</mat-icon> ASSIGN TRUCK
+            <span style="width: 50px" *ngIf="order.assignedTruckNumber === null">
+          <button mat-button
+                  (click)="findProperTrucks(order.orderId!, cargos[0].startCity!, cargos[0].startState!, order.weight!)"
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px">
+            <mat-icon>local_shipping</mat-icon> ASSIGN TRUCK
           </button></span>
 
-<!--            <span style="width: 50px">-->
-<!--          <button mat-button (click)="findProperDrivers(order.orderId, order.)"-->
-<!--                  style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">-->
-<!--            <mat-icon>edit</mat-icon> ASSIGN DRIVER-->
-<!--          </button></span>-->
 
             <span style="width: 50px">
-          <button mat-button (click)="updateOrder(order.orderId!)"
+          <button mat-button
+                  (click)="findProperDrivers(order.orderId!, cargos[0].startCity!, cargos[0].startState!, 150)"
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px">
+            <mat-icon>people_outline</mat-icon> ASSIGN DRIVER
+          </button></span>
+
+            <span style="width: 50px">
+          <button mat-button (click)="sendForDriverApprove(order.orderId!)"
                   style="; margin-right: 10px; color: white; background-color: #009511; width: 180px">
-            <mat-icon>edit</mat-icon> SENT TO DRIVER FOR APPROVE
+            <mat-icon>launch</mat-icon> SENT TO DRIVER FOR APPROVE
           </button></span>
 
           </div>

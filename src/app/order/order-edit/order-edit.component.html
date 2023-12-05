@@ -42,21 +42,6 @@
         </div>
       </div>
 
-<!--      <div class="form-group" [formGroup]="orderValidation" style="margin-top: 15px">-->
-<!--        <label><b>Weight, tons</b></label>-->
-<!--        <input type="text" class="form-control" id="weight" [(ngModel)]="orderUpdate.weight" name="weight"-->
-<!--               formControlName="orderWeight">-->
-<!--        <div-->
-<!--          *ngIf="orderWeight!.invalid && (orderWeight!.dirty || orderWeight!.touched)" class="validationAlert">-->
-<!--          <div>-->
-<!--            <div *ngIf="orderWeight?.errors?.['required']"> &#10008; Weight required</div>-->
-<!--            <div *ngIf="orderWeight?.errors?.['min']"> &#10008; Weight should be between 0.01 and 30.0 tons</div>-->
-<!--            <div *ngIf="orderWeight?.errors?.['max']"> &#10008; Weight should be between 0.01 and 30.0 tons</div>-->
-<!--            <div *ngIf="orderWeight?.errors?.['pattern']"> &#10008; Weight should be decimal number</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-
       <div class="form-group" [formGroup]="orderValidation" style="margin-top: 15px">
         <label><b>Limit date and time</b></label>
         <input type="text" class="form-control" id="limitDateTime" [(ngModel)]="orderUpdate.limitDateTime"

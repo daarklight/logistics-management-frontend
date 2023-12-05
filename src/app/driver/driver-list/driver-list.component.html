@@ -82,15 +82,15 @@
         <mat-header-cell *matHeaderCellDef class="actions-header-cell" >Actions</mat-header-cell>
         <mat-cell *matCellDef="let row" class="buttons-container-cell" >
         <span style="width: 50px">
-          <button (click)="showDriverDetails(row.personalNumber)" mat-button class="btn bnt-success">
+          <button (click)="showDriverDetails(row.personalNumber)" mat-button class="btn bnt-success" title="Driver details">
             <mat-icon>remove_red_eye</mat-icon></button>
         </span>
           <span style="width: 50px">
-          <button (click)="updateDriver(row.personalNumber)" mat-button class="btn bnt-success">
+          <button (click)="updateDriver(row.personalNumber)" mat-button class="btn bnt-success" title="Edit driver">
             <mat-icon>edit</mat-icon></button>
         </span>
           <span style="width: 50px">
-          <button mat-button (click)="deleteDriver(row.personalNumber)">
+          <button mat-button (click)="deleteDriver(row.personalNumber)" title="Delete driver">
             <mat-icon>delete</mat-icon>
           </button>
         </span>

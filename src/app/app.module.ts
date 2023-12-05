@@ -68,6 +68,7 @@ import {ErrorInterceptor} from "./errors/error.interceptor";
 import {ToastrModule} from "ngx-toastr";
 import { DriverProperComponent } from './driver/driver-proper/driver-proper.component';
 import { TruckProperComponent } from './truck/truck-proper/truck-proper.component';
+import { CargoInOrderListComponent } from './cargo/cargo-in-order-list/cargo-in-order-list.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { TruckProperComponent } from './truck/truck-proper/truck-proper.componen
     ErrorCommonComponent,
     DriverProperComponent,
     TruckProperComponent,
+    CargoInOrderListComponent,
   ],
   imports: [
     BrowserModule,

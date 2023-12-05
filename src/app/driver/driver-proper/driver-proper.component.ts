@@ -26,7 +26,13 @@ export class DriverProperComponent {
   }
 
   ngOnInit(): void {
-    this.driverService.driversFindAll().subscribe(allDrivers => {
+    let orderIdResult: number = Number(localStorage.getItem('order-id'));
+    let cityResult: string = localStorage.getItem('city-item')!;
+    let stateResult: string = localStorage.getItem('state-item')!;
+
+    // REWRITE METHOD TO INCLUDE PARAMETER WITH HOURS !!!
+
+    this.driverService.driversFindForOrder(orderIdResult, cityResult, stateResult, 150).subscribe(allDrivers => {
       this.drivers = allDrivers;
       this.dataSource = new MatTableDataSource(this.drivers);
       this.dataSource.paginator = this.paginator;
@@ -50,6 +56,13 @@ export class DriverProperComponent {
   updateDriver(personalNumber: number){
     this.driverService.driverFindById(personalNumber).subscribe(driverDetails => {
       this.router.navigate(['driver/update/', personalNumber]);
+    });
+  }
+
+  assignDriver(personalNumber: number){
+    let orderIdResult: number = Number(localStorage.getItem('order-id'));
+    this.driverService.driverUpdateCurrentOrder(orderIdResult, personalNumber).subscribe(driverDetails => {
+      this.router.navigate(['driver/details/', personalNumber]);
     });
   }
 

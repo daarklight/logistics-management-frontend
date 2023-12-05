@@ -25,8 +25,10 @@ export class OrderDetailsComponent implements OnInit {
     this.orderService.orderFindById(this.id).subscribe(orderDetails => {
       this.isError = false;
       this.order = orderDetails;
+      //console.log("order-details before cargo service")
       this.cargoService.cargoFindByOrderId(this.order.orderId!).subscribe(cargoList => {
-
+        this.cargos = cargoList;
+        //console.log(this.cargos);
       })
 
     }, error => {
@@ -41,12 +43,40 @@ export class OrderDetailsComponent implements OnInit {
       this.router.navigate(['order/update/', orderId]);
     });
   }
-
   findProperDrivers(orderId: number, city: string, state: string, hours: number){
-    this.driverService.driversFindForOrder(orderId, city, state, hours).subscribe(orderDetails => {
-      this.router.navigate(['order/update/', orderId]);
+    localStorage.setItem('order-id', String(orderId));
+    localStorage.setItem('city-item', city);
+    localStorage.setItem('state-item', state);
+    this.router.navigate(['drivers/proper']);
+  }
+
+  calculateNumberOfCargos() : number{
+    return this.cargos.length;
+  }
+
+  findProperTrucks(orderId: number, city: string, state: string, capacity: number){
+    localStorage.setItem('order-id', String(orderId));
+    localStorage.setItem('city-item', city);
+    localStorage.setItem('state-item', state);
+    localStorage.setItem('capacity-item', String(capacity));
+    this.router.navigate(['trucks/proper']);
+  }
+
+  findAllCargos(orderId: number){
+    localStorage.setItem('order-id', String(orderId));
+    this.router.navigate(['cargos/cargosInOrder']);
+    // this.driverService.driversFindForOrder(orderId, city, state, hours).subscribe(drivers => {
+    //   this.router.navigate(['drivers/proper']);
+    // });
+  }
+
+  sendForDriverApprove(orderId: number){
+    this.orderService.orderUpdateStatus(orderId, 'EXPECT_DRIVERS_CONFIRMATION').subscribe(orderDetails => {
+      window.location.reload();
     });
   }
+
+
 
   deleteOrder(orderId: number) {
     this.confirmationDialogService.confirm('Do you really want to delete this order?')

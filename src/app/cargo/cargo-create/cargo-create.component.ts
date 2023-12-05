@@ -35,6 +35,7 @@ export class CargoCreateComponent implements OnInit{
     this.cargoService.cargoCreate(this.cargo).subscribe(createdCargo => {
         this.isError = false;
         console.log(createdCargo)
+        this.router.navigate(['cargo/details/', createdCargo.cargoId]);
       },
       error => {
         this.isError = true;
@@ -64,11 +65,11 @@ export class CargoCreateComponent implements OnInit{
     startStateCheck: new FormControl(this.cargo.startState, [
       Validators.required,
       Validators.maxLength(30),
-      Validators.pattern("[A-Za-z\\s]+")]),
+      Validators.pattern("[A-Za-z.\\s]+")]),
     startAddressCheck: new FormControl(this.cargo.startAddress, [
       Validators.required,
       Validators.maxLength(50),
-      Validators.pattern("[A-Za-z\\s]+")]),
+      Validators.pattern("[A-Za-z#\\d\\s]+")]),
     finalCityCheck: new FormControl(this.cargo.finalCity, [
       Validators.required,
       Validators.maxLength(30),
@@ -76,11 +77,11 @@ export class CargoCreateComponent implements OnInit{
     finalStateCheck: new FormControl(this.cargo.finalState, [
       Validators.required,
       Validators.maxLength(30),
-      Validators.pattern("[A-Za-z\\s]+")]),
+      Validators.pattern("[A-Za-z.\\s]+")]),
     finalAddressCheck: new FormControl(this.cargo.finalAddress, [
       Validators.required,
       Validators.maxLength(50),
-      Validators.pattern("[A-Za-z\\s]+")]),
+      Validators.pattern("[A-Za-z#\\d\\s]+")]),
   });
 
   get orderForCargoIdCheck() {

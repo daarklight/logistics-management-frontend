@@ -39,6 +39,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             this.router.navigate(['error/404']);
             break;
           default:
+            localStorage.setItem('error-message', exception.error.message);
             this.router.navigate(['error/common']);
         }
       }
