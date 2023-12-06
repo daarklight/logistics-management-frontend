@@ -19,16 +19,16 @@
                [opened]="isMobile ? 'false' : 'true'" *ngIf="isLoggedIn === 'true'">
     <div *ngIf="!isCollapsed" class="avatar-main">
       <div *ngIf="userRole === 'ROLE_ADMIN'">
-        <img class="avatar mat-elevation-z8" src="driver_icon.png"/>
+        <img class="avatar-admin-pic mat-elevation-z8"/>
       </div>
       <div *ngIf="userRole === 'ROLE_LOGISTICIAN'">
-        <img class="avatar mat-elevation-z8" src=""/>
+        <img class="avatar-logistician-pic mat-elevation-z8"/>
       </div>
       <div *ngIf="userRole === 'ROLE_DRIVER'">
-        <img class="avatar mat-elevation-z8" src="resources/driver_ico.png"/>
+        <img class="avatar-driver-pic mat-elevation-z8"/>
       </div>
       <div *ngIf="userRole === 'ROLE_CUSTOMER'">
-        <img class="avatar mat-elevation-z8" src="driver_icon.png"/>
+        <img class="avatar-customer-pic mat-elevation-z8"/>
       </div>
 
       <h4 class="name">NAME</h4>
@@ -40,13 +40,19 @@
     <mat-nav-list color="primary">
       <div *ngIf="userRole === 'ROLE_LOGISTICIAN' || userRole === 'ROLE_DRIVER'">
         <h1>ORDERS</h1>
-        <a mat-list-item routerLink="orders">
+        <a mat-list-item routerLink="order/forDriver" *ngIf="userRole === 'ROLE_DRIVER'">
+        <span class="entry">
+          <mat-icon>library_books</mat-icon>
+          <span *ngIf="!isCollapsed">Show Assigned Order</span>
+        </span>
+        </a>
+        <a mat-list-item routerLink="orders" *ngIf="userRole === 'ROLE_LOGISTICIAN'">
         <span class="entry">
           <mat-icon>library_books</mat-icon>
           <span *ngIf="!isCollapsed">Show All Orders</span>
         </span>
         </a>
-        <a mat-list-item routerLink="order/create">
+        <a mat-list-item routerLink="order/create" *ngIf="userRole === 'ROLE_LOGISTICIAN'">
         <span class="entry">
           <mat-icon>library_add</mat-icon>
           <span *ngIf="!isCollapsed">Create New Order</span>
@@ -55,13 +61,13 @@
       </div>
       <div *ngIf="userRole === 'ROLE_LOGISTICIAN' || userRole === 'ROLE_DRIVER'">
         <h1>CARGOS</h1>
-        <a mat-list-item routerLink="cargos">
+        <a mat-list-item routerLink="cargos" *ngIf="userRole === 'ROLE_LOGISTICIAN'">
         <span class="entry">
           <mat-icon>card_travel</mat-icon>
           <span *ngIf="!isCollapsed">Show All Cargos</span>
         </span>
         </a>
-        <a mat-list-item routerLink="cargo/create">
+        <a mat-list-item routerLink="cargo/create" *ngIf="userRole === 'ROLE_LOGISTICIAN'">
         <span class="entry">
           <mat-icon>add</mat-icon>
           <span *ngIf="!isCollapsed">Create New Cargo</span>
@@ -91,7 +97,7 @@
           <span *ngIf="!isCollapsed">Show All Trucks</span>
         </span>
         </a>
-        <a mat-list-item routerLink="truck/create">
+        <a mat-list-item routerLink="truck/create" *ngIf="userRole === 'ROLE_LOGISTICIAN'">
         <span class="entry">
           <mat-icon>add</mat-icon>
           <span *ngIf="!isCollapsed">Create New Truck</span>
@@ -113,26 +119,27 @@
         </span>
         </a>
       </div>
+      <!---------------------- MENU FOR ADMIN ----------------------------------------------------- -->
       <div *ngIf="userRole === 'ROLE_ADMIN'">
         <h1>LOGISTICIANS</h1>
         <a mat-list-item routerLink="logisticians">
         <span class="entry">
-          <mat-icon>person_pin</mat-icon>
+          <mat-icon>people</mat-icon>
           <span *ngIf="!isCollapsed">Show All Logisticians</span>
         </span>
         </a>
         <a mat-list-item routerLink="logistician/create">
         <span class="entry">
           <mat-icon>person_add</mat-icon>
-          <span *ngIf="!isCollapsed">Create New Logisticians</span>
+          <span *ngIf="!isCollapsed">Create New Logistician</span>
         </span>
         </a>
       </div>
       <div *ngIf="userRole === 'ROLE_ADMIN'">
         <h1>AUTHENTICATION</h1>
-        <a mat-list-item routerLink="authenticationInfo">
+        <a mat-list-item routerLink="authentication-info/list">
         <span class="entry">
-          <mat-icon>person_pin</mat-icon>
+          <mat-icon>people_outline</mat-icon>
           <span *ngIf="!isCollapsed">Show All Users</span>
         </span>
         </a>

@@ -69,7 +69,7 @@ export class CargoCreateComponent implements OnInit{
     startAddressCheck: new FormControl(this.cargo.startAddress, [
       Validators.required,
       Validators.maxLength(50),
-      Validators.pattern("[A-Za-z#\\d\\s]+")]),
+      Validators.pattern("[A-Za-z#,\\d\\s]+")]),
     finalCityCheck: new FormControl(this.cargo.finalCity, [
       Validators.required,
       Validators.maxLength(30),
@@ -81,7 +81,7 @@ export class CargoCreateComponent implements OnInit{
     finalAddressCheck: new FormControl(this.cargo.finalAddress, [
       Validators.required,
       Validators.maxLength(50),
-      Validators.pattern("[A-Za-z#\\d\\s]+")]),
+      Validators.pattern("[A-Za-z#,\\d\\s]+")]),
   });
 
   get orderForCargoIdCheck() {

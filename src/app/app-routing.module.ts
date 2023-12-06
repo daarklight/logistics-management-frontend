@@ -1,17 +1,6 @@
 import {NgModule, OnInit} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DriverCreateComponent} from "./driver/driver-create/driver-create.component";
-import {DriverDetailsComponent} from "./driver/driver-details/driver-details.component";
-import {DriverEditComponent} from "./driver/driver-edit/driver-edit.component";
-import {OrderListComponent} from "./order/order-list/order-list.component";
-import {OrderCreateComponent} from "./order/order-create/order-create.component";
-import {OrderDetailsComponent} from "./order/order-details/order-details.component";
-import {OrderEditComponent} from "./order/order-edit/order-edit.component";
-import {CargoListComponent} from "./cargo/cargo-list/cargo-list.component";
-import {CargoCreateComponent} from "./cargo/cargo-create/cargo-create.component";
-import {CargoDetailsComponent} from "./cargo/cargo-details/cargo-details.component";
-import {CargoEditComponent} from "./cargo/cargo-edit/cargo-edit.component";
-import {CargoInOrderListComponent} from "./cargo/cargo-in-order-list/cargo-in-order-list.component";
+
 import {
   AuthenticationInfoListComponent
 } from "./authenticationInfo/authentication-info-list/authentication-info-list.component";
@@ -24,22 +13,43 @@ import {
 import {
   AuthenticationInfoEditComponent
 } from "./authenticationInfo/authentication-info-edit/authentication-info-edit.component";
+
+import {CargoListComponent} from "./cargo/cargo-list/cargo-list.component";
+import {CargoCreateComponent} from "./cargo/cargo-create/cargo-create.component";
+import {CargoDetailsComponent} from "./cargo/cargo-details/cargo-details.component";
+import {CargoEditComponent} from "./cargo/cargo-edit/cargo-edit.component";
+import {CargoInOrderListComponent} from "./cargo/cargo-in-order-list/cargo-in-order-list.component";
+
 import {CustomerListComponent} from "./customer/customer-list/customer-list.component";
 import {CustomerCreateComponent} from "./customer/customer-create/customer-create.component";
 import {CustomerDetailsComponent} from "./customer/customer-details/customer-details.component";
 import {CustomerEditComponent} from "./customer/customer-edit/customer-edit.component";
+
+import {DriverCreateComponent} from "./driver/driver-create/driver-create.component";
+import {DriverDetailsComponent} from "./driver/driver-details/driver-details.component";
+import {DriverEditComponent} from "./driver/driver-edit/driver-edit.component";
+import {DriverListComponent} from "./driver/driver-list/driver-list.component";
+import {DriverProperComponent} from "./driver/driver-proper/driver-proper.component";
+
 import {LogisticianEditComponent} from "./logistician/logistician-edit/logistician-edit.component";
 import {LogisticianDetailsComponent} from "./logistician/logistician-details/logistician-details.component";
 import {LogisticianCreateComponent} from "./logistician/logistician-create/logistician-create.component";
 import {LogisticianListComponent} from "./logistician/logistician-list/logistician-list.component";
-import {DriverListComponent} from "./driver/driver-list/driver-list.component";
-import {DriverProperComponent} from "./driver/driver-proper/driver-proper.component";
+
+import {OrderCreateComponent} from "./order/order-create/order-create.component";
+import {OrderEditComponent} from "./order/order-edit/order-edit.component";
+import {OrderDetailsComponent} from "./order/order-details/order-details.component";
+import {OrderForDriverComponent} from "./order/order-for-driver/order-for-driver.component";
+import {OrderListComponent} from "./order/order-list/order-list.component";
+
 import {TruckEditComponent} from "./truck/truck-edit/truck-edit.component";
 import {TruckDetailsComponent} from "./truck/truck-details/truck-details.component";
 import {TruckCreateComponent} from "./truck/truck-create/truck-create.component";
 import {TruckListComponent} from "./truck/truck-list/truck-list.component";
 import {TruckProperComponent} from "./truck/truck-proper/truck-proper.component";
+
 import {LoginPageComponent} from "./login-page/login-page.component";
+
 import {AuthorityGuard} from "./authority-guard";
 import {Error403Component} from "./errors/error-403/error-403.component";
 import {Error404Component} from "./errors/error-404/error-404.component";
@@ -49,8 +59,8 @@ const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 
-  {path: 'authenticationInfo', component: AuthenticationInfoListComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_ADMIN'] }},
-  {path: 'authenticationInfo', redirectTo: 'authenticationInfo', pathMatch: 'full'},
+  {path: 'authentication-info/list', component: AuthenticationInfoListComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_ADMIN'] }},
+  {path: 'authentication-info/list', redirectTo: 'authentication-info/list', pathMatch: 'full'},
   {path: 'authenticationInfo/create', component: AuthenticationInfoCreateComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_ADMIN'] }},
   {path: 'authenticationInfo/create', redirectTo: 'authenticationInfo/create', pathMatch: 'full'},
   {path: 'authenticationInfo/details/:id', component: AuthenticationInfoDetailsComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_ADMIN'] }},
@@ -104,6 +114,8 @@ const routes: Routes = [
   {path: 'order/create', redirectTo: 'order/create', pathMatch: 'full'},
   {path: 'order/details/:id', component: OrderDetailsComponent},
   {path: 'order/details/:id', redirectTo: 'order/details/:id', pathMatch: 'full'},
+  {path: 'order/forDriver', component: OrderForDriverComponent},
+  {path: 'order/forDriver', redirectTo: 'order/forDriver', pathMatch: 'full'},
   {path: 'order/update/:id', component: OrderEditComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_LOGISTICIAN'] }},
   {path: 'order/update/:id', redirectTo: 'order/update/:id', pathMatch: 'full'},
 

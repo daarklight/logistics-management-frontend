@@ -3,7 +3,7 @@
   <form (ngSubmit)="onSubmit()">
 
     <div class="form-group" [formGroup]="logisticianValidation" style="margin-top: 15px">
-      <label><b>Authentication ID</b></label>
+      <label><b>Authentication ID (do not forget to create proper authentication info before)</b></label>
       <input type="text" class="form-control" id="logistician-authentication-id" [(ngModel)]="logistician.logisticianAuthenticationId"
              name="logisticianAuthenticationId" formControlName="authenticationIdCheck" maxlength="6">
       <div

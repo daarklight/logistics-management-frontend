@@ -26,10 +26,14 @@ export class ErrorInterceptor implements HttpInterceptor {
     }, exception => {
       if (exception instanceof HttpErrorResponse) {
         switch (exception.status) {
+          case HttpError.Unauthorized:
+            this.router.navigate(['login']);
+            break;
           case HttpError.Forbidden:
             console.log(exception.status + ', ' + exception.message)
             console.log(exception.status)
             if(localStorage.getItem('is-logged-in') != String(true)) {
+              //localStorage.setItem('auth-error', String(true));
               this.router.navigate(['login']);
               break;
             }

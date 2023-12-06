@@ -6,6 +6,7 @@ import {
 } from "../../logistics-api";
 import {take} from "rxjs";
 import {Router} from "@angular/router";
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-login-page',
@@ -18,6 +19,7 @@ export class LoginPageComponent implements OnInit {
 
   isLoggedIn: boolean;
   username: string;
+  showErrorMessage: boolean;
 
   user: AuthenticationInfoToSend = new class implements AuthenticationInfoToSend {
     username: string;
@@ -46,6 +48,7 @@ export class LoginPageComponent implements OnInit {
         );
 
         if (localStorage.getItem('auth-token') !== '') {
+          this.showErrorMessage = false;
           this.isLoggedIn = true;
           localStorage.setItem('is-logged-in', String(true));
           localStorage.setItem(
@@ -58,7 +61,13 @@ export class LoginPageComponent implements OnInit {
           );
         }
         this.redirectDependingOnTheRole();
+      }, error => {
+        this.showErrorMessage = true;
       });
+  }
+
+  onKeyUp() {
+    this.showErrorMessage = false;
   }
 
   redirectDependingOnTheRole() {
@@ -66,7 +75,7 @@ export class LoginPageComponent implements OnInit {
 
     // NAVIGATE TO ADMIN (AFTER AUTH)
     if (localStorage.getItem('role') === 'ROLE_ADMIN') {
-
+      this.router.navigate(['logisticians']);
     }
 
     // NAVIGATE TO LOGISTICIAN (AFTER AUTH)
@@ -76,17 +85,22 @@ export class LoginPageComponent implements OnInit {
 
     // NAVIGATE TO DRIVER (AFTER AUTH)
     if (localStorage.getItem('role') === 'ROLE_DRIVER') {
-      this.router.navigate(['driver/details/', "153067"]); //TODO: DELETE WHEN ENDPOINT IS READY TO USE
-
-      // this.driverService.driverFindByUsername(this.username).subscribe(foundDriver => {  //TODO: UNCOMMENT WHEN ENDPOINT IS READY TO USE
-      //     this.router.navigate(['driver/details/', foundDriver.personalNumber]);
-      // });
+      let username = localStorage.getItem('username')!;
+      console.log('Username was found: ' + username);
+      this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
+        this.router.navigate(['driver/details/', driver.personalNumber]);
+      })
     }
 
     // NAVIGATE TO CUSTOMER (AFTER AUTH)
     if (localStorage.getItem('role') === 'ROLE_CUSTOMER') {
 
     }
+  }
+
+  function() {
+    setTimeout(function() { $("#validationAlert2").fadeOut(1500); }, 5000)
+
   }
 
 
@@ -99,16 +113,17 @@ export class LoginPageComponent implements OnInit {
     userPassword: new FormControl(this.user.password, [
       Validators.required,
       Validators.minLength(7),
-      Validators.pattern("[A-Za-z1-9_]+")]), //TODO check
+      Validators.pattern("[A-Za-z1-9_]+")]),
   })
 
   get userUsername() {
     return this.userAuthValidation.get('userUsername')
   }
-
   get userPassword() {
     return this.userAuthValidation.get('userPassword')
   }
 
+  protected readonly localStorage = localStorage;
+  protected readonly String = String;
 
 }

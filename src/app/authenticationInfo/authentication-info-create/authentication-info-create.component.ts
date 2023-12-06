@@ -16,18 +16,25 @@ export class AuthenticationInfoCreateComponent implements OnInit {
     login: string;
     password: string;
   }
+  roles = [
+    {role: "ROLE_ADMIN"},
+    {role: "ROLE_LOGISTICIAN"},
+    {role: "ROLE_DRIVER"},
+    {role: "ROLE_CUSTOMER"}
+  ];
+
 
   constructor(private authenticationInfoService: AuthenticationInfoService, private router: Router) {
   }
 
   ngOnInit(): void {
-    console.log(this.authenticationInfo)
+    console.log(this.authenticationInfo);
   }
 
   onSubmit() {
+    console.log(this.authenticationInfo.role);
     this.authenticationInfoService.authenticationInfoCreate(this.authenticationInfo).subscribe(createdAuthenticationInfo => {
         this.isError = false;
-        console.log(createdAuthenticationInfo)
         this.router.navigate(['authenticationInfo/details/', createdAuthenticationInfo.id]);
       },
       error => {
@@ -53,15 +60,19 @@ export class AuthenticationInfoCreateComponent implements OnInit {
       Validators.maxLength(40),
       Validators.pattern("[A-Za-z1-9_]+")]),
     passwordCheck: new FormControl(this.authenticationInfo.password, [
-      Validators.required]),
+      Validators.required,
+      Validators.minLength(7),
+      Validators.pattern("[A-Za-z1-9_]+")]),
   });
 
   get idCheck() {
     return this.authenticationInfoValidation.get('idCheck')
   }
-  get loginCheck() {
+
+  get usernameCheck() {
     return this.authenticationInfoValidation.get('usernameCheck')
   }
+
   get passwordCheck() {
     return this.authenticationInfoValidation.get('passwordCheck')
   }

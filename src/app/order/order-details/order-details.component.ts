@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Cargo, CargoService, DriverService, Order, OrderService} from "../../../logistics-api";
+import {Cargo, CargoService, Driver, DriverService, Order, OrderService} from "../../../logistics-api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
@@ -13,6 +13,7 @@ export class OrderDetailsComponent implements OnInit {
   id: number;
   order: Order;
   cargos: Cargo[]
+  drivers: Driver[]
   errorMessage: string;
   isError: boolean;
 
@@ -28,7 +29,9 @@ export class OrderDetailsComponent implements OnInit {
       //console.log("order-details before cargo service")
       this.cargoService.cargoFindByOrderId(this.order.orderId!).subscribe(cargoList => {
         this.cargos = cargoList;
-        //console.log(this.cargos);
+      })
+      this.driverService.driversFindByCurrentOrderId(this.order.orderId!).subscribe(driverList => {
+        this.drivers = driverList;
       })
 
     }, error => {
@@ -53,6 +56,14 @@ export class OrderDetailsComponent implements OnInit {
   calculateNumberOfCargos() : number{
     return this.cargos.length;
   }
+
+  calculateNumberOfAssignedDrivers() : number{
+    return this.drivers.length;
+  }
+
+  // showFirstDriver() : number{
+  //   return this.drivers.at(0)!.personalNumber!;
+  // }
 
   findProperTrucks(orderId: number, city: string, state: string, capacity: number){
     localStorage.setItem('order-id', String(orderId));

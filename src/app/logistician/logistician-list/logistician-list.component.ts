@@ -26,7 +26,6 @@ export class LogisticianListComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('need-to-reload-page') === String(true)) { //To show sidebar
-      console.log("HELLO")
       localStorage.setItem('need-to-reload-page', String(false));
       location.reload();
     }

@@ -19,19 +19,33 @@
       </div>
     </div>
 
+    <div class="form-group" style="margin-top: 15px">
+      <label><b>Role</b></label>
+      <input type="text" class="form-control" id="role" [(ngModel)]="authenticationInfo.role" name="role">
+    </div>
+
+    <!--    <div class="form-group">-->
+    <!--      <label><b>Role</b></label>-->
+    <!--      <select class="form-control" id="roleId" required)>-->
+    <!--        <option *ngFor="let role of roles" [value]="role.role">{{role.role}} </option>-->
+    <!--      </select>-->
+    <!--    </div>-->
+
     <div class="form-group" [formGroup]="authenticationInfoValidation" style="margin-top: 15px">
       <label><b>Login</b></label>
-      <input type="text" class="form-control" id="name" [(ngModel)]="authenticationInfo.username" name="name" formControlName="loginCheck">
+      <input type="text" class="form-control" id="name" [(ngModel)]="authenticationInfo.username" name="name"
+             formControlName="usernameCheck">
       <div
-        *ngIf="loginCheck!.invalid && (loginCheck!.dirty || loginCheck!.touched)" class="validationAlert">
+        *ngIf="usernameCheck!.invalid && (usernameCheck!.dirty || usernameCheck!.touched)" class="validationAlert">
         <div>
-          <div *ngIf="loginCheck?.errors?.['required']"> &#10008; Login should not be blank and should not exceed 40
+          <div *ngIf="usernameCheck?.errors?.['required']"> &#10008; Login should not be blank and should not exceed 40
             symbols
           </div>
-          <div *ngIf="loginCheck?.errors?.['maxlength']"> &#10008; Login should not be blank and should not exceed 40
+          <div *ngIf="usernameCheck?.errors?.['maxlength']"> &#10008; Login should not be blank and should not exceed 40
             symbols
           </div>
-          <div *ngIf="loginCheck?.errors?.['pattern']"> &#10008; Login can contain only letters, digits and underscores
+          <div *ngIf="usernameCheck?.errors?.['pattern']"> &#10008; Login can contain only letters, digits and
+            underscores
           </div>
         </div>
       </div>
@@ -39,12 +53,22 @@
 
     <div class="form-group" [formGroup]="authenticationInfoValidation" style="margin-top: 15px">
       <label><b>Password</b></label>
-      <input type="text" class="form-control" id="password" [(ngModel)]="authenticationInfo.password" name="surname"
+      <input type="text" class="form-control" id="password" [(ngModel)]="authenticationInfo.password"
+             name="userPassword"
              formControlName="passwordCheck">
       <div
         *ngIf="passwordCheck!.invalid && (passwordCheck!.dirty || passwordCheck!.touched)" class="validationAlert">
         <div>
           <div *ngIf="passwordCheck?.errors?.['required']"> &#10008; Password required
+          </div>
+        </div>
+        <div>
+          <div *ngIf="passwordCheck?.errors?.['minlength']"> &#10008; Password must be minimum 7 symbols long
+          </div>
+        </div>
+        <div>
+          <div *ngIf="passwordCheck?.errors?.['pattern']"> &#10008; Password can contain only letters, digits and
+            underscores
           </div>
         </div>
       </div>

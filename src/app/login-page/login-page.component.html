@@ -5,13 +5,13 @@
       <p>
         <mat-form-field>
           <input type="text" matInput placeholder="Username" id="login" [(ngModel)]="user.username" name="login"
-                 formControlName="userUsername" maxlength="30" disallow-spaces>
+                 formControlName="userUsername" maxlength="30" (keyup)="onKeyUp()">
         </mat-form-field>
       </p>
       <p>
         <mat-form-field>
           <input type="password" matInput placeholder="Password" id="password" [(ngModel)]="user.password"
-                 name="password"  formControlName="userPassword">
+                 name="password"  formControlName="userPassword" (keyup)="onKeyUp()">
         </mat-form-field>
       </p>
 
@@ -37,6 +37,10 @@
             underscores
           </div>
         </div>
+      </div>
+
+      <div *ngIf="showErrorMessage" class="validationAlert">
+        Authentication failed: incorrect username or password
       </div>
 
       <div class="button ">

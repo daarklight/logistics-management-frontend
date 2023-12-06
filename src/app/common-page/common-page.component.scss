@@ -32,7 +32,7 @@ mat-sidenav-container {
 mat-sidenav {
   padding-top: 3.5rem;
   transition: width 0.3s ease;
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 300px) {
     padding-top: 4rem;
   }
 
@@ -48,13 +48,13 @@ mat-sidenav {
 // Move the content down so that it won't be hidden by the toolbar
 mat-sidenav-content {
   padding-top: 3.5rem;
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 300px) {
     padding-top: 4rem;
   }
 }
 
 .expanded {
-  width: 250px;
+  width: 350px;
 }
 
 .sidebar-style {
@@ -93,7 +93,7 @@ mat-sidenav-content {
   }
 }
 
-.logopic{
+.logopic {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -115,10 +115,10 @@ mat-sidenav-content {
   }
 }
 
-.avatar-main{
-  align: center;
-  margin-left: 50px;
+.avatar-main {
+  margin-left: 90px;
 }
+
 .avatar {
   margin-top: 16px;
   width: 100px;
@@ -126,24 +126,68 @@ mat-sidenav-content {
   border-radius: 50%;
 }
 
+.avatar-admin-pic {
+  margin-top: 16px;
+  margin-left: 0;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-size: 110px;
+  background-image: url(../../../resources/admin.png);
+
+}
+
+.avatar-logistician-pic {
+  margin-top: 16px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-size: 110px;
+  background-color: white;
+  background-image: url(../../../resources/logistician.png);
+}
+
+.avatar-driver-pic {
+  margin-top: 16px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-size: 110px;
+  background-color: white;
+  background-image: url(../../../resources/driver_ico.png);
+}
+
+.avatar-customer-pic {
+  margin-top: 16px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-size: 110px;
+  background-color: white;
+  background-image: url(../../../resources/customer_2.png);
+}
+
 .name {
   margin-top: 8px;
+  margin-left: 25px;
   font-weight: normal;
   font-family: Lato, serif;
 }
 
 .designation {
   margin-top: 2px;
+  margin-left: 25px;
   font-size: 1rem;
   font-family: Lato, serif;
   font-weight: bold;
   color: #2E5090;
 }
+
 mat-divider {
   margin-top: 16px;
   margin-bottom: 16px;
   margin-left: 0;
-  width: 400px;
+  width: 330px;
   height: 1px;
   background-color: lightgray;
 }

@@ -120,7 +120,7 @@
         </div>
       </div>
 
-      <div class="form-group" [formGroup]="driverValidation" style="margin-top: 15px">
+      <div class="form-group" [formGroup]="driverValidation" style="margin-top: 15px" *ngIf="driverUpdate.currentTruckNumber === null">
         <label><b>Current city</b></label>
         <input type="text" class="form-control" id="current-сity" [(ngModel)]="driverUpdate.currentCity" name="currentCity"
                formControlName="drCurrentCity">

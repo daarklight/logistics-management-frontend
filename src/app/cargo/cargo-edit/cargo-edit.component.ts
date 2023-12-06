@@ -68,7 +68,7 @@ export class CargoEditComponent implements OnInit {
     startAddressCheck: new FormControl(this.cargoUpdate.startAddress, [
       Validators.required,
       Validators.maxLength(50),
-      Validators.pattern("A-Za-z#\\d\\s]+")]),
+      Validators.pattern("A-Za-z#,\\d\\s]+")]),
     finalCityCheck: new FormControl(this.cargoUpdate.finalCity, [
       Validators.required,
       Validators.maxLength(30),
@@ -80,7 +80,7 @@ export class CargoEditComponent implements OnInit {
     finalAddressCheck: new FormControl(this.cargoUpdate.finalAddress, [
       Validators.required,
       Validators.maxLength(50),
-      Validators.pattern("A-Za-z#\\d\\s]+")]),
+      Validators.pattern("A-Za-z#,\\d\\s]+")]),
   });
 
   get cargoNameCheck() {
