@@ -1,49 +1,49 @@
-<div class="grid-container">
-  <div class="customer-details">
-    <ng-template [ngIf]="isError" [ngIfElse]="details">
-      <div class="error">
-        <label><h3>Error occurred for while searching customer with id {{id}}:</h3></label>
-        <br>
-        <label><h3>{{errorMessage}}:</h3></label>
+<div class="customer-details customer-details-background">
+  <ng-template [ngIf]="isError" [ngIfElse]="details">
+    <div class="error">
+      <label><h3>Error occurred for while searching customer with id {{id}}:</h3></label>
+      <br>
+      <label><h3>{{errorMessage}}:</h3></label>
+    </div>
+  </ng-template>
+  <ng-template #details>
+    <div>
+      <br>
+      <div class="customer-details-header">
+        Customer <span class="header-style">{{customer.customerName}} </span>details
       </div>
-    </ng-template>
-    <ng-template #details>
-      <div>
-        <br>
-        <div class="customer-details-header">
-          Customer <span class="header-style">{{customer.customerName}} </span>details
+      <div class="customer-details-info">
+
+        <div class="customer-details-cell">
+          <label><b class="header-style">Customer Id: </b><span
+            class="row-margin">{{customer.customerId}}</span></label>
         </div>
-        <div class="customer-details-info">
+        <div class="customer-details-cell">
+          <label><b class="header-style">Customer name: </b><span
+            class="row-margin">{{customer.customerName}}</span></label>
+        </div>
+        <div class="customer-details-cell">
+          <label><b class="header-style">Phone: </b><span
+            class="row-margin">{{customer.phone}}</span></label>
+        </div>
+        <div class="customer-details-cell">
+          <label><b class="header-style">Email: </b><span
+            class="row-margin">{{customer.email}}</span></label>
+        </div>
 
-          <div class="customer-details-cell">
-            <label><b class="header-style">Customer Id: </b><span
-              class="row-margin">{{customer.customerId}}</span></label>
-          </div>
-          <div class="customer-details-cell">
-            <label><b class="header-style">Customer name: </b><span class="row-margin">{{customer.customerName}}</span></label>
-          </div>
-          <div class="customer-details-cell">
-            <label><b class="header-style">Phone: </b><span
-              class="row-margin">{{customer.phone}}</span></label>
-          </div>
-          <div class="customer-details-cell">
-            <label><b class="header-style">Email: </b><span
-              class="row-margin">{{customer.email}}</span></label>
-          </div>
-
-          <div class="buttons-panel">
+        <div class="buttons-panel" *ngIf="localStorage.getItem('role') !== 'ROLE_CUSTOMER'">
             <span style="width: 50px">
-          <button mat-button (click)="updateCustomer(customer.customerId!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+          <button mat-button (click)="updateCustomer(customer.customerId!)"
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
             <mat-icon>edit</mat-icon> EDIT
           </button></span>
-            <span style="width: 50px">
-          <button mat-button (click)="deleteCustomer(customer.customerId!)" style="background-color: darkred; color: white">
+          <span style="width: 50px">
+          <button mat-button (click)="deleteCustomer(customer.customerId!)"
+                  style="background-color: darkred; color: white">
             <mat-icon>delete</mat-icon> DELETE
           </button></span>
-          </div>
         </div>
       </div>
-    </ng-template>
-  </div>
-  <div class="background-pic"></div>
+    </div>
+  </ng-template>
 </div>

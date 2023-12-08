@@ -1,107 +1,109 @@
-<div class="grid-container">
-  <div class="cargo-details">
-    <ng-template [ngIf]="isError" [ngIfElse]="details">
-      <div class="error">
-        <label><h3>Error occurred for while searching cargo with id {{id}}:</h3></label>
-        <br>
-        <label><h3>{{errorMessage}}:</h3></label>
+<div class="cargo-details cargo-details-background">
+  <ng-template [ngIf]="isError" [ngIfElse]="details">
+    <div class="error">
+      <label><h3>Error occurred for while searching cargo with id {{id}}:</h3></label>
+      <br>
+      <label><h3>{{errorMessage}}:</h3></label>
+    </div>
+  </ng-template>
+  <ng-template #details>
+    <div>
+      <br>
+      <div class="cargo-details-header">
+        Cargo# <span class="header-style">{{cargo.cargoId}} </span>details
       </div>
-    </ng-template>
-    <ng-template #details>
-      <div>
-        <br>
-        <div class="cargo-details-header">
-          Cargo# <span class="header-style">{{cargo.cargoId}} </span>details
+      <div class="cargo-details-info">
+
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Cargo Id: </b><span
+            class="row-margin">{{cargo.cargoId}}</span></label>
         </div>
-        <div class="cargo-details-info">
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Order Id: </b><span class="row-margin">{{cargo.orderForCargoId}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Cargo name: </b><span class="row-margin">{{cargo.cargoName}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Weigh, tons: </b><span
+            class="row-margin">{{cargo.weight}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Start city: </b><span
+            class="row-margin">{{cargo.startCity}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Start state: </b><span
+            class="row-margin">{{cargo.startState}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Start address: </b><span
+            class="row-margin">{{cargo.startAddress}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Loaded status: </b><span
+            class="row-margin">{{cargo.loaded!.toLowerCase()}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Final city: </b><span
+            class="row-margin">{{cargo.finalCity ?? '  &mdash;'}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Final state: </b><span
+            class="row-margin">{{cargo.finalState ?? '  &mdash;'}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Final address: </b><span
+            class="row-margin">{{cargo.finalAddress ?? '  &mdash;'}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Unloaded status: </b><span
+            class="row-margin">{{cargo.unloaded!.toLowerCase()}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Waypoint index: </b><span
+            class="row-margin">{{cargo.waypointIndex}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Distance from start point, km: </b><span
+            class="row-margin">{{cargo.rideDistanceFromStartPoint}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Duration from start point, minutes: </b><span
+            class="row-margin">{{cargo.rideDurationFromStartPoint}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Distance from previous point, km: </b><span
+            class="row-margin">{{cargo.rideDistanceFromPreviousPoint}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Duration from previous point, minutes: </b><span
+            class="row-margin">{{cargo.rideDurationFromPreviousPoint}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Expected completion date and time: </b><span
+            class="row-margin">{{cargo.expectedCompletionDateTime ?? '  &mdash;'}}</span></label>
+        </div>
+        <div class="cargo-details-cell">
+          <label><b class="header-style">Real completion date and time: </b><span
+            class="row-margin">{{cargo.realCompletionDateTime ?? '  &mdash;'}}</span></label>
+        </div>
 
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Cargo Id: </b><span
-              class="row-margin">{{cargo.cargoId}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Order Id: </b><span class="row-margin">{{cargo.orderForCargoId}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Cargo name: </b><span class="row-margin">{{cargo.cargoName}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Weigh, tons: </b><span
-              class="row-margin">{{cargo.weight}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Start city: </b><span
-              class="row-margin">{{cargo.startCity}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Start state: </b><span
-              class="row-margin">{{cargo.startState}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Start address: </b><span
-              class="row-margin">{{cargo.startAddress}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Loaded status: </b><span
-              class="row-margin">{{cargo.loaded!.toLowerCase()}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Final city: </b><span
-              class="row-margin">{{cargo.finalCity ?? '  &mdash;'}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Final state: </b><span
-              class="row-margin">{{cargo.finalState ?? '  &mdash;'}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Final address: </b><span
-              class="row-margin">{{cargo.finalAddress ?? '  &mdash;'}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Unloaded status: </b><span class="row-margin">{{cargo.unloaded!.toLowerCase()}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Waypoint index: </b><span
-              class="row-margin">{{cargo.waypointIndex}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Distance from start point, km: </b><span
-              class="row-margin">{{cargo.rideDistanceFromStartPoint}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Duration from start point, minutes: </b><span
-              class="row-margin">{{cargo.rideDurationFromStartPoint}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Distance from previous point, km: </b><span
-              class="row-margin">{{cargo.rideDistanceFromPreviousPoint}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Duration from previous point, minutes: </b><span
-              class="row-margin">{{cargo.rideDurationFromPreviousPoint}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Expected completion date and time: </b><span
-              class="row-margin">{{cargo.expectedCompletionDateTime ?? '  &mdash;'}}</span></label>
-          </div>
-          <div class="cargo-details-cell">
-            <label><b class="header-style">Real completion date and time: </b><span
-              class="row-margin">{{cargo.realCompletionDateTime ?? '  &mdash;'}}</span></label>
-          </div>
-
-          <div class="buttons-panel">
+        <div class="buttons-panel" *ngIf="userRole==='ROLE_LOGISTICIAN'">
             <span style="width: 50px">
-          <button mat-button (click)="updateCargo(cargo.cargoId!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+          <button mat-button (click)="updateCargo(cargo.cargoId!)"
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
             <mat-icon>edit</mat-icon> EDIT
           </button></span>
-            <span style="width: 50px">
+
+          <span style="width: 50px">
           <button mat-button (click)="deleteCargo(cargo.cargoId!)" style="background-color: darkred; color: white">
             <mat-icon>delete</mat-icon> DELETE
           </button></span>
-          </div>
+
         </div>
       </div>
-    </ng-template>
-  </div>
-  <div class="background-pic"></div>
+    </div>
+  </ng-template>
 </div>
+<div class="background-pic"></div>

@@ -2,7 +2,7 @@ import {Component, inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {
   AuthenticationInfoService,
-  AuthenticationInfoToSend, DriverService,
+  AuthenticationInfoToSend, CustomerService, DriverService, LogisticianService,
 } from "../../logistics-api";
 import {take} from "rxjs";
 import {Router} from "@angular/router";
@@ -28,7 +28,9 @@ export class LoginPageComponent implements OnInit {
 
 
   constructor(private authService: AuthenticationInfoService, private router: Router,
-              private driverService: DriverService) {
+              private driverService: DriverService,
+              private logisticianService: LogisticianService,
+              private customerService: CustomerService) {
   }
 
   ngOnInit(): void {
@@ -72,7 +74,7 @@ export class LoginPageComponent implements OnInit {
 
   redirectDependingOnTheRole() {
     localStorage.setItem('need-to-reload-page', String(true));
-
+    let username = localStorage.getItem('username')!;
     // NAVIGATE TO ADMIN (AFTER AUTH)
     if (localStorage.getItem('role') === 'ROLE_ADMIN') {
       this.router.navigate(['logisticians']);
@@ -80,26 +82,36 @@ export class LoginPageComponent implements OnInit {
 
     // NAVIGATE TO LOGISTICIAN (AFTER AUTH)
     if (localStorage.getItem('role') === 'ROLE_LOGISTICIAN') {
-      this.router.navigate(['orders']);
+      this.logisticianService.logisticianFindByUsername(username)
+        .subscribe(logistician => {
+          localStorage.setItem('username-name', logistician.name!);
+          localStorage.setItem('username-surname', logistician.surname!);
+          this.router.navigate(['orders']);
+        });
     }
 
     // NAVIGATE TO DRIVER (AFTER AUTH)
     if (localStorage.getItem('role') === 'ROLE_DRIVER') {
-      let username = localStorage.getItem('username')!;
-      console.log('Username was found: ' + username);
-      this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
+      this.driverService.driverFindByUsername(username).subscribe(driver => {
+        localStorage.setItem('username-name', driver.name!);
+        localStorage.setItem('username-surname', driver.surname!);
         this.router.navigate(['driver/details/', driver.personalNumber]);
-      })
+      });
     }
 
     // NAVIGATE TO CUSTOMER (AFTER AUTH)
     if (localStorage.getItem('role') === 'ROLE_CUSTOMER') {
-
+      this.customerService.customerFindByUsername(username).subscribe(customer =>{
+        localStorage.setItem('username-name', customer.customerName!);
+        this.router.navigate(['customer/orders']);
+      });
     }
   }
 
   function() {
-    setTimeout(function() { $("#validationAlert2").fadeOut(1500); }, 5000)
+    setTimeout(function () {
+      $("#validationAlert2").fadeOut(1500);
+    }, 5000)
 
   }
 
@@ -119,6 +131,7 @@ export class LoginPageComponent implements OnInit {
   get userUsername() {
     return this.userAuthValidation.get('userUsername')
   }
+
   get userPassword() {
     return this.userAuthValidation.get('userPassword')
   }

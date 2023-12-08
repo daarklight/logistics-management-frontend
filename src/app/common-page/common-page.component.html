@@ -31,7 +31,7 @@
         <img class="avatar-customer-pic mat-elevation-z8"/>
       </div>
 
-      <h4 class="name">NAME</h4>
+      <h4 class="name">{{localStorage.getItem('username-name')}} {{localStorage.getItem('username-surname')}}</h4>
       <p class="designation">{{userRole.replace("ROLE_", '')}}</p>
     </div>
     <div *ngIf="!isCollapsed">
@@ -147,6 +147,24 @@
         <span class="entry">
           <mat-icon>person_add</mat-icon>
           <span *ngIf="!isCollapsed">Create New User</span>
+        </span>
+        </a>
+      </div>
+
+      <!---------------------- MENU FOR CUSTOMER ----------------------------------------------------- -->
+      <div *ngIf="userRole === 'ROLE_CUSTOMER'">
+        <br>
+        <br>
+        <a mat-list-item (click)="getCustomerDetails()">
+          <span  style="color: white; align-items: center; justify-content: center; display: flex;">
+          <h1><mat-icon>account_circle</mat-icon>  COMPANY DETAILS</h1>
+        </span>
+        </a>
+        <br>
+        <br>
+        <a mat-list-item routerLink="customer/orders">
+        <span style="color: white">
+         <h1 style="align-content: center"><mat-icon>list</mat-icon>  ORDERS</h1>
         </span>
         </a>
       </div>

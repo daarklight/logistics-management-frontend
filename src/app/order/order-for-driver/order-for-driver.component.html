@@ -9,13 +9,13 @@
     </ng-template>
     <ng-template #details>
 
-<!--      <div *ngIf="order.orderId === 0">-->
-<!--        <div>-->
-<!--        No order found for you-->
-<!--        </div>-->
-<!--      </div>-->
+      <!--      <div *ngIf="order.orderId === 0">-->
+      <!--        <div>-->
+      <!--        No order found for you-->
+      <!--        </div>-->
+      <!--      </div>-->
 
-<!--*ngIf="order.orderId !== 0"-->
+      <!--*ngIf="order.orderId !== 0"-->
       <div *ngIf="order !== null">
         <br>
         <div class="order-details-header">
@@ -58,18 +58,40 @@
             <label><b class="header-style">Assigned truck number: </b><span
               class="row-margin">{{order.assignedTruckNumber ?? '  &mdash;'}}</span></label>
           </div>
+          <!--          <div class="order-details-cell">-->
+          <!--            <label><b class="header-style">First driver: </b><span-->
+          <!--              class="row-margin">{{findFirstAssignedDriver()}}</span></label>-->
+          <!--          </div>-->
+
+          <!--          this.router.navigate(['cargo/details/', cargoId]);-->
+          <!--          ['/team/11/user', userName, {details: true}]-->
+          <!--          "../../driver/details/"-->
+          <!--          <a [routerLink]=”[‘/product’, product.id]”>{{ product.name }}</a>-->
+
+          <div class="order-details-cell">
+            <label><b class="header-style">First driver: </b><span
+              class="row-margin"><a
+              [routerLink]="['../../driver/details/', findFirstAssignedDriverPersonalNumber()]"
+              *ngIf="findFirstAssignedDriverPersonalNumber() !== 'not assigned'">{{findFirstAssignedDriver()}}</a></span></label>
+          </div>
+          <div class="order-details-cell">
+            <label><b class="header-style">Second driver: </b><span
+              class="row-margin"><a
+              [routerLink]="['../../driver/details/', findSecondAssignedDriverPersonalNumber()]"
+              *ngIf="findSecondAssignedDriverPersonalNumber() !== 'not assigned'">{{findSecondAssignedDriver()}}</a></span></label>
+          </div>
           <div class="order-details-cell">
             <label><b class="header-style">Driver's comment: </b><span
               class="row-margin">{{order.driverComment ?? '  &mdash;'}}</span></label>
           </div>
 
           <div class="buttons-panel">
-            <span style="width: 50px">
+            <span style="width: 50px" *ngIf="order.status === 'EXPECT_DRIVERS_CONFIRMATION'">
           <button mat-button (click)="confirmOrder('YES')"
                   style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
             <mat-icon>edit</mat-icon> CONFIRM ORDER
           </button></span>
-            <span style="width: 50px">
+            <span style="width: 50px" *ngIf="order.status === 'EXPECT_DRIVERS_CONFIRMATION'">
           <button mat-button (click)="confirmOrder('NO')" style="background-color: darkred; color: white"
                   title="Delete order">
             <mat-icon>delete</mat-icon> DECLINE ORDER
@@ -86,37 +108,37 @@
             <br>
             <br>
 
-<!--            &lt;!&ndash;            CONSIDER THE POSSIBILITY TO CREATE SEPARATE PAGE TO CREATE CARGO WHERE ORDER ID = ID FOR CURRENTLY CONSIDERED ORDER !!!&ndash;&gt;-->
-<!--            <a mat-list-item routerLink="../../../cargo/create">-->
-<!--            <span style="width: 50px" *ngIf="calculateNumberOfCargos() <2">-->
-<!--          <button mat-button-->
-<!--                  style="; margin-right: 10px; color: white; background-color: #009511; width: 130px">-->
-<!--            <mat-icon>edit</mat-icon> ADD CARGO-->
-<!--          </button></span>-->
-<!--            </a>-->
-<!--            <br>-->
-<!--            <br>-->
+            <!--            &lt;!&ndash;            CONSIDER THE POSSIBILITY TO CREATE SEPARATE PAGE TO CREATE CARGO WHERE ORDER ID = ID FOR CURRENTLY CONSIDERED ORDER !!!&ndash;&gt;-->
+            <!--            <a mat-list-item routerLink="../../../cargo/create">-->
+            <!--            <span style="width: 50px" *ngIf="calculateNumberOfCargos() <2">-->
+            <!--          <button mat-button-->
+            <!--                  style="; margin-right: 10px; color: white; background-color: #009511; width: 130px">-->
+            <!--            <mat-icon>edit</mat-icon> ADD CARGO-->
+            <!--          </button></span>-->
+            <!--            </a>-->
+            <!--            <br>-->
+            <!--            <br>-->
 
-<!--            <span style="width: 50px" *ngIf="order.assignedTruckNumber === null">-->
-<!--          <button mat-button-->
-<!--                  (click)="findProperTrucks(order.orderId!, cargos[0].startCity!, cargos[0].startState!, order.weight!)"-->
-<!--                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px">-->
-<!--            <mat-icon>local_shipping</mat-icon> ASSIGN TRUCK-->
-<!--          </button></span>-->
+            <!--            <span style="width: 50px" *ngIf="order.assignedTruckNumber === null">-->
+            <!--          <button mat-button-->
+            <!--                  (click)="findProperTrucks(order.orderId!, cargos[0].startCity!, cargos[0].startState!, order.weight!)"-->
+            <!--                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px">-->
+            <!--            <mat-icon>local_shipping</mat-icon> ASSIGN TRUCK-->
+            <!--          </button></span>-->
 
 
-<!--            <span style="width: 50px">-->
-<!--          <button mat-button-->
-<!--                  (click)="findProperDrivers(order.orderId!, cargos[0].startCity!, cargos[0].startState!, 150)"-->
-<!--                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px">-->
-<!--            <mat-icon>people_outline</mat-icon> ASSIGN DRIVER-->
-<!--          </button></span>-->
+            <!--            <span style="width: 50px">-->
+            <!--          <button mat-button-->
+            <!--                  (click)="findProperDrivers(order.orderId!, cargos[0].startCity!, cargos[0].startState!, 150)"-->
+            <!--                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px">-->
+            <!--            <mat-icon>people_outline</mat-icon> ASSIGN DRIVER-->
+            <!--          </button></span>-->
 
-<!--            <span style="width: 50px">-->
-<!--          <button mat-button (click)="sendForDriverApprove(order.orderId!)"-->
-<!--                  style="; margin-right: 10px; color: white; background-color: #009511; width: 180px">-->
-<!--            <mat-icon>launch</mat-icon> SENT TO DRIVER FOR APPROVE-->
-<!--          </button></span>-->
+            <!--            <span style="width: 50px">-->
+            <!--          <button mat-button (click)="sendForDriverApprove(order.orderId!)"-->
+            <!--                  style="; margin-right: 10px; color: white; background-color: #009511; width: 180px">-->
+            <!--            <mat-icon>launch</mat-icon> SENT TO DRIVER FOR APPROVE-->
+            <!--          </button></span>-->
 
           </div>
         </div>

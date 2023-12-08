@@ -1,13 +1,29 @@
 .cargo-details {
-  height: auto;
-  width: 500px;
+  height: 700px;
+  width: 1300px;
   border-radius: 1rem;
   border-width: 1rem;
   opacity: 1;
   margin-right: auto;
-  margin-left: -300px;
   position: relative;
+  align-self: center;
 }
+
+.cargo-details-background {
+  height: 700px;
+  width: 1300px;
+  border-radius: 1rem;
+  border-width: 1rem;
+  opacity: 1;
+  margin-right: auto;
+  position: relative;
+  background-image: url(../../../../resources/delivery_small.png);
+  background-repeat: no-repeat;
+  background-position-x: 350px;
+  background-position-y: 0px;
+  align-self: center;
+}
+
 
 .cargo-details-header {
   align-self: center;
@@ -30,21 +46,6 @@
   font-family: Arial, serif;
 }
 
-.background-pic {
-  grid-column-start: 2;
-  gap: 50px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right;
-  position: relative;
-  height: auto;
-  width: 700px;
-  margin-left: auto;
-  margin-right: 0;
-  margin-top: auto;
-  background-image: url(../../../../resources/delivery.png);
-}
-
 .error {
   position: relative;
   color: darkred;
@@ -64,18 +65,4 @@
 
 .buttons-panel {
   margin-top: 15px;
-}
-
-.grid-container{
-  display: inline-grid;
-  margin-left: 300px;
-  height: auto;
-  width: auto;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right;
-  position: relative;
-  margin-right: 0;
-  margin-top: auto;
-  background-image: url(../../../../resources/delivery.png);
 }

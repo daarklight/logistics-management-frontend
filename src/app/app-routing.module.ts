@@ -54,6 +54,7 @@ import {AuthorityGuard} from "./authority-guard";
 import {Error403Component} from "./errors/error-403/error-403.component";
 import {Error404Component} from "./errors/error-404/error-404.component";
 import {ErrorCommonComponent} from "./errors/error-common/error-common.component";
+import {CustomerOrdersListComponent} from "./order/customer-orders-list/customer-orders-list.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
@@ -87,6 +88,8 @@ const routes: Routes = [
   {path: 'customer/details/:id', redirectTo: 'customer/details/:id', pathMatch: 'full'},
   {path: 'customer/update/:id', component: CustomerEditComponent},
   {path: 'customer/update/:id', redirectTo: 'customer/update/:id', pathMatch: 'full'},
+  {path: 'customer/orders', component: CustomerOrdersListComponent },
+  {path: 'customer/orders', redirectTo: 'customer/orders', pathMatch: 'full'},
 
   {path: 'drivers', component: DriverListComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_LOGISTICIAN'] }},
   {path: 'drivers', redirectTo: 'drivers', pathMatch: 'full'},

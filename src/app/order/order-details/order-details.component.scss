@@ -1,12 +1,27 @@
 .order-details {
-  height: auto;
-  width: 500px;
+  height: 800px;
+  width: 1400px;
   border-radius: 1rem;
   border-width: 1rem;
   opacity: 1;
   margin-right: auto;
-  margin-left: -300px;
-  position: absolute;
+  position: relative;
+  align-self: center;
+}
+
+.order-details-background {
+  height: 800px;
+  width: 1400px;
+  border-radius: 1rem;
+  border-width: 1rem;
+  opacity: 1;
+  margin-right: auto;
+  position: relative;
+  background-image: url(../../../../resources/delivery_small.png);
+  background-repeat: no-repeat;
+  background-position-x: 450px;
+  background-position-y: 50px;
+  align-self: center;
 }
 
 .order-details-header {
@@ -30,21 +45,6 @@
   font-family: Arial, serif;
 }
 
-.background-pic {
-  grid-column-start: 2;
-  gap: 50px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right;
-  position: relative;
-  height: auto;
-  width: 700px;
-  margin-left: auto;
-  margin-right: 0;
-  margin-top: auto;
-  background-image: url(../../../../resources/delivery.png);
-}
-
 .error {
   position: relative;
   color: darkred;
@@ -64,18 +64,12 @@
 
 .buttons-panel {
   margin-top: 15px;
+  width: 500px;
 }
 
-.grid-container{
-  display: inline-grid;
-  margin-left: 300px;
-  height: 80%;
-  width: 70%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right;
-  position: relative;
-  margin-right: 0;
-  margin-top: auto;
- background-image: url(../../../../resources/delivery.png);
+.header-text-style {
+  font-family: Lato, serif;
+  font-weight: bold;
+  color: #004953;
+  font-size: 24px;
 }

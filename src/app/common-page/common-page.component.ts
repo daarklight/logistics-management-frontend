@@ -59,6 +59,8 @@ export class CommonPageComponent implements OnInit {
     localStorage.setItem('is-logged-in', String(false))
     localStorage.setItem('username', '');
     localStorage.setItem('role', '');
+    localStorage.setItem('username-name', '');
+    localStorage.setItem('username-surname', '');
     this.router.navigate(['login']);
   }
 
@@ -71,4 +73,11 @@ export class CommonPageComponent implements OnInit {
       this.isCollapsed = !this.isCollapsed;
     }
   }
+
+  getCustomerDetails(){
+    let customerId = localStorage.getItem('customer-id')!;
+    this.router.navigate(['customer/details/', customerId]);
+  }
+
+  protected readonly localStorage = localStorage;
 }

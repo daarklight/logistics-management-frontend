@@ -70,6 +70,7 @@ import { DriverProperComponent } from './driver/driver-proper/driver-proper.comp
 import { TruckProperComponent } from './truck/truck-proper/truck-proper.component';
 import { CargoInOrderListComponent } from './cargo/cargo-in-order-list/cargo-in-order-list.component';
 import { OrderForDriverComponent } from './order/order-for-driver/order-for-driver.component';
+import { CustomerOrdersListComponent } from './order/customer-orders-list/customer-orders-list.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { OrderForDriverComponent } from './order/order-for-driver/order-for-driv
     TruckProperComponent,
     CargoInOrderListComponent,
     OrderForDriverComponent,
+    CustomerOrdersListComponent,
   ],
   imports: [
     BrowserModule,

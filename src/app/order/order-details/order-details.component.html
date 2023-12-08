@@ -1,123 +1,139 @@
-<div class="grid-container">
-  <div class="order-details">
-    <ng-template [ngIf]="isError" [ngIfElse]="details">
-      <div class="error">
-        <label><h3>Error occurred for while searching order with id {{id}}:</h3></label>
-        <br>
-        <label><h3>{{errorMessage}}:</h3></label>
+<div class="order-details order-details-background">
+  <ng-template [ngIf]="isError" [ngIfElse]="details">
+    <div class="error">
+      <label><h3>Error occurred for while searching order with id {{id}}:</h3></label>
+      <br>
+      <label><h3>{{errorMessage}}:</h3></label>
+    </div>
+  </ng-template>
+  <ng-template #details>
+    <div>
+      <br>
+      <div class="order-details-header">
+        Order# <span class="header-style">{{order.orderId}} </span>details
       </div>
-    </ng-template>
-    <ng-template #details>
-      <div>
-        <br>
-        <div class="order-details-header">
-          Order# <span class="header-style">{{order.orderId}} </span>details
+      <div class="order-details-info">
+
+        <div class="order-details-cell">
+          <label><b class="header-style">Order id: </b><span
+            class="row-margin">{{order.orderId}}</span></label>
         </div>
-        <div class="order-details-info">
+        <div class="order-details-cell">
+          <label><b class="header-style">Total number of cargos: </b><span
+            class="row-margin">{{calculateNumberOfCargos()}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">Customer id: </b><span
+            class="row-margin">{{order.orderCustomerId}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">Category: </b><span class="row-margin">{{order.category}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">Weight, tons: </b><span
+            class="row-margin">{{order.weight}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">Status: </b><span
+            class="row-margin">{{order.status!.replaceAll("_", " ").toLowerCase()}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">Start date and time: </b><span
+            class="row-margin">{{order.startDateTime ?? '  &mdash;'}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">Limit date and time: </b><span
+            class="row-margin">{{order.limitDateTime}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">Assigned truck number: </b><span
+            class="row-margin">{{order.assignedTruckNumber ?? '  &mdash;'}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">Total number of assigned drivers: </b><span
+            class="row-margin">{{calculateNumberOfAssignedDrivers()}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">First driver: </b><span
+            class="row-margin">{{findFirstPersonalNumberOfAssignedDrivers()}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">Second driver: </b><span
+            class="row-margin">{{findSecondPersonalNumberOfAssignedDrivers()}}</span></label>
+        </div>
+        <div class="order-details-cell">
+          <label><b class="header-style">Driver's comment: </b><span
+            class="row-margin">{{order.driverComment ?? '  &mdash;'}}</span></label>
+        </div>
 
-          <div class="order-details-cell">
-            <label><b class="header-style">Order id: </b><span
-              class="row-margin">{{order.orderId}}</span></label>
-          </div>
-          <div class="order-details-cell">
-            <label><b class="header-style">Total number of cargos: </b><span
-              class="row-margin">{{calculateNumberOfCargos()}}</span></label>
-          </div>
-          <div class="order-details-cell">
-            <label><b class="header-style">Customer id for order: </b><span
-              class="row-margin">{{order.orderCustomerId}}</span></label>
-          </div>
-          <div class="order-details-cell">
-            <label><b class="header-style">Category: </b><span class="row-margin">{{order.category}}</span></label>
-          </div>
-          <div class="order-details-cell">
-            <label><b class="header-style">Weight, tons: </b><span
-              class="row-margin">{{order.weight}}</span></label>
-          </div>
-          <div class="order-details-cell">
-            <label><b class="header-style">Status: </b><span
-              class="row-margin">{{order.status!.replaceAll("_", " ").toLowerCase()}}</span></label>
-          </div>
-          <div class="order-details-cell">
-            <label><b class="header-style">Start date and time: </b><span
-              class="row-margin">{{order.startDateTime ?? '  &mdash;'}}</span></label>
-          </div>
-          <div class="order-details-cell">
-            <label><b class="header-style">Limit date and time: </b><span
-              class="row-margin">{{order.limitDateTime}}</span></label>
-          </div>
-          <div class="order-details-cell">
-            <label><b class="header-style">Assigned truck number: </b><span
-              class="row-margin">{{order.assignedTruckNumber ?? '  &mdash;'}}</span></label>
-          </div>
-          <div class="order-details-cell">
-            <label><b class="header-style">Total number of assigned drivers: </b><span
-              class="row-margin">{{calculateNumberOfAssignedDrivers()}}</span></label>
-          </div>
-          <div class="order-details-cell">
-            <label><b class="header-style">Driver's comment: </b><span
-              class="row-margin">{{order.driverComment ?? '  &mdash;'}}</span></label>
-          </div>
 
-          <div class="buttons-panel">
-            <span style="width: 50px">
+        <br>
+        <br>
+        <div class="buttons-panel">
+        <span>
+          <button mat-button (click)="findAllCargos(order.orderId!)"
+                  style="; margin-right: 10px; color: white; background-color: #008CBA; width: 120px; height: 40px">
+            <mat-icon>list</mat-icon> CARGOS DETAILS
+          </button>
+        </span>
+
+          <span>
           <button mat-button (click)="updateOrder(order.orderId!)"
-                  style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px; height: 40px">
             <mat-icon>edit</mat-icon> EDIT
-          </button></span>
-            <span style="width: 50px">
-          <button mat-button (click)="deleteOrder(order.orderId!)" style="background-color: darkred; color: white"
+          </button>
+          </span>
+          <span>
+          <button mat-button (click)="deleteOrder(order.orderId!)"
+                  style="background-color: darkred; color: white; width: 120px; height: 40px"
                   title="Delete order">
             <mat-icon>delete</mat-icon> DELETE
-          </button></span>
-            <br>
-            <br>
+          </button>
+          </span>
+        </div>
+        <br>
+        <br>
 
+        <div class="buttons-panel">
+          <p class="header-text-style">ACTIONS WITH THE ORDER:</p>
+          <!--            CONSIDER THE POSSIBILITY TO CREATE SEPARATE PAGE TO CREATE CARGO WHERE ORDER ID = ID FOR CURRENTLY CONSIDERED ORDER !!!-->
+          <span style="margin-left: 80px" *ngIf="calculateNumberOfCargos() <2 &&
+          (order.status ==='NEW' || order.status === 'DECLINED_BY_DRIVERS')">
+          <a routerLink="../../../cargo/create"><span><button mat-button
+                                                              style="margin-right: 10px; color: white; background-color: #004953; width: 150px; height: 50px;"><mat-icon>edit</mat-icon> ADD CARGO
+          </button></span></a>
+          </span>
+          <br>
+          <br>
 
-            <span style="width: 50px">
-          <button mat-button (click)="findAllCargos(order.orderId!)"
-                  style="; margin-right: 10px; color: white; background-color: #009511; width: 140px">
-            <mat-icon>list</mat-icon> ALL CARGOS IN ORDER
-          </button></span>
-            <br>
-            <br>
-
-<!--            CONSIDER THE POSSIBILITY TO CREATE SEPARATE PAGE TO CREATE CARGO WHERE ORDER ID = ID FOR CURRENTLY CONSIDERED ORDER !!!-->
-            <a mat-list-item routerLink="../../../cargo/create">
-            <span style="width: 50px" *ngIf="calculateNumberOfCargos() <2">
-          <button mat-button
-                  style="; margin-right: 10px; color: white; background-color: #009511; width: 130px">
-            <mat-icon>edit</mat-icon> ADD CARGO
-          </button></span>
-            </a>
-            <br>
-            <br>
-
-            <span style="width: 50px" *ngIf="order.assignedTruckNumber === null">
+          <span *ngIf="order.assignedTruckNumber === null">
           <button mat-button
                   (click)="findProperTrucks(order.orderId!, cargos[0].startCity!, cargos[0].startState!, order.weight!)"
-                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px">
+                  style="; margin-right: 10px; color: white; background-color: #004953; width: 150px; height: 50px">
             <mat-icon>local_shipping</mat-icon> ASSIGN TRUCK
-          </button></span>
+          </button>
+          </span>
 
-
-            <span style="width: 50px" *ngIf="calculateNumberOfAssignedDrivers() <2">
+          <span
+            *ngIf="calculateNumberOfAssignedDrivers() < 2 && order.assignedTruckNumber !== null &&
+            (order.status ==='NEW' || order.status === 'DECLINED_BY_DRIVERS')">
           <button mat-button
                   (click)="findProperDrivers(order.orderId!, cargos[0].startCity!, cargos[0].startState!, 150)"
-                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px">
-            <mat-icon>people_outline</mat-icon> ASSIGN DRIVER
-          </button></span>
-
-            <span style="width: 50px">
-          <button mat-button (click)="sendForDriverApprove(order.orderId!)"
-                  style="; margin-right: 10px; color: white; background-color: #009511; width: 180px">
-            <mat-icon>launch</mat-icon> SENT TO DRIVERS FOR APPROVE
-          </button></span>
-
-          </div>
+                  style="; margin-right: 10px; color: white; background-color: #004953; width: 150px; height: 50px">
+            <mat-icon>people_outline</mat-icon> ASSIGN DRIVERS
+          </button>
+          </span>
         </div>
+        <br>
+
+        <span style="margin-left: 30px" *ngIf="order.status == 'NEW'  || order.status === 'DECLINED_BY_DRIVERS'">
+          <button mat-button (click)="sendForDriverApprove(order.orderId!)"
+                  style="; margin-right: 10px; color: white; background-color: #004953; width: 250px; height: 50px">
+            <mat-icon>launch</mat-icon> SENT TO DRIVERS FOR APPROVE
+          </button>
+        </span>
+
       </div>
-    </ng-template>
-  </div>
-  <!--  <div class="background-pic"></div>  -->
+    </div>
+  </ng-template>
 </div>

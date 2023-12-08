@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Cargo, CargoService, DriverService, Order, OrderService} from "../../../logistics-api";
+import {Cargo, CargoService, Driver, DriverService, Order, OrderService} from "../../../logistics-api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
@@ -13,6 +13,7 @@ export class OrderForDriverComponent {
   id: number;
   order: Order;
   cargos: Cargo[]
+  drivers: Driver[]
   errorMessage: string;
   isError: boolean;
 
@@ -26,7 +27,7 @@ export class OrderForDriverComponent {
       //console.log(localStorage.getItem('username')!);
       this.orderService.orderFindByDriver(driver.personalNumber!).subscribe(order => {
           this.order = order;
-        console.log(order)
+        //console.log(order)
           {
 
             this.cargoService.cargoFindByOrderId(this.order.orderId!).subscribe(cargoList => {
@@ -34,6 +35,10 @@ export class OrderForDriverComponent {
               this.cargos = cargoList;
             })
           }
+
+        this.driverService.driversFindByCurrentOrderId(this.order.orderId!).subscribe(driverList => {
+          this.drivers = driverList;
+        })
 
         }
       )
@@ -65,6 +70,40 @@ export class OrderForDriverComponent {
 
   calculateNumberOfCargos(): number {
     return this.cargos.length;
+  }
+
+  findFirstAssignedDriver() : string{
+    if(this.drivers.length>0){
+      let name = this.drivers.at(0)!.name!;
+      let surname = this.drivers.at(0)!.surname!;
+      let personalNumber = this.drivers.at(0)!.personalNumber!.toString();
+      return name + ' ' + surname + ' (' + personalNumber + ')';
+    }
+    else return 'not assigned';
+  }
+
+  findFirstAssignedDriverPersonalNumber() : string{
+    if(this.drivers.length>0){
+      return this.drivers.at(0)!.personalNumber!.toString();
+    }
+    else return 'not assigned';
+  }
+
+  findSecondAssignedDriver() : string{
+    if(this.drivers.length===2){
+      let name = this.drivers.at(1)!.name!;
+      let surname = this.drivers.at(1)!.surname!;
+      let personalNumber = this.drivers.at(1)!.personalNumber!.toString();
+      return name + ' ' + surname + ' (' + personalNumber + ')';
+    }
+    else return 'not assigned';
+  }
+
+  findSecondAssignedDriverPersonalNumber() : string{
+    if(this.drivers.length===2){
+      return this.drivers.at(1)!.personalNumber!.toString();
+    }
+    else return 'not assigned';
   }
 
   // findProperTrucks(orderId: number, city: string, state: string, capacity: number){

@@ -77,32 +77,39 @@
       </ng-container>
       <!-- Distance from start point Column -->
       <ng-container matColumnDef="rideDistanceFromStartPoint">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Distance from start point, km</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Distance from start point, km
+        </mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDistanceFromStartPoint}} </mat-cell>
       </ng-container>
       <!-- Duration from start point Column -->
       <ng-container matColumnDef="rideDurationFromStartPoint">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Duration from start point, minutes</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Duration from start point, minutes
+        </mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDurationFromStartPoint}} </mat-cell>
       </ng-container>
       <!-- Distance from previous point Column -->
       <ng-container matColumnDef="rideDistanceFromPreviousPoint">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Distance from previous point, km</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Distance from previous point, km
+        </mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDistanceFromPreviousPoint}} </mat-cell>
       </ng-container>
       <!-- Duration from previous point Column -->
       <ng-container matColumnDef="rideDurationFromPreviousPoint">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Duration from previous point, minutes</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Duration from previous point,
+          minutes
+        </mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDurationFromPreviousPoint}} </mat-cell>
       </ng-container>
       <!-- Expected completion date and time Column -->
       <ng-container matColumnDef="expectedCompletionDateTime">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Expected completion date and time</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Expected completion date and time
+        </mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.expectedCompletionDateTime}} </mat-cell>
       </ng-container>
       <!-- Real completion date and time Column -->
       <ng-container matColumnDef="realCompletionDateTime">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Real completion date and time</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Real completion date and time
+        </mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell"> {{row.realCompletionDateTime}} </mat-cell>
       </ng-container>
 
@@ -111,20 +118,34 @@
       <ng-container matColumnDef="actions" stickyEnd>
         <mat-header-cell *matHeaderCellDef class="actions-header-cell">Actions</mat-header-cell>
         <mat-cell *matCellDef="let row" class="buttons-container-cell">
+
         <span style="width: 50px">
           <button (click)="showCargoDetails(row.cargoId)" mat-button class="btn bnt-success" title="Cargo details">
             <mat-icon>remove_red_eye</mat-icon></button>
         </span>
-          <span style="width: 50px">
+
+          <span style="width: 50px" *ngIf="userRole==='ROLE_LOGISTICIAN'">
           <button (click)="updateCargo(row.cargoId)" mat-button class="btn bnt-success" title="Edit cargo">
             <mat-icon>edit</mat-icon></button>
         </span>
-          <span style="width: 50px">
+
+          <span style="width: 50px" *ngIf="userRole==='ROLE_LOGISTICIAN'">
           <button mat-button (click)="deleteCargo(row.cargoId)" title="Delete cargo">
             <mat-icon>delete</mat-icon>
           </button>
-
         </span>
+
+          <span style="width: 50px" *ngIf="userRole==='ROLE_DRIVER' && row.loaded=='NO'">
+          <button (click)="loadingDone(row.cargoId)" mat-button class="btn bnt-success" title="Loading done">
+            <mat-icon>thumb_up_alt</mat-icon></button>
+        </span>
+
+          <span style="width: 50px" *ngIf="userRole==='ROLE_DRIVER' && row.loaded=='YES' && row.unloaded=='NO'">
+          <button mat-button (click)="unloadingDone(row.cargoId)" title="Unloading done">
+            <mat-icon>thumb_up_off_alt</mat-icon>
+          </button>
+        </span>
+
         </mat-cell>
       </ng-container>
       <div>

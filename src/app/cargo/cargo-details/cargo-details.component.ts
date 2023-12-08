@@ -15,12 +15,14 @@ export class CargoDetailsComponent implements OnInit {
   cargo: Cargo;
   errorMessage: string;
   isError: boolean;
+  userRole: string;
 
   constructor(private route: ActivatedRoute, private cargoService: CargoService, private router: Router,
               private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role')!;
     this.id = this.route.snapshot.params['id'];
     this.cargoService.cargoFindById(this.id).subscribe(cargoDetails => {
       this.isError = false;

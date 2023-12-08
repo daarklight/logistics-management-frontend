@@ -53,6 +53,7 @@ export class CustomerDetailsComponent implements OnInit {
       })
   }
 
+  protected readonly localStorage = localStorage;
 }
 
 

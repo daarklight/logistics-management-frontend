@@ -19,6 +19,7 @@ export class CargoInOrderListComponent {
       'loaded', 'finalCity', 'finalState', 'finalAddress', 'unloaded', 'waypointIndex', 'rideDistanceFromStartPoint',
       'rideDurationFromStartPoint', 'rideDistanceFromPreviousPoint', 'rideDurationFromPreviousPoint',
       'expectedCompletionDateTime', 'realCompletionDateTime', 'actions'];
+  userRole: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -28,6 +29,7 @@ export class CargoInOrderListComponent {
   }
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role')!;
 
     // this.cargoService.cargosFindAll().subscribe(allCargos => {
     //   this.cargos = allCargos;
@@ -35,6 +37,9 @@ export class CargoInOrderListComponent {
     //   this.dataSource.paginator = this.paginator;
     //   this.dataSource.sort = this.sort;
     // })
+
+    //let userRole: string = localStorage.getItem('role')!;
+    //console.log('username: ' + localStorage.getItem('role')!);
 
     let orderIdResult: number = Number(localStorage.getItem('order-id'));
 
@@ -52,6 +57,18 @@ export class CargoInOrderListComponent {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
+  }
+
+  loadingDone(cargoId: number) {
+    this.cargoService.cargoUpdateLoading(cargoId).subscribe(cargo =>{
+      window.location.reload();
+    });
+  }
+
+  unloadingDone(cargoId: number) {
+    this.cargoService.cargoUpdateUnloading(cargoId).subscribe(cargo =>{
+      window.location.reload();
+    });
   }
 
   showCargoDetails(cargoId: number) {

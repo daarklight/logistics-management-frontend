@@ -54,7 +54,7 @@ mat-sidenav-content {
 }
 
 .expanded {
-  width: 350px;
+  width: 360px;
 }
 
 .sidebar-style {
@@ -116,7 +116,7 @@ mat-sidenav-content {
 }
 
 .avatar-main {
-  margin-left: 90px;
+  margin-left: 100px;
 }
 
 .avatar {
@@ -169,15 +169,16 @@ mat-sidenav-content {
 
 .name {
   margin-top: 8px;
-  margin-left: 25px;
-  font-weight: normal;
+  margin-left: -20px;
+  font-weight: bold;
   font-family: Lato, serif;
+  font-size: 24px;
 }
 
 .designation {
   margin-top: 2px;
-  margin-left: 25px;
-  font-size: 1rem;
+  margin-left: -15px;
+  font-size: 1.2rem;
   font-family: Lato, serif;
   font-weight: bold;
   color: #2E5090;
@@ -191,4 +192,3 @@ mat-divider {
   height: 1px;
   background-color: lightgray;
 }
-

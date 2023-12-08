@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class Error403Component {
 
+  protected readonly localStorage = localStorage;
 }

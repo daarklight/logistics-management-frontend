@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Cargo, CargoService, Driver, DriverService, Order, OrderService} from "../../../logistics-api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
+import {__assign} from "tslib";
 
 @Component({
   selector: 'app-order-details',
@@ -59,6 +60,42 @@ export class OrderDetailsComponent implements OnInit {
 
   calculateNumberOfAssignedDrivers() : number{
     return this.drivers.length;
+  }
+
+  //var youngest = _
+  //   .chain(users)
+  //   .sortBy('age')
+  //   .map(function(o) {
+  //     return o.user + ' is ' + o.age;
+  //   })
+  //   .head()
+  //   .value();
+
+  // findFirstPersonalNumberOfAssignedDrivers() : string{
+  //   if(this.drivers.length>0){
+  //     return this.drivers.at(0)!.personalNumber!.toString();
+  //   }
+  //  else return 'not assigned';
+  // }
+
+  findFirstPersonalNumberOfAssignedDrivers() : string{
+    if(this.drivers.length>0){
+      let name = this.drivers.at(0)!.name!;
+      let surname = this.drivers.at(0)!.surname!;
+      let personalNumber = this.drivers.at(0)!.personalNumber!.toString();
+      return name + ' ' + surname + ' (' + personalNumber + ')';
+    }
+    else return 'not assigned';
+  }
+
+  findSecondPersonalNumberOfAssignedDrivers() : string{
+    if(this.drivers.length===2){
+      let name = this.drivers.at(1)!.name!;
+      let surname = this.drivers.at(1)!.surname!;
+      let personalNumber = this.drivers.at(1)!.personalNumber!.toString();
+      return name + ' ' + surname + ' (' + personalNumber + ')';
+    }
+    else return 'not assigned';
   }
 
   // showFirstDriver() : number{
