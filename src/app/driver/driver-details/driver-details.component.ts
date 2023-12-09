@@ -17,6 +17,7 @@ export class DriverDetailsComponent implements OnInit {
   driver: Driver;
   errorMessage: string;
   isError: boolean;
+  userRole: string;
 
   //
   isLoggedIn: boolean;
@@ -26,6 +27,7 @@ export class DriverDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role')!;
     this.id = this.route.snapshot.params['id'];
     if (localStorage.getItem('need-to-reload-page') === String(true)) {
       localStorage.setItem('need-to-reload-page', String(false));
@@ -67,13 +69,3 @@ export class DriverDetailsComponent implements OnInit {
 
 }
 
-
-export class HttpError {
-  static BadRequest = 400;
-  static Unauthorized = 401;
-  static Forbidden = 403;
-  static NotFound = 404;
-  static TimeOut = 408;
-  static Conflict = 409;
-  static InternalServerError = 500;
-}

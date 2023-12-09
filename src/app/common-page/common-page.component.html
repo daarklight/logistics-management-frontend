@@ -39,7 +39,8 @@
     </div>
     <mat-nav-list color="primary">
       <div *ngIf="userRole === 'ROLE_LOGISTICIAN' || userRole === 'ROLE_DRIVER'">
-        <h1>ORDERS</h1>
+        <h1 *ngIf="userRole === 'ROLE_LOGISTICIAN'">ORDERS</h1>
+        <h1 *ngIf="userRole === 'ROLE_DRIVER'">ASSIGNED ORDER</h1>
         <a mat-list-item routerLink="order/forDriver" *ngIf="userRole === 'ROLE_DRIVER'">
         <span class="entry">
           <mat-icon>library_books</mat-icon>
@@ -59,7 +60,8 @@
         </span>
         </a>
       </div>
-      <div *ngIf="userRole === 'ROLE_LOGISTICIAN' || userRole === 'ROLE_DRIVER'">
+
+      <div *ngIf="userRole === 'ROLE_LOGISTICIAN'">
         <h1>CARGOS</h1>
         <a mat-list-item routerLink="cargos" *ngIf="userRole === 'ROLE_LOGISTICIAN'">
         <span class="entry">
@@ -67,13 +69,14 @@
           <span *ngIf="!isCollapsed">Show All Cargos</span>
         </span>
         </a>
-        <a mat-list-item routerLink="cargo/create" *ngIf="userRole === 'ROLE_LOGISTICIAN'">
-        <span class="entry">
-          <mat-icon>add</mat-icon>
-          <span *ngIf="!isCollapsed">Create New Cargo</span>
-        </span>
-        </a>
+<!--        <a mat-list-item routerLink="cargo/create" *ngIf="userRole === 'ROLE_LOGISTICIAN'">-->
+<!--        <span class="entry">-->
+<!--          <mat-icon>add</mat-icon>-->
+<!--          <span *ngIf="!isCollapsed">Create New Cargo</span>-->
+<!--        </span>-->
+<!--        </a>-->
       </div>
+
       <div *ngIf="userRole === 'ROLE_LOGISTICIAN'">
         <h1>DRIVERS</h1>
         <a mat-list-item routerLink="drivers">
@@ -89,7 +92,18 @@
         </span>
         </a>
       </div>
-      <div *ngIf="userRole === 'ROLE_LOGISTICIAN' || userRole === 'ROLE_DRIVER' ">
+
+      <div *ngIf="userRole === 'ROLE_DRIVER'">
+        <h1>MY DETAILS</h1>
+        <a mat-list-item [routerLink]="['../../driver/details/', getDriverPersonalNumber()]">
+        <span class="entry">
+          <mat-icon>people_outline</mat-icon>
+          <span *ngIf="!isCollapsed">Show My details</span>
+        </span>
+        </a>
+      </div>
+
+      <div *ngIf="userRole === 'ROLE_LOGISTICIAN'">
         <h1>TRUCKS</h1>
         <a mat-list-item routerLink="trucks">
         <span class="entry">

@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {Router} from "@angular/router";
-import {DriverService, OrderService} from "../../logistics-api";
+import {Driver, DriverService, OrderService} from "../../logistics-api";
 
 @Component({
   selector: 'app-common-page',
@@ -21,6 +21,8 @@ export class CommonPageComponent implements OnInit {
   isLoggedIn: string;
   userRole: string;
 
+  driver: Driver;
+
   constructor(private orderService: OrderService, private driverService: DriverService,
     private observer: BreakpointObserver, private router: Router) {
   }
@@ -36,6 +38,12 @@ export class CommonPageComponent implements OnInit {
     this.isLoggedIn = localStorage.getItem('is-logged-in') || "false";
     this.userRole = localStorage.getItem("role") || '';
     console.log("main: " + this.isLoggedIn + " role: " + this.userRole);
+
+    //console.log('username: ' + localStorage.getItem('username')!);
+    this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
+      this.driver = driver;
+      //console.log('number: ' + driver.personalNumber)
+    })
   }
 
   // findOrderForDriver(){
@@ -77,6 +85,10 @@ export class CommonPageComponent implements OnInit {
   getCustomerDetails(){
     let customerId = localStorage.getItem('customer-id')!;
     this.router.navigate(['customer/details/', customerId]);
+  }
+
+  getDriverPersonalNumber(): number{
+    return this.driver.personalNumber!;
   }
 
   protected readonly localStorage = localStorage;

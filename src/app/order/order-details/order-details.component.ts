@@ -17,16 +17,23 @@ export class OrderDetailsComponent implements OnInit {
   drivers: Driver[]
   errorMessage: string;
   isError: boolean;
+  userRole: string;
 
   constructor(private route: ActivatedRoute, private orderService: OrderService, private driverService: DriverService,
               private router: Router, private confirmationDialogService: ConfirmationDialogService, private cargoService: CargoService) {
   }
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role')!;
+    console.log('role: ' + localStorage.getItem('role')!)
     this.id = this.route.snapshot.params['id'];
     this.orderService.orderFindById(this.id).subscribe(orderDetails => {
       this.isError = false;
       this.order = orderDetails;
+
+      localStorage.setItem('order-id-item', this.order.orderId!.toString());
+      //console.log('order-id-item: ' + this.order.orderId!.toString());
+
       //console.log("order-details before cargo service")
       this.cargoService.cargoFindByOrderId(this.order.orderId!).subscribe(cargoList => {
         this.cargos = cargoList;
@@ -40,6 +47,10 @@ export class OrderDetailsComponent implements OnInit {
       this.errorMessage = error.message;
       console.log(error)
     });
+
+
+    //localStorage.setItem('order-id-item', this.order.orderId!.toString());
+    //console.log('order-id-item: ' + this.order.orderId!.toString());
   }
 
   updateOrder(orderId: number){
@@ -71,13 +82,6 @@ export class OrderDetailsComponent implements OnInit {
   //   .head()
   //   .value();
 
-  // findFirstPersonalNumberOfAssignedDrivers() : string{
-  //   if(this.drivers.length>0){
-  //     return this.drivers.at(0)!.personalNumber!.toString();
-  //   }
-  //  else return 'not assigned';
-  // }
-
   findFirstPersonalNumberOfAssignedDrivers() : string{
     if(this.drivers.length>0){
       let name = this.drivers.at(0)!.name!;
@@ -98,16 +102,20 @@ export class OrderDetailsComponent implements OnInit {
     else return 'not assigned';
   }
 
-  // showFirstDriver() : number{
-  //   return this.drivers.at(0)!.personalNumber!;
-  // }
-
   findProperTrucks(orderId: number, city: string, state: string, capacity: number){
     localStorage.setItem('order-id', String(orderId));
     localStorage.setItem('city-item', city);
     localStorage.setItem('state-item', state);
     localStorage.setItem('capacity-item', String(capacity));
     this.router.navigate(['trucks/proper']);
+  }
+
+  unassignTruck(orderId: number){
+
+  }
+
+  unassignDriver(orderId: number){
+
   }
 
   findAllCargos(orderId: number){

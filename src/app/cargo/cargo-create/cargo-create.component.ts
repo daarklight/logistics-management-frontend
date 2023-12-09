@@ -29,6 +29,8 @@ export class CargoCreateComponent implements OnInit{
 
   ngOnInit(): void {
     console.log(this.cargo)
+    console.log('order-id-item: ' + localStorage.getItem('order-id-item'));
+    this.cargo.orderForCargoId = parseInt(localStorage.getItem('order-id-item')!.toString());
   }
 
   onSubmit() {
@@ -41,14 +43,21 @@ export class CargoCreateComponent implements OnInit{
         this.isError = true;
         this.errorMessage = error.error.message;
       })
+    // console.log('order-id-item: ' + localStorage.getItem('order-id-item'));
+    //
+    // this.cargo.orderForCargoId = parseInt(localStorage.getItem('order-id-item')!.toString());
+  }
+
+  findOrderId(): number{
+    return parseInt(localStorage.getItem('order-id')!.toString());
   }
 
   //----------------- VALIDATION----------------------------
   cargoValidation = new FormGroup({
-    orderForCargoIdCheck: new FormControl(this.cargo.orderForCargoId, [
-      Validators.required,
-      Validators.min(1),
-      Validators.pattern("\\d+")]),
+    // orderForCargoIdCheck: new FormControl(this.cargo.orderForCargoId, [
+    //   Validators.required,
+    //   Validators.min(1),
+    //   Validators.pattern("\\d+")]),
     cargoNameCheck: new FormControl(this.cargo.cargoName, [
       Validators.required,
       Validators.maxLength(40),
@@ -84,9 +93,9 @@ export class CargoCreateComponent implements OnInit{
       Validators.pattern("[A-Za-z#,\\d\\s]+")]),
   });
 
-  get orderForCargoIdCheck() {
-    return this.cargoValidation.get('orderForCargoIdCheck')
-  }
+  // get orderForCargoIdCheck() {
+  //   return this.cargoValidation.get('orderForCargoIdCheck')
+  // }
   get cargoNameCheck() {
     return this.cargoValidation.get('cargoNameCheck')
   }

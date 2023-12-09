@@ -47,7 +47,7 @@
             class="row-margin">{{truck.currentState}}</span></label>
         </div>
 
-        <div class="buttons-panel">
+        <div class="buttons-panel" *ngIf="userRole !== 'ROLE_LOGISTICIAN'">
             <span style="width: 50px">
           <button mat-button (click)="updateTruck(truck.number!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
             <mat-icon>edit</mat-icon> EDIT

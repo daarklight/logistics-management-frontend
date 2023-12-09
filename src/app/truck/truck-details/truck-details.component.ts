@@ -14,12 +14,14 @@ export class TruckDetailsComponent implements OnInit {
   truck: Truck;
   errorMessage: string;
   isError: boolean;
+  userRole: string;
 
   constructor(private route: ActivatedRoute, private truckService: TruckService, private router: Router,
               private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role')!;
     this.id = this.route.snapshot.params['id'];
     this.truckService.truckFindByNumber(this.id).subscribe(truckDetails => {
       this.isError = false;

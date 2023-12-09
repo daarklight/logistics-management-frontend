@@ -1,21 +1,21 @@
 <div class="form-create">
-  <h3 class="text-center" style="font-size: 26px"><b>Register new cargo</b></h3>
+  <h3 class="text-center" style="font-size: 26px"><b>Register new cargo for Order# {{cargo.orderForCargoId}}</b></h3>
   <form (ngSubmit)="onSubmit()">
 
-    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
-      <label><b>Id of order for this cargo</b></label>
-      <input type="text" class="form-control" id="order-for-cargo-id" [(ngModel)]="cargo.orderForCargoId"
-             name="orderForCargoId" formControlName="orderForCargoIdCheck" maxlength="6">
-      <div
-        *ngIf="orderForCargoIdCheck!.invalid && (orderForCargoIdCheck!.dirty || orderForCargoIdCheck!.touched)"
-        class="validationAlert">
-        <div>
-          <div *ngIf="orderForCargoIdCheck?.errors?.['required']"> &#10008; Order Id required</div>
-          <div *ngIf="orderForCargoIdCheck?.errors?.['min']"> &#10008; Order Id should be not less than 1</div>
-          <div *ngIf="orderForCargoIdCheck?.errors?.['pattern']"> &#10008; Order Id should be integer number</div>
-        </div>
-      </div>
-    </div>
+<!--    <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">-->
+<!--      <label><b>Id of order for this cargo</b></label>-->
+<!--      <input type="text" class="form-control" id="order-for-cargo-id" [(ngModel)]="cargo.orderForCargoId"-->
+<!--             name="orderForCargoId" formControlName="orderForCargoIdCheck" maxlength="6">-->
+<!--      <div-->
+<!--        *ngIf="orderForCargoIdCheck!.invalid && (orderForCargoIdCheck!.dirty || orderForCargoIdCheck!.touched)"-->
+<!--        class="validationAlert">-->
+<!--        <div>-->
+<!--          <div *ngIf="orderForCargoIdCheck?.errors?.['required']"> &#10008; Order Id required</div>-->
+<!--          <div *ngIf="orderForCargoIdCheck?.errors?.['min']"> &#10008; Order Id should be not less than 1</div>-->
+<!--          <div *ngIf="orderForCargoIdCheck?.errors?.['pattern']"> &#10008; Order Id should be integer number</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <div class="form-group" [formGroup]="cargoValidation" style="margin-top: 15px">
       <label><b>Cargo name</b></label>

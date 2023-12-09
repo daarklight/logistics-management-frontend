@@ -77,13 +77,13 @@
           </button>
         </span>
 
-          <span>
+          <span *ngIf="userRole == 'ROLE_LOGISTICIAN'">
           <button mat-button (click)="updateOrder(order.orderId!)"
                   style="; margin-right: 10px; color: white; background-color: #009511; width: 120px; height: 40px">
             <mat-icon>edit</mat-icon> EDIT
           </button>
           </span>
-          <span>
+          <span *ngIf="userRole === 'ROLE_LOGISTICIAN'">
           <button mat-button (click)="deleteOrder(order.orderId!)"
                   style="background-color: darkred; color: white; width: 120px; height: 40px"
                   title="Delete order">
@@ -94,7 +94,7 @@
         <br>
         <br>
 
-        <div class="buttons-panel">
+        <div class="buttons-panel" *ngIf="userRole === 'ROLE_LOGISTICIAN'">
           <p class="header-text-style">ACTIONS WITH THE ORDER:</p>
           <!--            CONSIDER THE POSSIBILITY TO CREATE SEPARATE PAGE TO CREATE CARGO WHERE ORDER ID = ID FOR CURRENTLY CONSIDERED ORDER !!!-->
           <span style="margin-left: 80px" *ngIf="calculateNumberOfCargos() <2 &&
@@ -113,6 +113,13 @@
             <mat-icon>local_shipping</mat-icon> ASSIGN TRUCK
           </button>
           </span>
+<!--          <span *ngIf="order.assignedTruckNumber !== null">-->
+<!--          <button mat-button-->
+<!--                  (click)="findProperTrucks(order.orderId!, cargos[0].startCity!, cargos[0].startState!, order.weight!)"-->
+<!--                  style="margin-right: 10px; color: white; background-color: darkred; width: 150px; height: 50px">-->
+<!--            <mat-icon>local_shipping</mat-icon> UNASSIGN TRUCK-->
+<!--          </button>-->
+<!--          </span>-->
 
           <span
             *ngIf="calculateNumberOfAssignedDrivers() < 2 && order.assignedTruckNumber !== null &&
@@ -123,15 +130,19 @@
             <mat-icon>people_outline</mat-icon> ASSIGN DRIVERS
           </button>
           </span>
-        </div>
-        <br>
 
-        <span style="margin-left: 30px" *ngIf="order.status == 'NEW'  || order.status === 'DECLINED_BY_DRIVERS'">
+          <br>
+          <span style="margin-left: 30px" *ngIf="order.status == 'NEW'  || order.status === 'DECLINED_BY_DRIVERS'">
           <button mat-button (click)="sendForDriverApprove(order.orderId!)"
-                  style="; margin-right: 10px; color: white; background-color: #004953; width: 250px; height: 50px">
+                  style="; margin-right: 10px; margin-top: 5px; color: white; background-color: #004953; width: 250px; height: 50px">
             <mat-icon>launch</mat-icon> SENT TO DRIVERS FOR APPROVE
           </button>
         </span>
+
+        </div>
+<!--        <br>-->
+
+
 
       </div>
     </div>

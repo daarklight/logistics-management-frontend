@@ -56,7 +56,8 @@
           </div>
           <div class="order-details-cell">
             <label><b class="header-style">Assigned truck number: </b><span
-              class="row-margin">{{order.assignedTruckNumber ?? '  &mdash;'}}</span></label>
+              class="row-margin"><a
+              [routerLink]="['../../truck/details/', order.assignedTruckNumber]">{{order.assignedTruckNumber ?? '  &mdash;'}}</a></span></label>
           </div>
           <!--          <div class="order-details-cell">-->
           <!--            <label><b class="header-style">First driver: </b><span-->
