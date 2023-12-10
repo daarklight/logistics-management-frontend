@@ -12,8 +12,8 @@
 
       <!-- PersonalNumber Column -->
       <ng-container matColumnDef="personalNumber" sticky>
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Personal Number</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.personalNumber}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Personal Number</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.personalNumber}} </mat-cell>
       </ng-container>
       <!-- Name Column -->
       <ng-container matColumnDef="name">
@@ -37,24 +37,24 @@
       </ng-container>
       <!-- Work Experience Column -->
       <ng-container matColumnDef="workExperience">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Work Experience</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.workExperience}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Work Experience</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.workExperience}} </mat-cell>
       </ng-container>
       <!-- Working Hours In Current Month Column -->
       <ng-container matColumnDef="workingHoursInCurrentMonth">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Spent hours
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Spent hours
         </mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.workingHoursInCurrentMonth}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.workingHoursInCurrentMonth}} </mat-cell>
       </ng-container>
       <!-- Status Column -->
       <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Status</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.status.toLowerCase()}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Status</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.status.toLowerCase()}} </mat-cell>
       </ng-container>
       <!-- Busy status Column -->
       <ng-container matColumnDef="busy">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Busy status</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.busy.toLowerCase()}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Busy status</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.busy.toLowerCase()}} </mat-cell>
       </ng-container>
       <!-- Current city Column -->
       <ng-container matColumnDef="currentCity">
@@ -68,13 +68,13 @@
       </ng-container>
       <!-- Current truck number Column -->
       <ng-container matColumnDef="currentTruckNumber">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Current truck number</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.currentTruckNumber}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Current truck number</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.currentTruckNumber}} </mat-cell>
       </ng-container>
       <!-- Id of current order Column -->
       <ng-container matColumnDef="currentOrderId">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Id of current order</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.currentOrderId}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Id of current order</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.currentOrderId}} </mat-cell>
       </ng-container>
 
       <!-- Actions Column -->

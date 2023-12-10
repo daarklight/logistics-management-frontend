@@ -42,7 +42,7 @@
               class="row-margin">{{driver.currentState}}</span></label>
           </div>
           <div class="driver-details-cell">
-            <label><b class="header-style">Is Busy: </b><span
+            <label><b class="header-style">Busy: </b><span
               class="row-margin">{{driver.busy!.toLowerCase()}}</span></label>
           </div>
           <div class="driver-details-cell">
@@ -65,19 +65,23 @@
               class="row-margin">{{driver.workingHoursInCurrentMonth}}</span></label>
           </div>
           <div class="driver-details-cell">
-            <label><b class="header-style">Work experience: </b><span
-              class="row-margin">{{driver.workExperience}} years</span></label>
+            <label><b class="header-style">Work experience, years: </b><span
+              class="row-margin">{{driver.workExperience}}</span></label>
           </div>
 
-          <div class="buttons-panel" *ngIf="userRole !== 'ROLE_LOGISTICIAN'">
-            <span style="width: 50px">
-          <button mat-button (click)="updateDriver(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px" >
-            <mat-icon>edit</mat-icon> EDIT
+          <div class="buttons-panel" *ngIf="userRole == 'ROLE_LOGISTICIAN' && driver.currentOrderId !== null">
+            <span style="width: 170px">
+          <button mat-button (click)="showOrderDetails(driver.currentOrderId!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 170px" >
+            <mat-icon>arrow_back</mat-icon> GO TO ORDER DETAILS
           </button></span>
-            <span style="width: 50px">
-          <button mat-button (click)="deleteDriver(driver.personalNumber!)" style="background-color: darkred; color: white">
-            <mat-icon>delete</mat-icon> DELETE
-          </button></span>
+<!--            <span style="width: 50px">-->
+<!--          <button mat-button (click)="updateDriver(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px" >-->
+<!--            <mat-icon>edit</mat-icon> EDIT-->
+<!--          </button></span>-->
+<!--            <span style="width: 50px">-->
+<!--          <button mat-button (click)="deleteDriver(driver.personalNumber!)" style="background-color: darkred; color: white">-->
+<!--            <mat-icon>delete</mat-icon> DELETE-->
+<!--          </button></span>-->
           </div>
         </div>
       </div>

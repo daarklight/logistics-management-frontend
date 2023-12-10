@@ -24,7 +24,7 @@ export class CommonPageComponent implements OnInit {
   driver: Driver;
 
   constructor(private orderService: OrderService, private driverService: DriverService,
-    private observer: BreakpointObserver, private router: Router) {
+              private observer: BreakpointObserver, private router: Router) {
   }
 
   ngOnInit() {
@@ -37,13 +37,33 @@ export class CommonPageComponent implements OnInit {
     });
     this.isLoggedIn = localStorage.getItem('is-logged-in') || "false";
     this.userRole = localStorage.getItem("role") || '';
-    console.log("main: " + this.isLoggedIn + " role: " + this.userRole);
+    console.log("Common page : " + this.isLoggedIn + " role: " + this.userRole);
 
     //console.log('username: ' + localStorage.getItem('username')!);
-    this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
-      this.driver = driver;
-      //console.log('number: ' + driver.personalNumber)
-    })
+
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // OLD VARIANT:
+    // this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
+    //   this.driver = driver;
+    //   //console.log('number: ' + driver.personalNumber)
+    // })
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // NEW VARIANT TO INVESTIGATE:
+    console.log('local storage results for role: ' + localStorage.getItem("role"));
+    if (this.userRole = 'ROLE_DRIVER') {
+      console.log('We think this is driver in method ngOnInit() - before driver service...')
+      this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
+        this.driver = driver;
+        console.log('We think this is driver in method ngOnInit() - after driver service...')
+        //console.log('number: ' + driver.personalNumber)
+      })
+    }else{
+      console.log('We DO NOT think that this is driver')
+    }
+
+
+
   }
 
   // findOrderForDriver(){
@@ -61,6 +81,7 @@ export class CommonPageComponent implements OnInit {
 
 
   logOut() {
+    //localStorage.clear();
     this.isLoggedIn = "false";
     this.userRole = '';
     localStorage.setItem('auth-token', '');
@@ -82,13 +103,22 @@ export class CommonPageComponent implements OnInit {
     }
   }
 
-  getCustomerDetails(){
+  getCustomerDetails() {
     let customerId = localStorage.getItem('customer-id')!;
     this.router.navigate(['customer/details/', customerId]);
   }
 
-  getDriverPersonalNumber(): number{
-    return this.driver.personalNumber!;
+  // getDriverPersonalNumber(): number{
+  //   return this.driver.personalNumber!;
+  // }
+
+  getDriverPersonalNumber(): number {
+    if (this.userRole === 'ROLE_DRIVER') {
+      console.log('We think this is driver in method getDriverPersonalNumber()...')
+      return this.driver.personalNumber!;
+    } else {
+      return 0;
+    }
   }
 
   protected readonly localStorage = localStorage;

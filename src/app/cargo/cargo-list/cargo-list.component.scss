@@ -23,8 +23,27 @@
   border-left: solid 0.5px  #008080;
 }
 
+.mat-header-cell-short {
+  font-size: 14px;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  min-width: 100px;
+  border-right: solid 0.5px  #008080;
+  border-left: solid 0.5px  #008080;
+}
+
 .mat-cell {
   min-width: 170px;
+  background-color: #f4fafd;
+  justify-content: center;
+  border-right: solid 0.5px  #008080;
+  border-left: solid 0.5px  #008080;
+}
+
+.mat-cell-short {
+  min-width: 100px;
   background-color: #f4fafd;
   justify-content: center;
   border-right: solid 0.5px  #008080;

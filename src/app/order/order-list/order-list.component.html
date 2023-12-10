@@ -12,18 +12,18 @@
 
       <!-- Order id Column -->
       <ng-container matColumnDef="orderId" sticky>
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Order id</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.orderId}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Order id</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short">{{row.orderId}}</mat-cell>
       </ng-container>
-<!--      &lt;!&ndash; Total number of cargos Column &ndash;&gt;-->
-<!--      <ng-container matColumnDef="numberOfCargos" sticky>-->
-<!--        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Total number of cargos</mat-header-cell>-->
-<!--        <mat-cell *matCellDef="let row" class="mat-cell">{{calculateNumberOfCargos(row.orderId!)}}</mat-cell>-->
-<!--      </ng-container>-->
       <!-- Order customer id Column -->
       <ng-container matColumnDef="orderCustomerId">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Order customer id</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.orderCustomerId}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Customer id</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short">{{row.orderCustomerId}}</mat-cell>
+      </ng-container>
+      <!-- Total number of cargos Column -->
+      <ng-container matColumnDef="numberOfCargos" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Number of cargos</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short">{{row.numberOfCargos}}</mat-cell>
       </ng-container>
       <!-- Category Column -->
       <ng-container matColumnDef="category">
@@ -32,8 +32,8 @@
       </ng-container>
       <!-- Weight Column -->
       <ng-container matColumnDef="weight">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Weight, tons</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.weight}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Weight, tons</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short">{{row.weight}}</mat-cell>
       </ng-container>
       <!-- Status Column -->
       <ng-container matColumnDef="status">
@@ -52,14 +52,19 @@
       </ng-container>
       <!-- Assigned truck number Column -->
       <ng-container matColumnDef="assignedTruckNumber">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Assigned truck number</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.assignedTruckNumber}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Assigned truck number</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short">{{row.assignedTruckNumber}}</mat-cell>
       </ng-container>
-      <!-- Driver comment Column -->
-      <ng-container matColumnDef="driverComment">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Driver's comment</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.driverComment}}</mat-cell>
+      <!-- Total number of drivers Column -->
+      <ng-container matColumnDef="numberOfAssignedDrivers" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Number of drivers</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short">{{row.numberOfAssignedDrivers}}</mat-cell>
       </ng-container>
+<!--      &lt;!&ndash; Driver comment Column &ndash;&gt;-->
+<!--      <ng-container matColumnDef="driverComment">-->
+<!--        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Driver's comment</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let row" class="mat-cell">{{row.driverComment}}</mat-cell>-->
+<!--      </ng-container>-->
 
 
       <!-- Actions Column -->

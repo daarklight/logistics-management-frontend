@@ -3,7 +3,7 @@
   <form (ngSubmit)="onSubmit()">
 
     <div class="form-group" [formGroup]="customerValidation" style="margin-top: 15px">
-      <label><b>Authentication ID</b> (ask admin to provide)</label>
+      <label><b>Authentication ID</b> (ask admin to provide!)</label>
       <input type="text" class="form-control" id="customer-authentication-id" [(ngModel)]="customer.customerAuthenticationId"
              name="customerAuthenticationId" formControlName="authenticationIdCheck" maxlength="6">
       <div

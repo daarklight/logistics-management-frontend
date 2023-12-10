@@ -20,7 +20,6 @@ import { Observable }                                        from 'rxjs';
 import { CreateOrder } from '../model/createOrder';
 import { Order } from '../model/order';
 import { UpdateOrder } from '../model/updateOrder';
-import { UpdateOrderDriverComment } from '../model/updateOrderDriverComment';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -556,6 +555,47 @@ export class OrderService {
     }
 
     /**
+     * Update assigned truck number for Order
+     * 
+     * @param orderId Order id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public orderUnassignTruck(orderId: number, observe?: 'body', reportProgress?: boolean): Observable<Order>;
+    public orderUnassignTruck(orderId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
+    public orderUnassignTruck(orderId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
+    public orderUnassignTruck(orderId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (orderId === null || orderId === undefined) {
+            throw new Error('Required parameter orderId was null or undefined when calling orderUnassignTruck.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Order>('patch',`${this.basePath}/orders/unassignTruck/${encodeURIComponent(String(orderId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Update Order
      * 
      * @param body Order object that needs to be updated
@@ -645,58 +685,6 @@ export class OrderService {
 
         return this.httpClient.request<Order>('patch',`${this.basePath}/orders/assignedTruckNumber/${encodeURIComponent(String(orderId))}/${encodeURIComponent(String(number))}`,
             {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Update driver comment for Order
-     * 
-     * @param body Order object that needs to be updated
-     * @param orderId Order id
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public orderUpdateDriverComment(body: UpdateOrderDriverComment, orderId: number, observe?: 'body', reportProgress?: boolean): Observable<Order>;
-    public orderUpdateDriverComment(body: UpdateOrderDriverComment, orderId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
-    public orderUpdateDriverComment(body: UpdateOrderDriverComment, orderId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
-    public orderUpdateDriverComment(body: UpdateOrderDriverComment, orderId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling orderUpdateDriverComment.');
-        }
-
-        if (orderId === null || orderId === undefined) {
-            throw new Error('Required parameter orderId was null or undefined when calling orderUpdateDriverComment.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<Order>('patch',`${this.basePath}/orders/driverComment/${encodeURIComponent(String(orderId))}`,
-            {
-                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

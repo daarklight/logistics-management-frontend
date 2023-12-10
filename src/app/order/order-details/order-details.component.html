@@ -20,7 +20,8 @@
         </div>
         <div class="order-details-cell">
           <label><b class="header-style">Total number of cargos: </b><span
-            class="row-margin">{{calculateNumberOfCargos()}}</span></label>
+            class="row-margin">{{order.numberOfCargos}}</span></label>
+<!--            class="row-margin">{{calculateNumberOfCargos()}}</span></label>-->
         </div>
         <div class="order-details-cell">
           <label><b class="header-style">Customer id: </b><span
@@ -47,24 +48,30 @@
         </div>
         <div class="order-details-cell">
           <label><b class="header-style">Assigned truck number: </b><span
-            class="row-margin">{{order.assignedTruckNumber ?? '  &mdash;'}}</span></label>
+            class="row-margin"><a
+            [routerLink]="['../../../truck/details/', order.assignedTruckNumber]">{{order.assignedTruckNumber ?? '  &mdash;'}}</a></span></label>
         </div>
         <div class="order-details-cell">
           <label><b class="header-style">Total number of assigned drivers: </b><span
-            class="row-margin">{{calculateNumberOfAssignedDrivers()}}</span></label>
+            class="row-margin">{{order.numberOfAssignedDrivers}}</span></label>
+<!--            class="row-margin">{{calculateNumberOfAssignedDrivers()}}</span></label>-->
         </div>
         <div class="order-details-cell">
           <label><b class="header-style">First driver: </b><span
-            class="row-margin">{{findFirstPersonalNumberOfAssignedDrivers()}}</span></label>
+            class="row-margin"><a
+            [routerLink]="['../../../driver/details/', findFirstPersonalNumberOfAssignedDrivers()]"
+            *ngIf="findFirstPersonalNumberOfAssignedDrivers() !== 0">{{findFirstAssignedDriver()}}</a></span></label>
         </div>
         <div class="order-details-cell">
           <label><b class="header-style">Second driver: </b><span
-            class="row-margin">{{findSecondPersonalNumberOfAssignedDrivers()}}</span></label>
+            class="row-margin"><a
+            [routerLink]="['../../../driver/details/', findSecondPersonalNumberOfAssignedDrivers()]"
+            *ngIf="findSecondPersonalNumberOfAssignedDrivers() !== 0">{{findSecondAssignedDriver()}}</a></span></label>
         </div>
-        <div class="order-details-cell">
-          <label><b class="header-style">Driver's comment: </b><span
-            class="row-margin">{{order.driverComment ?? '  &mdash;'}}</span></label>
-        </div>
+<!--        <div class="order-details-cell">-->
+<!--          <label><b class="header-style">Driver's comment: </b><span-->
+<!--            class="row-margin">{{order.driverComment ?? '  &mdash;'}}</span></label>-->
+<!--        </div>-->
 
 
         <br>
@@ -79,14 +86,15 @@
 
           <span *ngIf="userRole == 'ROLE_LOGISTICIAN'">
           <button mat-button (click)="updateOrder(order.orderId!)"
-                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px; height: 40px">
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px; height: 40px"
+                  *ngIf="(order.status ==='NEW' || order.status === 'DECLINED_BY_DRIVERS')">
             <mat-icon>edit</mat-icon> EDIT
           </button>
           </span>
           <span *ngIf="userRole === 'ROLE_LOGISTICIAN'">
           <button mat-button (click)="deleteOrder(order.orderId!)"
                   style="background-color: darkred; color: white; width: 120px; height: 40px"
-                  title="Delete order">
+                  *ngIf="(order.status ==='NEW' || order.status === 'DECLINED_BY_DRIVERS')">
             <mat-icon>delete</mat-icon> DELETE
           </button>
           </span>
@@ -95,8 +103,9 @@
         <br>
 
         <div class="buttons-panel" *ngIf="userRole === 'ROLE_LOGISTICIAN'">
-          <p class="header-text-style">ACTIONS WITH THE ORDER:</p>
-          <!--            CONSIDER THE POSSIBILITY TO CREATE SEPARATE PAGE TO CREATE CARGO WHERE ORDER ID = ID FOR CURRENTLY CONSIDERED ORDER !!!-->
+          <p class="header-text-style" *ngIf="(order.status ==='NEW' || order.status === 'DECLINED_BY_DRIVERS')">ACTIONS WITH THE ORDER:</p>
+          <p class="header-text-style" *ngIf="(order.status ==='EXPECT_DRIVERS_CONFIRMATION' || order.status ==='CONFIRMED' ||
+          order.status ==='ON_ROAD' || order.status ==='COMPLETED')">NO AVAILABLE ACTIONS WITH THE ORDER</p>
           <span style="margin-left: 80px" *ngIf="calculateNumberOfCargos() <2 &&
           (order.status ==='NEW' || order.status === 'DECLINED_BY_DRIVERS')">
           <a routerLink="../../../cargo/create"><span><button mat-button
@@ -113,21 +122,39 @@
             <mat-icon>local_shipping</mat-icon> ASSIGN TRUCK
           </button>
           </span>
-<!--          <span *ngIf="order.assignedTruckNumber !== null">-->
-<!--          <button mat-button-->
-<!--                  (click)="findProperTrucks(order.orderId!, cargos[0].startCity!, cargos[0].startState!, order.weight!)"-->
-<!--                  style="margin-right: 10px; color: white; background-color: darkred; width: 150px; height: 50px">-->
-<!--            <mat-icon>local_shipping</mat-icon> UNASSIGN TRUCK-->
-<!--          </button>-->
-<!--          </span>-->
+          <span *ngIf="order.assignedTruckNumber !== null && order.numberOfAssignedDrivers === 0">
+          <button mat-button
+                  (click)="unassignTruck(order.orderId!)"
+                  style="margin-right: 10px; color: white; background-color: darkred; width: 150px; height: 50px">
+            <mat-icon>local_shipping</mat-icon> UNASSIGN TRUCK
+          </button>
+          </span>
 
           <span
-            *ngIf="calculateNumberOfAssignedDrivers() < 2 && order.assignedTruckNumber !== null &&
+            *ngIf="order.numberOfAssignedDrivers! < 2 && order.assignedTruckNumber !== null &&
             (order.status ==='NEW' || order.status === 'DECLINED_BY_DRIVERS')">
           <button mat-button
                   (click)="findProperDrivers(order.orderId!, cargos[0].startCity!, cargos[0].startState!, 150)"
                   style="; margin-right: 10px; color: white; background-color: #004953; width: 150px; height: 50px">
             <mat-icon>people_outline</mat-icon> ASSIGN DRIVERS
+          </button>
+          </span>
+          <span
+            *ngIf="order.numberOfAssignedDrivers! >0 && order.assignedTruckNumber !== null &&
+            (order.status ==='NEW' || order.status === 'DECLINED_BY_DRIVERS')">
+          <button mat-button
+                  (click)="unassignDrivers(order.orderId!, findFirstPersonalNumberOfAssignedDrivers())"
+                  style="; margin-right: 10px; color: white; background-color: darkred; width: 150px; height: 50px">
+            <mat-icon>people_outline</mat-icon> UNASSIGN FIRST DRIVER
+          </button>
+          </span>
+          <span
+            *ngIf="order.numberOfAssignedDrivers! >0 && order.assignedTruckNumber && findSecondPersonalNumberOfAssignedDrivers() !== 0 &&
+            (order.status ==='NEW' || order.status === 'DECLINED_BY_DRIVERS')">
+          <button mat-button
+                  (click)="unassignDrivers(order.orderId!, findSecondPersonalNumberOfAssignedDrivers())"
+                  style="; margin-right: 10px; color: white; background-color: darkred; width: 160px; height: 50px">
+            <mat-icon>people_outline</mat-icon> UNASSIGN SECOND DRIVER
           </button>
           </span>
 

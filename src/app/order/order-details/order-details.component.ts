@@ -82,7 +82,7 @@ export class OrderDetailsComponent implements OnInit {
   //   .head()
   //   .value();
 
-  findFirstPersonalNumberOfAssignedDrivers() : string{
+  findFirstAssignedDriver() : string{
     if(this.drivers.length>0){
       let name = this.drivers.at(0)!.name!;
       let surname = this.drivers.at(0)!.surname!;
@@ -92,7 +92,15 @@ export class OrderDetailsComponent implements OnInit {
     else return 'not assigned';
   }
 
-  findSecondPersonalNumberOfAssignedDrivers() : string{
+  findFirstPersonalNumberOfAssignedDrivers() : number{
+    if(this.drivers.length>0){
+      let personalNumber = this.drivers.at(0)!.personalNumber!;
+      return personalNumber;
+    }
+    else return 0;
+  }
+
+  findSecondAssignedDriver() : string{
     if(this.drivers.length===2){
       let name = this.drivers.at(1)!.name!;
       let surname = this.drivers.at(1)!.surname!;
@@ -100,6 +108,14 @@ export class OrderDetailsComponent implements OnInit {
       return name + ' ' + surname + ' (' + personalNumber + ')';
     }
     else return 'not assigned';
+  }
+
+  findSecondPersonalNumberOfAssignedDrivers() : number{
+    if(this.drivers.length===2){
+      let personalNumber = this.drivers.at(1)!.personalNumber!;
+      return personalNumber;
+    }
+    else return 0;
   }
 
   findProperTrucks(orderId: number, city: string, state: string, capacity: number){
@@ -111,11 +127,16 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   unassignTruck(orderId: number){
+    this.orderService.orderUnassignTruck(orderId).subscribe(order =>{
+      window.location.reload();
+    })
 
   }
 
-  unassignDriver(orderId: number){
-
+  unassignDrivers(orderId: number, personalNumber: number){
+    this.driverService.driverUnassignOrder(orderId, personalNumber).subscribe(driver=>{
+      window.location.reload();
+    })
   }
 
   findAllCargos(orderId: number){
@@ -149,6 +170,7 @@ export class OrderDetailsComponent implements OnInit {
       })
   }
 
+  protected readonly parseInt = parseInt;
 }
 
 export class HttpError{

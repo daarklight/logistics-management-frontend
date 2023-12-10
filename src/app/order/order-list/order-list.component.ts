@@ -15,8 +15,8 @@ export class OrderListComponent implements OnInit{
   orders: Order[]
   dataSource: MatTableDataSource<Order>
   displayedColumns =
-    ['orderId', 'orderCustomerId', 'category', 'weight', 'status', 'startDateTime', 'limitDateTime',
-      'assignedTruckNumber', 'driverComment', 'actions'];
+    ['orderId', 'orderCustomerId', 'numberOfCargos', 'category', 'weight', 'status', 'startDateTime', 'limitDateTime',
+      'assignedTruckNumber', 'numberOfAssignedDrivers', 'actions'];
   // cargos: Cargo[]
   // drivers: Driver[]
   // numberOfCargos: number
@@ -30,6 +30,7 @@ export class OrderListComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    console.log('start loading...')
     if (localStorage.getItem('need-to-reload-page') === String(true)) {
       localStorage.setItem('need-to-reload-page', String(false));
       location.reload();

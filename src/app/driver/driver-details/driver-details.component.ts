@@ -1,10 +1,7 @@
 import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Driver, DriverService} from "../../../logistics-api";
-import {HttpErrorResponse} from "@angular/common/http";
+import {Driver, DriverService, Order, OrderService} from "../../../logistics-api";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
-import {error} from "@angular/compiler-cli/src/transformers/util";
-
 
 @Component({
   selector: 'app-driver-details',
@@ -15,6 +12,7 @@ export class DriverDetailsComponent implements OnInit {
 
   id: number;
   driver: Driver;
+  order: Order;
   errorMessage: string;
   isError: boolean;
   userRole: string;
@@ -23,7 +21,7 @@ export class DriverDetailsComponent implements OnInit {
   isLoggedIn: boolean;
 
   constructor(private route: ActivatedRoute, private driverService: DriverService, private router: Router,
-              private confirmationDialogService: ConfirmationDialogService) {
+              private orderService: OrderService, private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
@@ -43,7 +41,13 @@ export class DriverDetailsComponent implements OnInit {
       console.log(error.message)
     });
 
+    // this.orderService.orderFindByDriver(this.id).subscribe(driverList => {
+    //   this.drivers = driverList;
+    // })
+  }
 
+  showOrderDetails(orderId: number) {
+      this.router.navigate(['order/details/', orderId]);
   }
 
 

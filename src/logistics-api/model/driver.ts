@@ -37,6 +37,7 @@ export interface Driver {
      * Order acceptance
      */
     orderAcceptance?: Driver.OrderAcceptanceEnum;
+    driverComment?: string;
 }
 export namespace Driver {
     export type StatusEnum = 'REST' | 'DRIVING';

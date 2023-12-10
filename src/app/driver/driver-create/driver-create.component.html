@@ -3,7 +3,7 @@
   <form (ngSubmit)="onSubmit()">
 
     <div class="form-group" [formGroup]="driverValidation" style="margin-top: 15px">
-      <label><b>Authentication ID</b> (ask admin to provide)</label>
+      <label><b>Authentication ID</b> (ask admin to provide!)</label>
       <input type="text" class="form-control" id="driver-authentication-id" [(ngModel)]="driver.driverAuthenticationId"
              name="driverAuthenticationId" formControlName="drAuthenticationId" maxlength="6">
       <div

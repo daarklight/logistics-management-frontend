@@ -95,7 +95,8 @@
 
       <div *ngIf="userRole === 'ROLE_DRIVER'">
         <h1>MY DETAILS</h1>
-        <a mat-list-item [routerLink]="['../../driver/details/', getDriverPersonalNumber()]">
+<!--        <a mat-list-item [routerLink]="['../../driver/details/', getDriverPersonalNumber()]">-->
+        <a mat-list-item [routerLink]="['../../drivers']">
         <span class="entry">
           <mat-icon>people_outline</mat-icon>
           <span *ngIf="!isCollapsed">Show My details</span>

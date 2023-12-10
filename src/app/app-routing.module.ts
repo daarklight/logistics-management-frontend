@@ -91,7 +91,7 @@ const routes: Routes = [
   {path: 'customer/orders', component: CustomerOrdersListComponent },
   {path: 'customer/orders', redirectTo: 'customer/orders', pathMatch: 'full'},
 
-  {path: 'drivers', component: DriverListComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_LOGISTICIAN'] }},
+  {path: 'drivers', component: DriverListComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_LOGISTICIAN', 'ROLE_DRIVER'] }},
   {path: 'drivers', redirectTo: 'drivers', pathMatch: 'full'},
   {path: 'driver/create', component: DriverCreateComponent,  canActivate: [AuthorityGuard], data: { roles: ['ROLE_LOGISTICIAN'] }},
   {path: 'driver/create', redirectTo: 'driver/create', pathMatch: 'full'},

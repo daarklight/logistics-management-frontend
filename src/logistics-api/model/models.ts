@@ -9,7 +9,6 @@ export * from './createOrder';
 export * from './createTruck';
 export * from './customer';
 export * from './driver';
-export * from './emptyBody';
 export * from './logistician';
 export * from './order';
 export * from './truck';

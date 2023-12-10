@@ -34,6 +34,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //localStorage.clear();
     this.isLoggedIn = localStorage.getItem('auth-token') !== '';
     console.log("login-page1: " + this.isLoggedIn);
     localStorage.setItem('is-logged-in', String(this.isLoggedIn));

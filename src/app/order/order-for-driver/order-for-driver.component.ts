@@ -56,18 +56,6 @@ export class OrderForDriverComponent {
 
   }
 
-  // updateOrder(orderId: number){
-  //   this.orderService.orderFindById(orderId).subscribe(orderDetails => {
-  //     this.router.navigate(['order/update/', orderId]);
-  //   });
-  // }
-  // findProperDrivers(orderId: number, city: string, state: string, hours: number){
-  //   localStorage.setItem('order-id', String(orderId));
-  //   localStorage.setItem('city-item', city);
-  //   localStorage.setItem('state-item', state);
-  //   this.router.navigate(['drivers/proper']);
-  // }
-
   calculateNumberOfCargos(): number {
     return this.cargos.length;
   }
@@ -106,46 +94,10 @@ export class OrderForDriverComponent {
     else return 'not assigned';
   }
 
-  // findProperTrucks(orderId: number, city: string, state: string, capacity: number){
-  //   localStorage.setItem('order-id', String(orderId));
-  //   localStorage.setItem('city-item', city);
-  //   localStorage.setItem('state-item', state);
-  //   localStorage.setItem('capacity-item', String(capacity));
-  //   this.router.navigate(['trucks/proper']);
-  // }
-
-  // findCargoForDriver(orderId: number){
-  //   this.orderService.orderFindById(orderId).subscribe(orderDetails => {
-  //     this.router.navigate(['order/update/', orderId]);
-  //   });
-  // }
-
-
-  // findOrderForDriver(orderId: number){
-  //   this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver =>{
-  //     this.orderService.orderFindByDriver(driver.personalNumber!).subscribe(order =>
-  //     this.router.navigate(['order/forDriver', orderId]))
-  //   })
-  //
-  //   // localStorage.getItem("order-id")!
-  //   //
-  //   // this.orderService.orderFindByDriver().subscribe(orderDetails => {
-  //   //   this.router.navigate(['order/update/', orderId]);
-  //   // });
-  // }
-
-
   findAllCargos(orderId: number) {
     localStorage.setItem('order-id', String(orderId));
     this.router.navigate(['cargos/cargosInOrder']);
   }
-
-  // sendForDriverApprove(orderId: number){
-  //   this.orderService.orderUpdateStatus(orderId, 'EXPECT_DRIVERS_CONFIRMATION').subscribe(orderDetails => {
-  //     window.location.reload();
-  //   });
-  // }
-
 
   confirmOrder(orderAcceptance: string) {
     this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
@@ -156,25 +108,7 @@ export class OrderForDriverComponent {
         }
       )
     });
-    //this.driverService.driversUpdateOrderAcceptance(personalNumber, orderAcceptance)
-    //window.location.reload();
   }
-
-
-  // deleteOrder(orderId: number) {
-  //   this.confirmationDialogService.confirm('Do you really want to delete this order?')
-  //     .then((confirmed) => {
-  //       if (confirmed) {
-  //         this.orderService.orderDelete(orderId).subscribe(order => {
-  //           //Renew table data after order deletion
-  //           this.router.navigate(['orders']);
-  //         })
-  //       }
-  //       else {
-  //         this.router.navigate(['order/details/', orderId]);
-  //       }
-  //     })
-  // }
 
 }
 

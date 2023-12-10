@@ -15,6 +15,7 @@
  */
 export interface Order { 
     orderId?: number;
+    numberOfCargos?: number;
     orderCustomerId?: number;
     category?: string;
     /**
@@ -25,7 +26,7 @@ export interface Order {
     startDateTime?: Date;
     limitDateTime?: Date;
     assignedTruckNumber?: string;
-    driverComment?: string;
+    numberOfAssignedDrivers?: number;
 }
 export namespace Order {
     export type StatusEnum = 'NEW' | 'EXPECT_DRIVERS_CONFIRMATION' | 'CONFIRMED' | 'DECLINED_BY_DRIVERS' | 'ON_ROAD' | 'COMPLETED';

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Truck, TruckService} from "../../../logistics-api";
+import {OrderService, Truck, TruckService} from "../../../logistics-api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
@@ -17,7 +17,7 @@ export class TruckDetailsComponent implements OnInit {
   userRole: string;
 
   constructor(private route: ActivatedRoute, private truckService: TruckService, private router: Router,
-              private confirmationDialogService: ConfirmationDialogService) {
+              private orderService: OrderService, private confirmationDialogService: ConfirmationDialogService) {
   }
 
   ngOnInit(): void {
