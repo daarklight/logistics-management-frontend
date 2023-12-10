@@ -28,6 +28,7 @@ export class CommonPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    //localStorage.clear();
     this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
       if (screenSize.matches) {
         this.isMobile = true;
@@ -38,47 +39,7 @@ export class CommonPageComponent implements OnInit {
     this.isLoggedIn = localStorage.getItem('is-logged-in') || "false";
     this.userRole = localStorage.getItem("role") || '';
     console.log("Common page : " + this.isLoggedIn + " role: " + this.userRole);
-
-    //console.log('username: ' + localStorage.getItem('username')!);
-
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // OLD VARIANT:
-    // this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
-    //   this.driver = driver;
-    //   //console.log('number: ' + driver.personalNumber)
-    // })
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    // NEW VARIANT TO INVESTIGATE:
-    console.log('local storage results for role: ' + localStorage.getItem("role"));
-    if (this.userRole = 'ROLE_DRIVER') {
-      console.log('We think this is driver in method ngOnInit() - before driver service...')
-      this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
-        this.driver = driver;
-        console.log('We think this is driver in method ngOnInit() - after driver service...')
-        //console.log('number: ' + driver.personalNumber)
-      })
-    }else{
-      console.log('We DO NOT think that this is driver')
-    }
-
-
-
   }
-
-  // findOrderForDriver(){
-  //   this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver =>{
-  //     this.orderService.orderFindByDriver(driver.personalNumber!).subscribe(order =>
-  //       this.router.navigate(['order/forDriver']))
-  //   })
-  //
-  //   // localStorage.getItem("order-id")!
-  //   //
-  //   // this.orderService.orderFindByDriver().subscribe(orderDetails => {
-  //   //   this.router.navigate(['order/update/', orderId]);
-  //   // });
-  // }
-
 
   logOut() {
     //localStorage.clear();
@@ -90,6 +51,10 @@ export class CommonPageComponent implements OnInit {
     localStorage.setItem('role', '');
     localStorage.setItem('username-name', '');
     localStorage.setItem('username-surname', '');
+    localStorage.setItem('order-id', '');
+    localStorage.setItem('city-item', '');
+    localStorage.setItem('state-item', '');
+    localStorage.setItem('error-message', '');
     this.router.navigate(['login']);
   }
 
@@ -108,18 +73,21 @@ export class CommonPageComponent implements OnInit {
     this.router.navigate(['customer/details/', customerId]);
   }
 
-  // getDriverPersonalNumber(): number{
-  //   return this.driver.personalNumber!;
-  // }
-
-  getDriverPersonalNumber(): number {
-    if (this.userRole === 'ROLE_DRIVER') {
-      console.log('We think this is driver in method getDriverPersonalNumber()...')
-      return this.driver.personalNumber!;
-    } else {
-      return 0;
+  getDriverDetails() {
+    if (localStorage.getItem('role') === 'ROLE_DRIVER') {
+      let driverId = localStorage.getItem('driver-id')!;
+      this.router.navigate(['driver/details/',driverId]);
     }
   }
+
+  // getDriverPersonalNumber(): number {
+  //   if (this.userRole === 'ROLE_DRIVER') {
+  //     console.log('We think this is driver in method getDriverPersonalNumber()...')
+  //     return this.driver.personalNumber!;
+  //   } else {
+  //     return 0;
+  //   }
+  // }
 
   protected readonly localStorage = localStorage;
 }

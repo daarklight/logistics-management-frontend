@@ -1,6 +1,6 @@
 import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Driver, DriverService, Order, OrderService} from "../../../logistics-api";
+import {Driver, DriverService, Order, OrderService, UpdateDriverStatusByDriver} from "../../../logistics-api";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
 @Component({
@@ -16,6 +16,8 @@ export class DriverDetailsComponent implements OnInit {
   errorMessage: string;
   isError: boolean;
   userRole: string;
+
+  driverStatusBody: UpdateDriverStatusByDriver;
 
   //
   isLoggedIn: boolean;
@@ -37,23 +39,63 @@ export class DriverDetailsComponent implements OnInit {
     }, error => {
       this.isError = true;
       this.errorMessage = error.message;
-      console.log("Driver details error: "+ error);
+      console.log("Driver details error: " + error);
       console.log(error.message)
     });
 
-    // this.orderService.orderFindByDriver(this.id).subscribe(driverList => {
-    //   this.drivers = driverList;
-    // })
+    if(localStorage.getItem('role') === 'ROLE_LOGISTICIAN') {
+      this.driverService.driverFindById(this.id).subscribe(driverDetails => {
+        this.isError = false;
+        this.driver = driverDetails;
+      }, error => {
+        this.isError = true;
+        this.errorMessage = error.message;
+        console.log("Driver details error: "+ error);
+        console.log(error.message)
+      });
+    }
+    if(localStorage.getItem('role') === 'ROLE_DRIVER') {
+      this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
+        this.driver = driver;
+        this.isError = false;
+
+        localStorage.setItem('driver-id', String(driver.personalNumber!));
+
+
+      }, error => {
+        this.isError = true;
+        this.errorMessage = error.message;
+        console.log("Driver details error: "+ error);
+        console.log(error.message)
+      });
+    }
   }
 
+
   showOrderDetails(orderId: number) {
-      this.router.navigate(['order/details/', orderId]);
+    this.router.navigate(['order/details/', orderId]);
   }
 
 
   updateDriver(personalNumber: number) {
     this.driverService.driverFindById(personalNumber).subscribe(driverDetails => {
       this.router.navigate(['driver/update/', personalNumber]);
+    });
+  }
+
+  updateStatusToRest(personalNumber: number) {
+    this.driverStatusBody.status = 'REST';
+    this.driverService.driverUpdateStatusByDriver(this.driverStatusBody, personalNumber).subscribe(driverDetails => {
+      //this.router.navigate(['driver/update/', personalNumber]);
+      window.location.reload();
+    });
+  }
+
+  updateStatusToDriving(personalNumber: number) {
+    this.driverStatusBody.status = 'DRIVING';
+    this.driverService.driverUpdateStatusByDriver(this.driverStatusBody, personalNumber).subscribe(driverDetails => {
+      //this.router.navigate(['driver/update/', personalNumber]);
+      window.location.reload();
     });
   }
 
