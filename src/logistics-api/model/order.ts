@@ -13,7 +13,7 @@
 /**
  * Object representing Order
  */
-export interface Order { 
+export interface Order {
     orderId?: number;
     numberOfCargos?: number;
     orderCustomerId?: number;

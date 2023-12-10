@@ -52,8 +52,8 @@ export class OrderEditComponent implements OnInit {
       Validators.maxLength(40),
       Validators.pattern("[A-Za-z\\d\\s]+")]),
     orderLimitDateTime: new FormControl(this.orderUpdate.limitDateTime, [
-      Validators.required,
-      Validators.pattern("^\\d{4}-(?:0[0-9]{1}|1[0-2]{1})-(0?[1-9]|[12][0-9]|3[01])[tT ]\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?([zZ]|[+-]\\d{2}:\\d{2})")]),
+      Validators.required])
+    //     Validators.pattern("^\\d{4}-(?:0[0-9]{1}|1[0-2]{1})-(0?[1-9]|[12][0-9]|3[01])[tT ]\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?([zZ]|[+-]\\d{2}:\\d{2})")]),
   });
 
   get orderOrderCustomerId() {

@@ -11,7 +11,7 @@
     <div>
       <br>
       <div class="truck-details-header">
-        Truck# <span class="header-style">{{truck.number}} </span>details
+        Truck# <span class="header-style">{{truck.number!}} </span>details
       </div>
       <div class="truck-details-info">
 
@@ -45,6 +45,18 @@
         <div class="truck-details-cell">
           <label><b class="header-style">Current state: </b><span
             class="row-margin">{{truck.currentState}}</span></label>
+        </div>
+        <div class="truck-details-cell" *ngIf="order !== undefined">
+          <label><b class="header-style">Assigned order: </b><span
+            class="row-margin">{{order.orderId!}}</span></label>
+        </div>
+
+<!--        <div class="buttons-panel" *ngIf="userRole == 'ROLE_LOGISTICIAN' && findOrderNumber(truck.number!) > 0">-->
+        <div class="buttons-panel" *ngIf="userRole == 'ROLE_LOGISTICIAN' && order !== undefined">
+            <span style="width: 170px">
+          <button mat-button (click)="showOrderDetails(truck.number!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 170px" >
+            <mat-icon>arrow_back</mat-icon> GO TO ORDER DETAILS
+          </button></span>
         </div>
 
 <!--        <div class="buttons-panel" *ngIf="userRole == 'ROLE_LOGISTICIAN'">-->

@@ -13,7 +13,7 @@
 /**
  * Object representing Driver
  */
-export interface Driver { 
+export interface Driver {
     personalNumber?: number;
     name?: string;
     surname?: string;
@@ -38,6 +38,8 @@ export interface Driver {
      */
     orderAcceptance?: Driver.OrderAcceptanceEnum;
     driverComment?: string;
+    startShiftDateTime?: Date;
+    endShiftDateTime?: Date;
 }
 export namespace Driver {
     export type StatusEnum = 'REST' | 'DRIVING';

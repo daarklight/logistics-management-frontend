@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderService, Truck, TruckService} from "../../../logistics-api";
+import {Order, OrderService, Truck, TruckService} from "../../../logistics-api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
@@ -15,6 +15,7 @@ export class TruckDetailsComponent implements OnInit {
   errorMessage: string;
   isError: boolean;
   userRole: string;
+  order: Order;
 
   constructor(private route: ActivatedRoute, private truckService: TruckService, private router: Router,
               private orderService: OrderService, private confirmationDialogService: ConfirmationDialogService) {
@@ -29,11 +30,20 @@ export class TruckDetailsComponent implements OnInit {
     }, error => {
       this.isError = true;
       this.errorMessage = error.message;
-      console.log(error)
+      //console.log(error)
     });
   }
 
-  updateTruck(number: string){
+  showOrderDetails(number: string) {
+    this.orderService.orderFindByAssignedTruckNumber(number).subscribe(order => {
+      this.order = order;
+      if (order !== undefined) {
+        this.router.navigate(['order/details/', order.orderId]);
+      }
+    })
+  }
+
+  updateTruck(number: string) {
     this.truckService.truckFindByNumber(number).subscribe(truckDetails => {
       this.router.navigate(['truck/update/', number]);
     });
@@ -47,8 +57,7 @@ export class TruckDetailsComponent implements OnInit {
             //Renew table data after truck deletion
             this.router.navigate(['trucks']);
           })
-        }
-        else {
+        } else {
           this.router.navigate(['truck/details/', number]);
         }
       })

@@ -17,7 +17,10 @@ export class DriverDetailsComponent implements OnInit {
   isError: boolean;
   userRole: string;
 
-  driverStatusBody: UpdateDriverStatusByDriver;
+  //driverStatusBody: UpdateDriverStatusByDriver;
+  driverStatusBody: UpdateDriverStatusByDriver = new class implements UpdateDriverStatusByDriver {
+    status: UpdateDriverStatusByDriver.StatusEnum;
+  };
 
   //
   isLoggedIn: boolean;
@@ -50,8 +53,8 @@ export class DriverDetailsComponent implements OnInit {
       }, error => {
         this.isError = true;
         this.errorMessage = error.message;
-        console.log("Driver details error: "+ error);
-        console.log(error.message)
+        //console.log("Driver details error: "+ error);
+        //console.log(error.message)
       });
     }
     if(localStorage.getItem('role') === 'ROLE_DRIVER') {
@@ -84,16 +87,22 @@ export class DriverDetailsComponent implements OnInit {
   }
 
   updateStatusToRest(personalNumber: number) {
+    console.log('Driver status before set to rest: ' + this.driverStatusBody.status);
     this.driverStatusBody.status = 'REST';
+    console.log('Driver status after set to rest: ' + this.driverStatusBody.status);
     this.driverService.driverUpdateStatusByDriver(this.driverStatusBody, personalNumber).subscribe(driverDetails => {
+      driverDetails.status='REST';
       //this.router.navigate(['driver/update/', personalNumber]);
       window.location.reload();
     });
   }
 
   updateStatusToDriving(personalNumber: number) {
+    console.log('Driver status before set to driving: ' + this.driverStatusBody.status)
     this.driverStatusBody.status = 'DRIVING';
+    console.log('Driver status after set to driving: ' + this.driverStatusBody.status);
     this.driverService.driverUpdateStatusByDriver(this.driverStatusBody, personalNumber).subscribe(driverDetails => {
+      driverDetails.status='DRIVING';
       //this.router.navigate(['driver/update/', personalNumber]);
       window.location.reload();
     });

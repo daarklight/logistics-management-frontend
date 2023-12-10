@@ -82,11 +82,11 @@
         </div>
         <div class="cargo-details-cell">
           <label><b class="header-style">Expected completion date and time: </b><span
-            class="row-margin">{{cargo.expectedCompletionDateTime ?? '  &mdash;'}}</span></label>
+            class="row-margin">{{(cargo.expectedCompletionDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</span></label>
         </div>
         <div class="cargo-details-cell">
           <label><b class="header-style">Real completion date and time: </b><span
-            class="row-margin">{{cargo.realCompletionDateTime ?? '  &mdash;'}}</span></label>
+            class="row-margin">{{(cargo.realCompletionDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</span></label>
         </div>
 
         <div class="buttons-panel" *ngIf="userRole==='ROLE_LOGISTICIAN'">

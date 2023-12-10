@@ -65,12 +65,12 @@ import {Error403Component} from "./errors/error-403/error-403.component";
 import {Error404Component} from './errors/error-404/error-404.component';
 import {ErrorCommonComponent} from './errors/error-common/error-common.component';
 import {ErrorInterceptor} from "./errors/error.interceptor";
-import {ToastrModule} from "ngx-toastr";
 import { DriverProperComponent } from './driver/driver-proper/driver-proper.component';
 import { TruckProperComponent } from './truck/truck-proper/truck-proper.component';
 import { CargoInOrderListComponent } from './cargo/cargo-in-order-list/cargo-in-order-list.component';
 import { OrderForDriverComponent } from './order/order-for-driver/order-for-driver.component';
 import { CustomerOrdersListComponent } from './order/customer-orders-list/customer-orders-list.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 @NgModule({
   declarations: [
@@ -115,27 +115,28 @@ import { CustomerOrdersListComponent } from './order/customer-orders-list/custom
     OrderForDriverComponent,
     CustomerOrdersListComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ApiModule,
-    FormsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    BrowserAnimationsModule,
-    MatExpansionModule,
-    MatTableModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatSortModule,
-    ReactiveFormsModule,
-    NgbModule,
-    MatCardModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ApiModule,
+        FormsModule,
+        MatIconModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule,
+        BrowserAnimationsModule,
+        MatExpansionModule,
+        MatTableModule,
+        MatInputModule,
+        MatPaginatorModule,
+        MatSortModule,
+        ReactiveFormsModule,
+        NgbModule,
+        MatCardModule,
+        MatDatepickerModule,
+    ],
   providers: [
     {provide: BASE_PATH, useValue: environment.basePath},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

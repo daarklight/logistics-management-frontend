@@ -1,5 +1,4 @@
-<div class="grid-container">
-  <div class="order-details">
+  <div class="order-details order-details-background">
     <ng-template [ngIf]="isError" [ngIfElse]="details">
       <div class="error">
         <label><h3>Error occurred for while searching order with id {{id}}:</h3></label>
@@ -16,6 +15,15 @@
       <!--      </div>-->
 
       <!--*ngIf="order.orderId !== 0"-->
+      <div *ngIf="order === null">
+        <br>
+        <div class="order-details-header">
+          Currently no new orders for you. We hope that some new will appear soon...
+        </div>
+        <div class="order-details-info">
+        </div>
+      </div>
+
       <div *ngIf="order !== null">
         <br>
         <div class="order-details-header">
@@ -104,4 +112,3 @@
 
     </ng-template>
   </div>
-</div>

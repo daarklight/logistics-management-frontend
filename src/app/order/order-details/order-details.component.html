@@ -40,11 +40,11 @@
         </div>
         <div class="order-details-cell">
           <label><b class="header-style">Start date and time: </b><span
-            class="row-margin">{{order.startDateTime ?? '  &mdash;'}}</span></label>
+            class="row-margin">{{(order.startDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</span></label>
         </div>
         <div class="order-details-cell">
           <label><b class="header-style">Limit date and time: </b><span
-            class="row-margin">{{order.limitDateTime}}</span></label>
+            class="row-margin">{{order.limitDateTime!.toString().replace('T', ' at ')}}</span></label>
         </div>
         <div class="order-details-cell">
           <label><b class="header-style">Assigned truck number: </b><span
@@ -159,9 +159,10 @@
           </span>
 
           <br>
-          <span style="margin-left: 30px" *ngIf="order.status == 'NEW'  || order.status === 'DECLINED_BY_DRIVERS'">
+          <span style="margin-left: 30px" *ngIf="order.status === 'NEW'  || order.status === 'DECLINED_BY_DRIVERS'">
           <button mat-button (click)="sendForDriverApprove(order.orderId!)"
-                  style="; margin-right: 10px; margin-top: 5px; color: white; background-color: #004953; width: 250px; height: 50px">
+                  style="; margin-right: 10px; margin-top: 5px; color: white; background-color: #004953; width: 250px; height: 50px"
+          *ngIf="order.numberOfAssignedDrivers! > 0">
             <mat-icon>launch</mat-icon> SENT TO DRIVERS FOR APPROVE
           </button>
         </span>

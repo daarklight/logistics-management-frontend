@@ -44,7 +44,7 @@
 
       <div class="form-group" [formGroup]="orderValidation" style="margin-top: 15px">
         <label><b>Limit date and time</b></label>
-        <input type="text" class="form-control" id="limitDateTime" [(ngModel)]="orderUpdate.limitDateTime"
+        <input type="datetime-local" class="form-control" id="limitDateTime" [(ngModel)]="orderUpdate.limitDateTime"
                name="limitDateTime"
                formControlName="orderLimitDateTime">
         <div
@@ -52,9 +52,9 @@
           class="validationAlert">
           <div>
             <div *ngIf="orderLimitDateTime?.errors?.['required']"> &#10008; Limit date and time required</div>
-            <div *ngIf="orderLimitDateTime?.errors?.['pattern']"> &#10008; Limit date and time should have proper
-              format
-            </div>
+<!--            <div *ngIf="orderLimitDateTime?.errors?.['pattern']"> &#10008; Limit date and time should have proper-->
+<!--              format-->
+<!--            </div>-->
           </div>
         </div>
       </div>

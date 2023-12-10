@@ -1,5 +1,5 @@
-<div class="grid-container">
-  <div class="driver-details">
+<!--<div class="grid-container">-->
+  <div class="driver-details driver-details-background">
     <ng-template [ngIf]="isError" [ngIfElse]="details">
       <div class="error">
         <label><h3>Error occurred for while searching driver with id {{id}}:</h3></label>
@@ -68,6 +68,14 @@
             <label><b class="header-style">Work experience, years: </b><span
               class="row-margin">{{driver.workExperience}}</span></label>
           </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">Start shift date and time: </b><span
+              class="row-margin">{{driver.startShiftDateTime}}</span></label>
+          </div>
+          <div class="driver-details-cell">
+            <label><b class="header-style">End shift date and time: </b><span
+              class="row-margin">{{driver.endShiftDateTime}}</span></label>
+          </div>
 
           <div class="buttons-panel" *ngIf="userRole == 'ROLE_LOGISTICIAN' && driver.currentOrderId !== null">
             <span style="width: 170px">
@@ -83,9 +91,30 @@
 <!--            <mat-icon>delete</mat-icon> DELETE-->
 <!--          </button></span>-->
           </div>
+
+          <div class="buttons-panel" *ngIf="userRole == 'ROLE_DRIVER'">
+            <br>
+            <span style="width: 250px" *ngIf="userRole == 'ROLE_DRIVER' && driver.status === 'DRIVING'">
+          <button mat-button (click)="updateStatusToRest(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 250px" >
+            <mat-icon>local_hotel</mat-icon> UPDATE STATUS TO REST
+          </button></span>
+            <span style="width: 250px" *ngIf="userRole == 'ROLE_DRIVER' && driver.status === 'REST'">
+          <button mat-button (click)="updateStatusToDriving(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 250px" >
+            <mat-icon>directions_car</mat-icon> UPDATE STATUS TO DRIVING
+          </button></span>
+            <!--            <span style="width: 50px">-->
+            <!--          <button mat-button (click)="updateDriver(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #009511; width: 100px" >-->
+            <!--            <mat-icon>edit</mat-icon> EDIT-->
+            <!--          </button></span>-->
+            <!--            <span style="width: 50px">-->
+            <!--          <button mat-button (click)="deleteDriver(driver.personalNumber!)" style="background-color: darkred; color: white">-->
+            <!--            <mat-icon>delete</mat-icon> DELETE-->
+            <!--          </button></span>-->
+          </div>
+
         </div>
       </div>
     </ng-template>
   </div>
   <div class="background-pic"></div>
-</div>
+<!--</div>-->

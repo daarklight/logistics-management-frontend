@@ -13,7 +13,7 @@
 /**
  * Object representing Order creating
  */
-export interface CreateOrder { 
+export interface CreateOrder {
     orderCustomerId?: number;
     category?: string;
     /**
