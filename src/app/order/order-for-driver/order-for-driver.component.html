@@ -66,13 +66,13 @@
           <div class="order-details-cell">
             <label><b class="header-style">First driver: </b><span
               class="row-margin"><a
-              [routerLink]="['../../driver/details/', findFirstAssignedDriverPersonalNumber()]"
+              [routerLink]="['../../driver/codriver/details/', findFirstAssignedDriverPersonalNumber()]"
               *ngIf="findFirstAssignedDriverPersonalNumber() !== 'not assigned'">{{findFirstAssignedDriver()}}</a></span></label>
           </div>
           <div class="order-details-cell">
             <label><b class="header-style">Second driver: </b><span
               class="row-margin"><a
-              [routerLink]="['../../driver/details/', findSecondAssignedDriverPersonalNumber()]"
+              [routerLink]="['../../driver/codriver/details/', findSecondAssignedDriverPersonalNumber()]"
               *ngIf="findSecondAssignedDriverPersonalNumber() !== 'not assigned'">{{findSecondAssignedDriver()}}</a></span></label>
           </div>
 <!--          <div class="order-details-cell">-->

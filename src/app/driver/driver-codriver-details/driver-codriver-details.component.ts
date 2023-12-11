@@ -1,14 +1,14 @@
-import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component } from '@angular/core';
 import {Driver, DriverService, Order, OrderService, UpdateDriverStatusByDriver} from "../../../logistics-api";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
 
 @Component({
-  selector: 'app-driver-details',
-  templateUrl: './driver-details.component.html',
-  styleUrls: ['./driver-details.component.scss']
+  selector: 'app-driver-codriver-details',
+  templateUrl: './driver-codriver-details.component.html',
+  styleUrls: ['./driver-codriver-details.component.scss']
 })
-export class DriverDetailsComponent implements OnInit {
+export class DriverCodriverDetailsComponent {
 
   id: number;
   driver: Driver;
@@ -36,33 +36,33 @@ export class DriverDetailsComponent implements OnInit {
     }
 
 
-    if(localStorage.getItem('role') === 'ROLE_LOGISTICIAN') {
-      this.driverService.driverFindById(this.id).subscribe(driverDetails => {
-        this.isError = false;
-        this.driver = driverDetails;
-      }, error => {
-        this.isError = true;
-        this.errorMessage = error.message;
-      });
-    }
+    // if(localStorage.getItem('role') === 'ROLE_LOGISTICIAN') {
+    //   this.driverService.driverFindById(this.id).subscribe(driverDetails => {
+    //     this.isError = false;
+    //     this.driver = driverDetails;
+    //   }, error => {
+    //     this.isError = true;
+    //     this.errorMessage = error.message;
+    //   });
+    // }
 
-    if(localStorage.getItem('role') === 'ROLE_DRIVER') {
-      this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
-        console.log('Find by username started...');
-        console.log('Personal number based on username: ' + driver.personalNumber);
-        this.driver = driver;
-        this.isError = false;
-
-        localStorage.setItem('driver-id', String(driver.personalNumber!));
-
-
-      }, error => {
-        this.isError = true;
-        this.errorMessage = error.message;
-        console.log("Driver details error: "+ error);
-        console.log(error.message)
-      });
-    }
+    // if(localStorage.getItem('role') === 'ROLE_DRIVER') {
+    //   this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
+    //     console.log('Find by username started...');
+    //     console.log('Personal number based on username: ' + driver.personalNumber);
+    //     this.driver = driver;
+    //     this.isError = false;
+    //
+    //     localStorage.setItem('driver-id', String(driver.personalNumber!));
+    //
+    //
+    //   }, error => {
+    //     this.isError = true;
+    //     this.errorMessage = error.message;
+    //     console.log("Driver details error: "+ error);
+    //     console.log(error.message)
+    //   });
+    // }
 
     this.driverService.driverFindById(this.id).subscribe(driverDetails => {
       console.log('First find by id started...');
@@ -86,14 +86,7 @@ export class DriverDetailsComponent implements OnInit {
     return parseInt(localStorage.getItem('driver-id')!);
   }
 
-  findOrderStatus(orderId: number): string {
-    if (this.order !== undefined) {
-      return this.order.status!.toString();
-    }
-    else{
-      return  'not assigned'
-    }
-  }
+
 
   updateDriver(personalNumber: number) {
     this.driverService.driverFindById(personalNumber).subscribe(driverDetails => {

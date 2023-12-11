@@ -71,6 +71,7 @@ import { CargoInOrderListComponent } from './cargo/cargo-in-order-list/cargo-in-
 import { OrderForDriverComponent } from './order/order-for-driver/order-for-driver.component';
 import { CustomerOrdersListComponent } from './order/customer-orders-list/customer-orders-list.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import { DriverCodriverDetailsComponent } from './driver/driver-codriver-details/driver-codriver-details.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     CargoInOrderListComponent,
     OrderForDriverComponent,
     CustomerOrdersListComponent,
+    DriverCodriverDetailsComponent,
   ],
     imports: [
         BrowserModule,

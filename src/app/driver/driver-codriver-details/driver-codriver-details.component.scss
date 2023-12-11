@@ -1,0 +1,67 @@
+.driver-details {
+  height: 700px;
+  width: 1300px;
+  border-radius: 1rem;
+  border-width: 1rem;
+  opacity: 1;
+  margin-right: auto;
+  position: relative;
+  align-self: center;
+}
+
+.driver-details-header {
+  align-self: center;
+  margin-left: 20px;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-family: Arial, serif;
+  font-weight: bold;
+}
+
+.driver-details-background {
+  height: 700px;
+  width: 1300px;
+  border-radius: 1rem;
+  border-width: 1rem;
+  opacity: 1;
+  margin-right: auto;
+  position: relative;
+  background-image: url(../../../../resources/delivery_small.png);
+  background-repeat: no-repeat;
+  background-position-x: 380px;
+  background-position-y: 0px;
+  align-self: center;
+}
+
+.driver-details-info {
+  margin-top: 2rem;
+  margin-left: 3rem;
+  font-size: 1.2rem;
+  font-family: Arial, serif;
+}
+
+.driver-details-cell {
+  margin-top: 0.5rem;
+  font-family: Arial, serif;
+}
+
+.error {
+  position: relative;
+  color: darkred;
+  font-size: large;
+  font-weight: bold;
+  width: 500px;
+  height: 500px;
+}
+
+.header-style {
+  color: #034694;
+}
+
+.row-margin {
+  margin-left: 5px;
+}
+
+.buttons-panel {
+  margin-top: 15px;
+}

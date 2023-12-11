@@ -27,6 +27,7 @@ import {CustomerEditComponent} from "./customer/customer-edit/customer-edit.comp
 
 import {DriverCreateComponent} from "./driver/driver-create/driver-create.component";
 import {DriverDetailsComponent} from "./driver/driver-details/driver-details.component";
+import {DriverCodriverDetailsComponent} from "./driver/driver-codriver-details/driver-codriver-details.component";
 import {DriverEditComponent} from "./driver/driver-edit/driver-edit.component";
 import {DriverListComponent} from "./driver/driver-list/driver-list.component";
 import {DriverProperComponent} from "./driver/driver-proper/driver-proper.component";
@@ -97,6 +98,10 @@ const routes: Routes = [
   {path: 'driver/create', redirectTo: 'driver/create', pathMatch: 'full'},
   {path: 'driver/details/:id', component: DriverDetailsComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_DRIVER', 'ROLE_LOGISTICIAN'] }},
   {path: 'driver/details/:id', redirectTo: 'driver/details/:id', pathMatch: 'full'},
+
+  {path: 'driver/codriver/details/:id', component: DriverCodriverDetailsComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_DRIVER'] }},
+  {path: 'driver/codriver/details/:id', redirectTo: 'driver/codriver/details/:id', pathMatch: 'full'},
+
   {path: 'driver/update/:id', component: DriverEditComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_LOGISTICIAN'] }},
   {path: 'driver/update/:id', redirectTo: 'driver/update/:id', pathMatch: 'full'},
   {path: 'drivers/proper', component: DriverProperComponent, canActivate: [AuthorityGuard], data: { roles: ['ROLE_LOGISTICIAN'] }},

@@ -1,4 +1,3 @@
-<!--<div class="grid-container">-->
   <div class="driver-details driver-details-background">
     <ng-template [ngIf]="isError" [ngIfElse]="details">
       <div class="error">
@@ -92,14 +91,14 @@
 <!--          </button></span>-->
           </div>
 
-          <div class="buttons-panel" *ngIf="userRole == 'ROLE_DRIVER' && driver.busy === 'YES'">
+          <div class="buttons-panel" *ngIf="userRole == 'ROLE_DRIVER'">
             <br>
-            <span style="width: 250px" *ngIf="userRole == 'ROLE_DRIVER' && driver.status === 'DRIVING'  && findCurrentDriver() === driver.personalNumber!">
+            <span style="width: 250px" *ngIf="userRole == 'ROLE_DRIVER' && driver.status === 'DRIVING' && findCurrentDriver() === driver.personalNumber!">
           <button mat-button (click)="updateStatusToRest(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 250px" >
             <mat-icon>local_hotel</mat-icon> UPDATE STATUS TO REST
           </button></span>
-            <span style="width: 250px" *ngIf="userRole == 'ROLE_DRIVER' && driver.status === 'REST'  && findCurrentDriver() === driver.personalNumber!">
-          <button mat-button (click)="updateStatusToDriving(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 250px" >
+            <span style="width: 250px" *ngIf="userRole == 'ROLE_DRIVER' && driver.status === 'REST' && driver.busy === 'YES' ">
+          <button mat-button (click)="updateStatusToDriving(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 250px">
             <mat-icon>directions_car</mat-icon> UPDATE STATUS TO DRIVING
           </button></span>
             <!--            <span style="width: 50px">-->
@@ -117,4 +116,3 @@
     </ng-template>
   </div>
   <div class="background-pic"></div>
-<!--</div>-->

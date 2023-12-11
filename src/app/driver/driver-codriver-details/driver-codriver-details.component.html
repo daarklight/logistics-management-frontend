@@ -1,0 +1,90 @@
+<div class="driver-details driver-details-background">
+  <ng-template [ngIf]="isError" [ngIfElse]="details">
+    <div class="error">
+      <label><h3>Error occurred for while searching driver with id {{id}}:</h3></label>
+      <br>
+      <label><h3>{{errorMessage}}:</h3></label>
+    </div>
+  </ng-template>
+  <ng-template #details>
+    <div>
+      <br>
+      <div class="driver-details-header">
+        Driver <span class="header-style">{{driver.name}} {{driver.surname}} </span>details
+      </div>
+      <div class="driver-details-info">
+
+        <div class="driver-details-cell">
+          <label><b class="header-style">Personal number: </b><span
+            class="row-margin">{{driver.personalNumber}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Name: </b><span class="row-margin">{{driver.name}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Surname: </b><span class="row-margin">{{driver.surname}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Phone: </b><span
+            class="row-margin">{{driver.phone}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Email: </b><span
+            class="row-margin">{{driver.email}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">City: </b><span
+            class="row-margin">{{driver.currentCity}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">State: </b><span
+            class="row-margin">{{driver.currentState}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Busy: </b><span
+            class="row-margin">{{driver.busy!.toLowerCase()}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Current truck: </b><span
+            class="row-margin">{{driver.currentTruckNumber ?? '  &mdash;'}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Current order: </b><span
+            class="row-margin">{{driver.currentOrderId ?? '  &mdash;'}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Order acceptance: </b><span
+            class="row-margin">{{driver.orderAcceptance ?? '  &mdash;'}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Status: </b><span class="row-margin">{{driver.status!.toLowerCase()}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Hours spent in current month: </b><span
+            class="row-margin">{{driver.workingHoursInCurrentMonth}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Work experience, years: </b><span
+            class="row-margin">{{driver.workExperience}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">Start shift date and time: </b><span
+            class="row-margin">{{(driver.startShiftDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</span></label>
+        </div>
+        <div class="driver-details-cell">
+          <label><b class="header-style">End shift date and time: </b><span
+            class="row-margin">{{(driver.endShiftDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</span></label>
+        </div>
+
+<!--        <div class="buttons-panel" *ngIf="userRole == 'ROLE_LOGISTICIAN' && driver.currentOrderId !== null">-->
+<!--            <span style="width: 170px">-->
+<!--          <button mat-button (click)="showOrderDetails(driver.currentOrderId!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 170px" >-->
+<!--            <mat-icon>arrow_back</mat-icon> GO TO ORDER DETAILS-->
+<!--          </button></span>-->
+<!--        </div>-->
+
+      </div>
+    </div>
+  </ng-template>
+</div>
+<div class="background-pic"></div>
