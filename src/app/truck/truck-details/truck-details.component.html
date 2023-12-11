@@ -51,7 +51,6 @@
             class="row-margin">{{order.orderId!}}</span></label>
         </div>
 
-<!--        <div class="buttons-panel" *ngIf="userRole == 'ROLE_LOGISTICIAN' && findOrderNumber(truck.number!) > 0">-->
         <div class="buttons-panel" *ngIf="userRole == 'ROLE_LOGISTICIAN' && order !== undefined">
             <span style="width: 170px">
           <button mat-button (click)="showOrderDetails(truck.number!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 170px" >

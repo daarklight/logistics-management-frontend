@@ -22,8 +22,8 @@
         *ngIf="userUsername!.invalid && (userUsername!.dirty || userUsername!.touched)" class="validationAlert">
         <div>
           <div *ngIf="userUsername?.errors?.['required']"> &#10008; Username is required</div>
-          <div *ngIf="userUsername?.errors?.['minlength']"> &#10008; Username must be minimum 5 symbols long</div>
-          <div *ngIf="userUsername?.errors?.['pattern']"> &#10008; Username can contain only letters, digits and
+          <div *ngIf="userUsername?.errors?.['minlength']"> &#10008; Username must be minimum 4 symbols long</div>
+          <div *ngIf="userUsername?.errors?.['pattern']"> &#10008; Username can contain only Latin letters, digits and
             underscores
           </div>
         </div>
@@ -33,7 +33,7 @@
         <div>
           <div *ngIf="userPassword?.errors?.['required']"> &#10008; Password is required</div>
           <div *ngIf="userPassword?.errors?.['minlength']"> &#10008; Password must be minimum 7 symbols long</div>
-          <div *ngIf="userPassword?.errors?.['pattern']"> &#10008; Password can contain only letters, digits and
+          <div *ngIf="userPassword?.errors?.['pattern']"> &#10008; Password can contain only Latin letters, digits and
             underscores
           </div>
         </div>

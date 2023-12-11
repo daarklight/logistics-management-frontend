@@ -30,8 +30,6 @@ export class DriverProperComponent {
     let cityResult: string = localStorage.getItem('city-item')!;
     let stateResult: string = localStorage.getItem('state-item')!;
 
-    // REWRITE METHOD TO INCLUDE PARAMETER WITH HOURS !!!
-
     this.driverService.driversFindForOrder(orderIdResult, cityResult, stateResult, 150).subscribe(allDrivers => {
       this.drivers = allDrivers;
       this.dataSource = new MatTableDataSource(this.drivers);

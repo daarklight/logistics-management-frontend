@@ -24,18 +24,13 @@ export class OrderForDriverComponent {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
-      //console.log(localStorage.getItem('username')!);
       this.orderService.orderFindByDriver(driver.personalNumber!).subscribe(order => {
           this.order = order;
-        //console.log(order)
           {
-
             this.cargoService.cargoFindByOrderId(this.order.orderId!).subscribe(cargoList => {
-              console.log("dfgdfgdfg2" + this.order.orderId)
               this.cargos = cargoList;
             })
           }
-
         this.driverService.driversFindByCurrentOrderId(this.order.orderId!).subscribe(driverList => {
           this.drivers = driverList;
         })
@@ -47,12 +42,6 @@ export class OrderForDriverComponent {
       this.errorMessage = error.message;
       console.log(error)
     });
-
-
-    // this.cargoService.cargoFindByOrderId(this.order.orderId!).subscribe(cargoList => {
-    //   this.cargos = cargoList;
-    //   //console.log(this.cargos);
-    // })
 
   }
 
@@ -110,14 +99,4 @@ export class OrderForDriverComponent {
     });
   }
 
-}
-
-export class HttpError {
-  static BadRequest = 400;
-  static Unauthorized = 401;
-  static Forbidden = 403;
-  static NotFound = 404;
-  static TimeOut = 408;
-  static Conflict = 409;
-  static InternalServerError = 500;
 }

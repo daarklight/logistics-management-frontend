@@ -42,6 +42,14 @@ export class CargoListComponent implements OnInit{
     this.dataSource.filter = filterValue;
   }
 
+  convertMinsToHrsMins(minutes: number): string {
+    let h = Math.floor(minutes / 60);
+    let m = minutes % 60;
+    let hrs = h < 10 ? '0' + h : h;
+    let mins = m < 10 ? '0' + m : m;
+    return hrs + ':' + mins;
+  }
+
   showCargoDetails(cargoId: number) {
     this.cargoService.cargoFindById(cargoId).subscribe(cargoDetails => {
       console.log(cargoDetails);

@@ -8,17 +8,13 @@
     </ng-template>
     <ng-template #details>
 
-      <!--      <div *ngIf="order.orderId === 0">-->
-      <!--        <div>-->
-      <!--        No order found for you-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-      <!--*ngIf="order.orderId !== 0"-->
       <div *ngIf="order === null">
         <br>
-        <div class="order-details-header">
-          Currently no new orders for you. We hope that some new will appear soon...
+        <div class="order-details-header" style="color: #034694">
+          Currently no new orders for you.
+        </div>
+        <div class="order-details-header" style="color: #034694">
+         We hope that something new will appear soon...
         </div>
         <div class="order-details-info">
         </div>
@@ -85,9 +81,9 @@
 <!--          </div>-->
 
           <div class="buttons-panel">
-            <span style="width: 50px" *ngIf="order.status === 'EXPECT_DRIVERS_CONFIRMATION'">
+            <span style="width: 120px" *ngIf="order.status === 'EXPECT_DRIVERS_CONFIRMATION'">
           <button mat-button (click)="confirmOrder('YES')"
-                  style="; margin-right: 10px; color: white; background-color: #009511; width: 100px">
+                  style="; margin-right: 10px; color: white; background-color: #009511; width: 120px">
             <mat-icon>edit</mat-icon> CONFIRM ORDER
           </button></span>
             <span style="width: 50px" *ngIf="order.status === 'EXPECT_DRIVERS_CONFIRMATION'">

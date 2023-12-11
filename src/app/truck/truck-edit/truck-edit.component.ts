@@ -16,9 +16,15 @@ export class TruckEditComponent implements OnInit {
     model: string;
     capacity: number;
     totalOperatingTime: number;
+    technicalCondition: UpdateTruckByLogistician.TechnicalConditionEnum;
     currentCity: string
     currentState: string;
   }
+
+  technicalCondition = [
+    {techCondition: "OK"},
+    {techCondition: "NOK"}
+  ];
 
   constructor(private truckService: TruckService, private router: Router, private route: ActivatedRoute) {
   }

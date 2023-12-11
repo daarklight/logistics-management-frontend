@@ -16,7 +16,7 @@ export class CustomerOrdersListComponent implements OnInit{
   dataSource: MatTableDataSource<Order>
   displayedColumns =
     ['orderId', 'customerName', 'category', 'weight', 'status', 'startDateTime', 'limitDateTime',
-      'assignedTruckNumber', 'driverComment', 'actions'];
+      'assignedTruckNumber', 'actions'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

@@ -121,7 +121,7 @@ export class LoginPageComponent implements OnInit {
   userAuthValidation = new FormGroup({
     userUsername: new FormControl(this.user.username, [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(4),
       Validators.pattern("[A-Za-z1-9_]+")]),
     userPassword: new FormControl(this.user.password, [
       Validators.required,

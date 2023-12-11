@@ -37,7 +37,7 @@
       </ng-container>
       <!-- Work Experience Column -->
       <ng-container matColumnDef="workExperience">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Work Experience</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Work Experience, years</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.workExperience}} </mat-cell>
       </ng-container>
       <!-- Working Hours In Current Month Column -->
@@ -69,12 +69,12 @@
       <!-- Current truck number Column -->
       <ng-container matColumnDef="currentTruckNumber">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Current truck number</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.currentTruckNumber}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.currentTruckNumber ?? '  &mdash;'}} </mat-cell>
       </ng-container>
       <!-- Id of current order Column -->
       <ng-container matColumnDef="currentOrderId">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Id of current order</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.currentOrderId}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short"> {{row.currentOrderId ?? '  &mdash;'}} </mat-cell>
       </ng-container>
 
       <!-- Actions Column -->

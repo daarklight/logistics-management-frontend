@@ -10,7 +10,7 @@
         <div>
           <div *ngIf="numberCheck?.errors?.['required']"> &#10008; Number required
           </div>
-          <div *ngIf="numberCheck?.errors?.['pattern']"> &#10008; Number should consist of 3 capital letters and 4 digits, like ABC1234
+          <div *ngIf="numberCheck?.errors?.['pattern']"> &#10008; Number should consist of 3 capital Latin letters and 4 digits, like ABC1234
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
           <div *ngIf="modelCheck?.errors?.['required']"> &#10008; Model should not be blank and should not exceed 30
             symbols
           </div>
-          <div *ngIf="modelCheck?.errors?.['pattern']"> &#10008; Model should consist of letters and can contain
+          <div *ngIf="modelCheck?.errors?.['pattern']"> &#10008; Model should consist of Latin letters and can contain
             backspaces and/or digits
           </div>
         </div>

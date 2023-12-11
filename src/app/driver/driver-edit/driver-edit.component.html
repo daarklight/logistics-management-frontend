@@ -21,7 +21,7 @@
             <div *ngIf="drName?.errors?.['maxlength']"> &#10008; Name should not be blank and should not exceed 35
               symbols
             </div>
-            <div *ngIf="drName?.errors?.['pattern']"> &#10008; Name should consist of letters and can contain backspaces
+            <div *ngIf="drName?.errors?.['pattern']"> &#10008; Name should consist of Latin letters and can contain backspaces
               and/or digits
             </div>
           </div>
@@ -41,7 +41,7 @@
             <div *ngIf="drSurname?.errors?.['maxlength']"> &#10008; Surname should not be blank and should not exceed 35
               symbols
             </div>
-            <div *ngIf="drSurname?.errors?.['pattern']"> &#10008; Surname should consist of letters and can contain
+            <div *ngIf="drSurname?.errors?.['pattern']"> &#10008; Surname should consist of Latin letters and can contain
               backspaces and/or digits
             </div>
           </div>
@@ -70,7 +70,7 @@
           *ngIf="drEmail!.invalid && (drEmail!.dirty || drEmail!.touched)" class="validationAlert">
           <div>
             <div *ngIf="drEmail?.errors?.['required']"> &#10008; Email required</div>
-            <div *ngIf="drEmail?.errors?.['pattern']"> &#10008; Email format is incorrect, email can contain only letters,
+            <div *ngIf="drEmail?.errors?.['pattern']"> &#10008; Email format is incorrect, email can contain only Latin letters,
               digits, underscores, dashes, dots, @
             </div>
           </div>

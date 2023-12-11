@@ -31,7 +31,7 @@
           <div *ngIf="customerNameCheck?.errors?.['maxlength']"> &#10008; Customer name should not be blank and should not exceed 50
             symbols
           </div>
-          <div *ngIf="customerNameCheck?.errors?.['pattern']"> &#10008; Customer name should consist of letters and can contain backspaces
+          <div *ngIf="customerNameCheck?.errors?.['pattern']"> &#10008; Customer name should consist of Latin letters and can contain backspaces
             and/or digits
           </div>
         </div>
@@ -60,7 +60,7 @@
         *ngIf="emailCheck!.invalid && (emailCheck!.dirty || emailCheck!.touched)" class="validationAlert">
         <div>
           <div *ngIf="emailCheck?.errors?.['required']"> &#10008; Email required</div>
-          <div *ngIf="emailCheck?.errors?.['pattern']"> &#10008; Email format is incorrect, email can contain only letters,
+          <div *ngIf="emailCheck?.errors?.['pattern']"> &#10008; Email format is incorrect, email can contain only Latin letters,
             digits, underscores, dashes, dots, @
           </div>
         </div>

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Cargo, CargoService} from "../../../logistics-api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogService} from "../../confirmation-dialog/confirmation-dialog.service";
-import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-cargo-details',
@@ -40,6 +39,14 @@ export class CargoDetailsComponent implements OnInit {
     });
   }
 
+  convertMinsToHrsMins(minutes: number): string {
+  let h = Math.floor(minutes / 60);
+  let m = minutes % 60;
+  let hrs = h < 10 ? '0' + h : h;
+  let mins = m < 10 ? '0' + m : m;
+  return hrs + ':' + mins;
+}
+
   deleteCargo(cargoId: number) {
     this.confirmationDialogService.confirm('Do you really want to delete this cargo?')
       .then((confirmed) => {
@@ -54,7 +61,6 @@ export class CargoDetailsComponent implements OnInit {
         }
       })
   }
-
 }
 
 export class HttpError{

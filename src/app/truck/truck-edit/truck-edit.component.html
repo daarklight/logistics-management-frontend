@@ -19,7 +19,7 @@
             <div *ngIf="modelCheck?.errors?.['required']"> &#10008; Model should not be blank and should not exceed 30
               symbols
             </div>
-            <div *ngIf="modelCheck?.errors?.['pattern']"> &#10008; Model should consist of letters and can contain
+            <div *ngIf="modelCheck?.errors?.['pattern']"> &#10008; Model should consist of Latin letters and can contain
               backspaces and/or digits
             </div>
           </div>
@@ -57,6 +57,12 @@
             <div *ngIf="totalOperatingTimeCheck?.errors?.['pattern']"> &#10008; Total operating time should be integer number</div>
           </div>
         </div>
+      </div>
+      <br>
+      <label><b>Technical condition </b></label>
+      <div class="form-group radio" style="margin-top: 15px" *ngFor="let techCondition of technicalCondition">
+        <input type="radio"  id="role" [(ngModel)]="truckUpdate.technicalCondition" name="role" [value]='techCondition.techCondition'>
+        <label><b>&nbsp; {{techCondition.techCondition}}</b></label>
       </div>
 
       <div class="form-group" [formGroup]="truckValidation" style="margin-top: 15px">

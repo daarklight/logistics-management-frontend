@@ -31,7 +31,7 @@
           <div *ngIf="nameCheck?.errors?.['maxlength']"> &#10008; Name should not be blank and should not exceed 35
             symbols
           </div>
-          <div *ngIf="nameCheck?.errors?.['pattern']"> &#10008; Name should consist of letters and can contain backspaces
+          <div *ngIf="nameCheck?.errors?.['pattern']"> &#10008; Name should consist of Latin letters and can contain backspaces
             and/or digits
           </div>
         </div>
@@ -51,7 +51,7 @@
           <div *ngIf="surnameCheck?.errors?.['maxlength']"> &#10008; Surname should not be blank and should not exceed 35
             symbols
           </div>
-          <div *ngIf="surnameCheck?.errors?.['pattern']"> &#10008; Surname should consist of letters and can contain
+          <div *ngIf="surnameCheck?.errors?.['pattern']"> &#10008; Surname should consist of Latin letters and can contain
             backspaces and/or digits
           </div>
         </div>

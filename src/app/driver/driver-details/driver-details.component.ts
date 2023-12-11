@@ -17,12 +17,10 @@ export class DriverDetailsComponent implements OnInit {
   isError: boolean;
   userRole: string;
 
-  //driverStatusBody: UpdateDriverStatusByDriver;
   driverStatusBody: UpdateDriverStatusByDriver = new class implements UpdateDriverStatusByDriver {
     status: UpdateDriverStatusByDriver.StatusEnum;
   };
 
-  //
   isLoggedIn: boolean;
 
   constructor(private route: ActivatedRoute, private driverService: DriverService, private router: Router,
@@ -36,15 +34,7 @@ export class DriverDetailsComponent implements OnInit {
       localStorage.setItem('need-to-reload-page', String(false));
       location.reload();
     }
-    this.driverService.driverFindById(this.id).subscribe(driverDetails => {
-      this.isError = false;
-      this.driver = driverDetails;
-    }, error => {
-      this.isError = true;
-      this.errorMessage = error.message;
-      console.log("Driver details error: " + error);
-      console.log(error.message)
-    });
+
 
     if(localStorage.getItem('role') === 'ROLE_LOGISTICIAN') {
       this.driverService.driverFindById(this.id).subscribe(driverDetails => {
@@ -53,12 +43,13 @@ export class DriverDetailsComponent implements OnInit {
       }, error => {
         this.isError = true;
         this.errorMessage = error.message;
-        //console.log("Driver details error: "+ error);
-        //console.log(error.message)
       });
     }
+
     if(localStorage.getItem('role') === 'ROLE_DRIVER') {
       this.driverService.driverFindByUsername(localStorage.getItem('username')!).subscribe(driver => {
+        console.log('Find by username started...');
+        console.log('Personal number based on username: ' + driver.personalNumber);
         this.driver = driver;
         this.isError = false;
 
@@ -72,12 +63,29 @@ export class DriverDetailsComponent implements OnInit {
         console.log(error.message)
       });
     }
-  }
 
+    this.driverService.driverFindById(this.id).subscribe(driverDetails => {
+      console.log('First find by id started...');
+      console.log('Personal number based on id: ' + driverDetails.personalNumber);
+      this.isError = false;
+      this.driver = driverDetails;
+    }, error => {
+      this.isError = true;
+      this.errorMessage = error.message;
+      console.log("Driver details error: " + error);
+      console.log(error.message)
+    });
+  }
 
   showOrderDetails(orderId: number) {
     this.router.navigate(['order/details/', orderId]);
   }
+
+  findCurrentDriver(): number {
+    console.log('current driver-id: ' + localStorage.getItem('driver-id'));
+    return parseInt(localStorage.getItem('driver-id')!);
+  }
+
 
 
   updateDriver(personalNumber: number) {
@@ -92,7 +100,6 @@ export class DriverDetailsComponent implements OnInit {
     console.log('Driver status after set to rest: ' + this.driverStatusBody.status);
     this.driverService.driverUpdateStatusByDriver(this.driverStatusBody, personalNumber).subscribe(driverDetails => {
       driverDetails.status='REST';
-      //this.router.navigate(['driver/update/', personalNumber]);
       window.location.reload();
     });
   }
@@ -103,7 +110,6 @@ export class DriverDetailsComponent implements OnInit {
     console.log('Driver status after set to driving: ' + this.driverStatusBody.status);
     this.driverService.driverUpdateStatusByDriver(this.driverStatusBody, personalNumber).subscribe(driverDetails => {
       driverDetails.status='DRIVING';
-      //this.router.navigate(['driver/update/', personalNumber]);
       window.location.reload();
     });
   }

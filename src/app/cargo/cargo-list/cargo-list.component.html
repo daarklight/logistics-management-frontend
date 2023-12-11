@@ -82,8 +82,8 @@
       </ng-container>
       <!-- Duration from start point Column -->
       <ng-container matColumnDef="rideDurationFromStartPoint">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Duration from start point, minutes</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDurationFromStartPoint}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Duration from start point, hrs:mins</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell">{{convertMinsToHrsMins(row.rideDurationFromStartPoint!)}}</mat-cell>
       </ng-container>
       <!-- Distance from previous point Column -->
       <ng-container matColumnDef="rideDistanceFromPreviousPoint">
@@ -92,18 +92,18 @@
       </ng-container>
       <!-- Duration from previous point Column -->
       <ng-container matColumnDef="rideDurationFromPreviousPoint">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Duration from previous point, minutes</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.rideDurationFromPreviousPoint}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Duration from previous point, hrs:mins</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell">{{convertMinsToHrsMins(row.rideDurationFromPreviousPoint!)}}</mat-cell>
       </ng-container>
       <!-- Expected completion date and time Column -->
       <ng-container matColumnDef="expectedCompletionDateTime">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Expected completion date and time</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.expectedCompletionDateTime}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell">{{(row.expectedCompletionDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</mat-cell>
       </ng-container>
       <!-- Real completion date and time Column -->
       <ng-container matColumnDef="realCompletionDateTime">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Real completion date and time</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell"> {{row.realCompletionDateTime}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell">{{(row.realCompletionDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</mat-cell>
       </ng-container>
 
 

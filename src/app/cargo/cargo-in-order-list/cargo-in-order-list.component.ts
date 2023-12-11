@@ -30,33 +30,27 @@ export class CargoInOrderListComponent {
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem('role')!;
-
-    // this.cargoService.cargosFindAll().subscribe(allCargos => {
-    //   this.cargos = allCargos;
-    //   this.dataSource = new MatTableDataSource(this.cargos);
-    //   this.dataSource.paginator = this.paginator;
-    //   this.dataSource.sort = this.sort;
-    // })
-
-    //let userRole: string = localStorage.getItem('role')!;
-    //console.log('username: ' + localStorage.getItem('role')!);
-
     let orderIdResult: number = Number(localStorage.getItem('order-id'));
-
     this.cargoService.cargoFindByOrderId(orderIdResult).subscribe(allCargos => {
       this.cargos = allCargos;
       this.dataSource = new MatTableDataSource(this.cargos);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
-
-
   }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
+  }
+
+  convertMinsToHrsMins(minutes: number): string {
+    let h = Math.floor(minutes / 60);
+    let m = minutes % 60;
+    let hrs = h < 10 ? '0' + h : h;
+    let mins = m < 10 ? '0' + m : m;
+    return hrs + ':' + mins;
   }
 
   loadingDone(cargoId: number) {

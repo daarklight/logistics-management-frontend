@@ -48,7 +48,7 @@
           <div *ngIf="usernameCheck?.errors?.['maxlength']"> &#10008; Login should not be blank and should not exceed 40
             symbols
           </div>
-          <div *ngIf="usernameCheck?.errors?.['pattern']"> &#10008; Login can contain only letters, digits and
+          <div *ngIf="usernameCheck?.errors?.['pattern']"> &#10008; Login can contain only Latin letters, digits and
             underscores
           </div>
         </div>
@@ -71,7 +71,7 @@
           </div>
         </div>
         <div>
-          <div *ngIf="passwordCheck?.errors?.['pattern']"> &#10008; Password can contain only letters, digits and
+          <div *ngIf="passwordCheck?.errors?.['pattern']"> &#10008; Password can contain only Latin letters, digits and
             underscores
           </div>
         </div>

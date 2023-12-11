@@ -32,9 +32,7 @@ export class OrderDetailsComponent implements OnInit {
       this.order = orderDetails;
 
       localStorage.setItem('order-id-item', this.order.orderId!.toString());
-      //console.log('order-id-item: ' + this.order.orderId!.toString());
 
-      //console.log("order-details before cargo service")
       this.cargoService.cargoFindByOrderId(this.order.orderId!).subscribe(cargoList => {
         this.cargos = cargoList;
       })
@@ -47,10 +45,6 @@ export class OrderDetailsComponent implements OnInit {
       this.errorMessage = error.message;
       console.log(error)
     });
-
-
-    //localStorage.setItem('order-id-item', this.order.orderId!.toString());
-    //console.log('order-id-item: ' + this.order.orderId!.toString());
   }
 
   updateOrder(orderId: number){
@@ -72,15 +66,6 @@ export class OrderDetailsComponent implements OnInit {
   calculateNumberOfAssignedDrivers() : number{
     return this.drivers.length;
   }
-
-  //var youngest = _
-  //   .chain(users)
-  //   .sortBy('age')
-  //   .map(function(o) {
-  //     return o.user + ' is ' + o.age;
-  //   })
-  //   .head()
-  //   .value();
 
   findFirstAssignedDriver() : string{
     if(this.drivers.length>0){
@@ -142,9 +127,6 @@ export class OrderDetailsComponent implements OnInit {
   findAllCargos(orderId: number){
     localStorage.setItem('order-id', String(orderId));
     this.router.navigate(['cargos/cargosInOrder']);
-    // this.driverService.driversFindForOrder(orderId, city, state, hours).subscribe(drivers => {
-    //   this.router.navigate(['drivers/proper']);
-    // });
   }
 
   sendForDriverApprove(orderId: number){
@@ -171,14 +153,4 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   protected readonly parseInt = parseInt;
-}
-
-export class HttpError{
-  static BadRequest = 400;
-  static Unauthorized = 401;
-  static Forbidden = 403;
-  static NotFound = 404;
-  static TimeOut = 408;
-  static Conflict = 409;
-  static InternalServerError = 500;
 }

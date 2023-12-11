@@ -70,11 +70,11 @@
           </div>
           <div class="driver-details-cell">
             <label><b class="header-style">Start shift date and time: </b><span
-              class="row-margin">{{driver.startShiftDateTime}}</span></label>
+              class="row-margin">{{(driver.startShiftDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</span></label>
           </div>
           <div class="driver-details-cell">
             <label><b class="header-style">End shift date and time: </b><span
-              class="row-margin">{{driver.endShiftDateTime}}</span></label>
+              class="row-margin">{{(driver.endShiftDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</span></label>
           </div>
 
           <div class="buttons-panel" *ngIf="userRole == 'ROLE_LOGISTICIAN' && driver.currentOrderId !== null">
@@ -92,13 +92,13 @@
 <!--          </button></span>-->
           </div>
 
-          <div class="buttons-panel" *ngIf="userRole == 'ROLE_DRIVER'">
+          <div class="buttons-panel" *ngIf="userRole == 'ROLE_DRIVER' && driver.busy === 'YES'">
             <br>
-            <span style="width: 250px" *ngIf="userRole == 'ROLE_DRIVER' && driver.status === 'DRIVING'">
+            <span style="width: 250px" *ngIf="userRole == 'ROLE_DRIVER' && driver.status === 'DRIVING'  && findCurrentDriver() === driver.personalNumber!">
           <button mat-button (click)="updateStatusToRest(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 250px" >
             <mat-icon>local_hotel</mat-icon> UPDATE STATUS TO REST
           </button></span>
-            <span style="width: 250px" *ngIf="userRole == 'ROLE_DRIVER' && driver.status === 'REST'">
+            <span style="width: 250px" *ngIf="userRole == 'ROLE_DRIVER' && driver.status === 'REST'  && findCurrentDriver() === driver.personalNumber!">
           <button mat-button (click)="updateStatusToDriving(driver.personalNumber!)" style="; margin-right: 10px; color: white; background-color: #008CBA; width: 250px" >
             <mat-icon>directions_car</mat-icon> UPDATE STATUS TO DRIVING
           </button></span>

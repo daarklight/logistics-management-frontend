@@ -13,8 +13,8 @@
 
       <!-- Order id Column -->
       <ng-container matColumnDef="orderId" sticky>
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Order id</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.orderId}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Order id</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short">{{row.orderId}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="customerName">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Customer name</mat-header-cell>
@@ -27,34 +27,34 @@
       </ng-container>
       <!-- Weight Column -->
       <ng-container matColumnDef="weight">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Weight, tons</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.weight}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Weight, tons</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short">{{row.weight}}</mat-cell>
       </ng-container>
       <!-- Status Column -->
       <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Status</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.status.replaceAll("_", " ").toLowerCase()}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-short">Status</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell-short">{{row.status.replaceAll("_", " ").toLowerCase()}}</mat-cell>
       </ng-container>
       <!-- Start date and time Column -->
       <ng-container matColumnDef="startDateTime">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Start date and time</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.startDateTime}}</mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell">{{(row.startDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</mat-cell>
       </ng-container>
       <!-- Limit date and time Column -->
       <ng-container matColumnDef="limitDateTime">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Limit date and time</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.limitDateTime}}</mat-cell>
+        <mat-cell *matCellDef="let row" class="mat-cell">{{(row.limitDateTime ?? '  &mdash;')!.toString().replace('T', ' at ')}}</mat-cell>
       </ng-container>
       <!-- Assigned truck number Column -->
       <ng-container matColumnDef="assignedTruckNumber">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Assigned truck number</mat-header-cell>
         <mat-cell *matCellDef="let row" class="mat-cell">{{row.assignedTruckNumber}}</mat-cell>
       </ng-container>
-      <!-- Driver comment Column -->
-      <ng-container matColumnDef="driverComment">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Driver's comment</mat-header-cell>
-        <mat-cell *matCellDef="let row" class="mat-cell">{{row.driverComment}}</mat-cell>
-      </ng-container>
+<!--      &lt;!&ndash; Driver comment Column &ndash;&gt;-->
+<!--      <ng-container matColumnDef="driverComment">-->
+<!--        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell">Driver's comment</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let row" class="mat-cell">{{row.driverComment}}</mat-cell>-->
+<!--      </ng-container>-->
 
 
       <!-- Actions Column -->
